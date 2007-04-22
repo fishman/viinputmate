@@ -14,6 +14,6 @@
 }
 
 + (NSEvent *)handleEvent:(NSEvent *)theEvent 
-			withResponder:(id)theResponder 
-			   withWindow:(NSWindow *)theWindow;
+            withResponder:(id)theResponder 
+               withWindow:(NSWindow *)theWindow;
 @end

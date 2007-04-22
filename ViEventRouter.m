@@ -20,11 +20,11 @@ static ViEventRouter *sharedViEventRouter = nil;
 + (ViEventRouter *)sharedViEventRouter
 {
 
-	if (sharedViEventRouter == nil) {
-		[[self alloc] init];
-	}
-	
-	return sharedViEventRouter;
+    if (sharedViEventRouter == nil) {
+        [[self alloc] init];
+    }
+    
+    return sharedViEventRouter;
 }
 
 /**
@@ -32,120 +32,120 @@ static ViEventRouter *sharedViEventRouter = nil;
  */
 + (id)allocWithZone:(NSZone *)zone
 {
-	if (sharedViEventRouter == nil) {
-		sharedViEventRouter = [super allocWithZone:zone];
+    if (sharedViEventRouter == nil) {
+        sharedViEventRouter = [super allocWithZone:zone];
 
-		return sharedViEventRouter ;  // assignment and return on first allocation
-	}
-	
-	return nil; // on subsequent allocation attempts return nil
+        return sharedViEventRouter ;  // assignment and return on first allocation
+    }
+    
+    return nil; // on subsequent allocation attempts return nil
 }
 
 - (id)init
 {
-	unichar escape = 0x1B;
+    unichar escape = 0x1B;
 
     if ((self = [super init])) {
-		mode = ViInsertMode;
-		command = [[ViCommand alloc] init];
+        mode = ViInsertMode;
+        command = [[ViCommand alloc] init];
 
 
-		keyMaps = [NSMutableDictionary dictionaryWithCapacity:2];
-		[keyMaps retain];
-		[keyMaps setObject: [NSDictionary dictionaryWithObjectsAndKeys:
-					  @"resetStack:", [NSString stringWithCharacters:&escape length:1],
-						  @"repeat:", @"1",
-						  @"repeat:", @"2",
-						  @"repeat:", @"3",
-						  @"repeat:", @"4",
-						  @"repeat:", @"5",
-						  @"repeat:", @"6",
-						  @"repeat:", @"7",
-						  @"repeat:", @"8",
-						  @"repeat:", @"9",
-						@"moveLeft:", @"h",
-						@"moveDown:", @"j",
-						  @"moveUp:", @"k",
-					   @"moveRight:", @"l",
-		   @"moveToBeginningOfLine:", @"0",
-				 @"moveToEndOfLine:", @"$",
-						  @"insert:", @"i",
-		 @"insertAtBeginningOfLine:", @"I",
-						  @"append:", @"a",
-			   @"appendToEndOfLine:", @"A",
-					 @"deleteRight:", @"x",
-					  @"deleteLeft:", @"X", 
-					  	  @"delete:", @"d", 
-			   @"deleteToEndOfLine:", @"D", 
-						  @"visual:", @"v",
-					  NULL] forKey: @"commandDefault"];
-		[keyMaps setObject: [NSDictionary dictionaryWithObjectsAndKeys:
-					  @"resetStack:", [NSString stringWithCharacters:&escape length:1],
-						  @"repeat:", @"0",
-						  @"repeat:", @"1",
-						  @"repeat:", @"2",
-						  @"repeat:", @"3",
-						  @"repeat:", @"4",
-						  @"repeat:", @"5",
-						  @"repeat:", @"6",
-						  @"repeat:", @"7",
-						  @"repeat:", @"8",
-						  @"repeat:", @"9",
-						@"moveLeft:", @"h",
-						@"moveDown:", @"j",
-						  @"moveUp:", @"k",
-					   @"moveRight:", @"l",
-						  @"insert:", @"i",
-		 @"insertAtBeginningOfLine:", @"I",
-						  @"append:", @"a",
-			   @"appendToEndOfLine:", @"A",
-					 @"deleteRight:", @"x",
-					  @"deleteLeft:", @"X",
-					  NULL] forKey: @"commandRepeat"];
-		[keyMaps setObject: [NSDictionary dictionaryWithObjectsAndKeys:
-					  @"resetStack:", [NSString stringWithCharacters:&escape length:1],
-						  @"repeat:", @"1",
-						  @"repeat:", @"2",
-						  @"repeat:", @"3",
-						  @"repeat:", @"4",
-						  @"repeat:", @"5",
-						  @"repeat:", @"6",
-						  @"repeat:", @"7",
-						  @"repeat:", @"8",
-						  @"repeat:", @"9",
-					  @"deleteLeft:", @"h",
-					  @"deleteDown:", @"j",
-						@"deleteUp:", @"k",
-					 @"deleteRight:", @"l",
-		 @"deleteToBeginningOfLine:", @"0",
-			   @"deleteToEndOfLine:", @"$",
-				  @"deleteWordLeft:", @"b",
-				 @"deleteWordRight:", @"w",
-					  @"deleteLine:", @"d", 
-					  NULL] forKey: @"deleteDefault"];
-		[keyMaps setObject: [NSDictionary dictionaryWithObjectsAndKeys:
-					  @"resetStack:", [NSString stringWithCharacters:&escape length:1],
-						  @"repeat:", @"0",
-						  @"repeat:", @"1",
-						  @"repeat:", @"2",
-						  @"repeat:", @"3",
-						  @"repeat:", @"4",
-						  @"repeat:", @"5",
-						  @"repeat:", @"6",
-						  @"repeat:", @"7",
-						  @"repeat:", @"8",
-						  @"repeat:", @"9",
-					  @"deleteLeft:", @"h",
-					  @"deleteDown:", @"j",
-						@"deleteUp:", @"k",
-					 @"deleteRight:", @"l",
-			   @"deleteToEndOfLine:", @"$",
-				  @"deleteWordLeft:", @"b",
-				 @"deleteWordRight:", @"w",
-					  @"deleteLine:", @"d", 
-					  NULL] forKey: @"deleteRepeat"];
+        keyMaps = [NSMutableDictionary dictionaryWithCapacity:2];
+        [keyMaps retain];
+        [keyMaps setObject: [NSDictionary dictionaryWithObjectsAndKeys:
+                      @"resetStack:", [NSString stringWithCharacters:&escape length:1],
+                          @"repeat:", @"1",
+                          @"repeat:", @"2",
+                          @"repeat:", @"3",
+                          @"repeat:", @"4",
+                          @"repeat:", @"5",
+                          @"repeat:", @"6",
+                          @"repeat:", @"7",
+                          @"repeat:", @"8",
+                          @"repeat:", @"9",
+                        @"moveLeft:", @"h",
+                        @"moveDown:", @"j",
+                          @"moveUp:", @"k",
+                       @"moveRight:", @"l",
+           @"moveToBeginningOfLine:", @"0",
+                 @"moveToEndOfLine:", @"$",
+                          @"insert:", @"i",
+         @"insertAtBeginningOfLine:", @"I",
+                          @"append:", @"a",
+               @"appendToEndOfLine:", @"A",
+                     @"deleteRight:", @"x",
+                      @"deleteLeft:", @"X", 
+                            @"delete:", @"d", 
+               @"deleteToEndOfLine:", @"D", 
+                          @"visual:", @"v",
+                      NULL] forKey: @"commandDefault"];
+        [keyMaps setObject: [NSDictionary dictionaryWithObjectsAndKeys:
+                      @"resetStack:", [NSString stringWithCharacters:&escape length:1],
+                          @"repeat:", @"0",
+                          @"repeat:", @"1",
+                          @"repeat:", @"2",
+                          @"repeat:", @"3",
+                          @"repeat:", @"4",
+                          @"repeat:", @"5",
+                          @"repeat:", @"6",
+                          @"repeat:", @"7",
+                          @"repeat:", @"8",
+                          @"repeat:", @"9",
+                        @"moveLeft:", @"h",
+                        @"moveDown:", @"j",
+                          @"moveUp:", @"k",
+                       @"moveRight:", @"l",
+                          @"insert:", @"i",
+         @"insertAtBeginningOfLine:", @"I",
+                          @"append:", @"a",
+               @"appendToEndOfLine:", @"A",
+                     @"deleteRight:", @"x",
+                      @"deleteLeft:", @"X",
+                      NULL] forKey: @"commandRepeat"];
+        [keyMaps setObject: [NSDictionary dictionaryWithObjectsAndKeys:
+                      @"resetStack:", [NSString stringWithCharacters:&escape length:1],
+                          @"repeat:", @"1",
+                          @"repeat:", @"2",
+                          @"repeat:", @"3",
+                          @"repeat:", @"4",
+                          @"repeat:", @"5",
+                          @"repeat:", @"6",
+                          @"repeat:", @"7",
+                          @"repeat:", @"8",
+                          @"repeat:", @"9",
+                      @"deleteLeft:", @"h",
+                      @"deleteDown:", @"j",
+                        @"deleteUp:", @"k",
+                     @"deleteRight:", @"l",
+         @"deleteToBeginningOfLine:", @"0",
+               @"deleteToEndOfLine:", @"$",
+                  @"deleteWordLeft:", @"b",
+                 @"deleteWordRight:", @"w",
+                      @"deleteLine:", @"d", 
+                      NULL] forKey: @"deleteDefault"];
+        [keyMaps setObject: [NSDictionary dictionaryWithObjectsAndKeys:
+                      @"resetStack:", [NSString stringWithCharacters:&escape length:1],
+                          @"repeat:", @"0",
+                          @"repeat:", @"1",
+                          @"repeat:", @"2",
+                          @"repeat:", @"3",
+                          @"repeat:", @"4",
+                          @"repeat:", @"5",
+                          @"repeat:", @"6",
+                          @"repeat:", @"7",
+                          @"repeat:", @"8",
+                          @"repeat:", @"9",
+                      @"deleteLeft:", @"h",
+                      @"deleteDown:", @"j",
+                        @"deleteUp:", @"k",
+                     @"deleteRight:", @"l",
+               @"deleteToEndOfLine:", @"$",
+                  @"deleteWordLeft:", @"b",
+                 @"deleteWordRight:", @"w",
+                      @"deleteLine:", @"d", 
+                      NULL] forKey: @"deleteRepeat"];
 
-		activeKeyMap = [keyMaps objectForKey:@"commandDefault"];
+        activeKeyMap = [keyMaps objectForKey:@"commandDefault"];
     }
 
     return self;
@@ -156,7 +156,7 @@ static ViEventRouter *sharedViEventRouter = nil;
  */
 - (id)copyWithZone:(NSZone *)zone
 {
-	return self;
+    return self;
 }
 
 /**
@@ -164,7 +164,7 @@ static ViEventRouter *sharedViEventRouter = nil;
  */
 - (id)retain
 {
-	return self;
+    return self;
 }
 
 
@@ -179,40 +179,40 @@ static ViEventRouter *sharedViEventRouter = nil;
  */
 - (NSEvent *)routeEvent:(NSEvent *)theEvent
 {
-	NSString * keyPress = [theEvent charactersIgnoringModifiers];
-	NSString * commandMethod;
+    NSString * keyPress = [theEvent charactersIgnoringModifiers];
+    NSString * commandMethod;
 
-	switch ( mode ) {
-		case ViInsertMode:
-			// if escape is pressed.
-			if ( [keyPress characterAtIndex:0] == 0x1B ) {
-				mode = ViCommandMode;
-				return nil;
-			} else {
-				return theEvent;
-			}
-			break;
+    switch ( mode ) {
+        case ViInsertMode:
+            // if escape is pressed.
+            if ( [keyPress characterAtIndex:0] == 0x1B ) {
+                mode = ViCommandMode;
+                return nil;
+            } else {
+                return theEvent;
+            }
+            break;
 
-		case ViVisualMode:
-		case ViCommandMode:
-			// find the method that corresponds to the key that was pressed 
-			// given the current state's key map.
-			commandMethod = [activeKeyMap objectForKey: keyPress];
+        case ViVisualMode:
+        case ViCommandMode:
+            // find the method that corresponds to the key that was pressed 
+            // given the current state's key map.
+            commandMethod = [activeKeyMap objectForKey: keyPress];
 
-			if ( commandMethod != nil ) {
-				NSLog( @"routing the message" );
-				[command performSelector: sel_getUid([commandMethod UTF8String]) withObject: theEvent];
-				return nil;
-			} else {
-				NSLog( @"could not find method for %@:", keyPress );
-				[command performSelector: @selector(resetStack:) withObject: theEvent];
-				return nil;
-			}
+            if ( commandMethod != nil ) {
+                NSLog( @"routing the message" );
+                [command performSelector: sel_getUid([commandMethod UTF8String]) withObject: theEvent];
+                return nil;
+            } else {
+                NSLog( @"could not find method for %@:", keyPress );
+                [command performSelector: @selector(resetStack:) withObject: theEvent];
+                return nil;
+            }
 
-			break;
-		default:
-			return theEvent;
-	}
+            break;
+        default:
+            return theEvent;
+    }
 }
 
 /**
@@ -221,7 +221,7 @@ static ViEventRouter *sharedViEventRouter = nil;
  */
 - (void)setKeyMap:(NSString *)theKeyMapLabel
 {
-	activeKeyMap = [keyMaps objectForKey: theKeyMapLabel];
+    activeKeyMap = [keyMaps objectForKey: theKeyMapLabel];
 }
 
 /**
@@ -229,27 +229,27 @@ static ViEventRouter *sharedViEventRouter = nil;
  */
 - (void)setMode:(ViMode)theMode
 {
-	mode = theMode;
+    mode = theMode;
 }
 
 - (ViMode)mode
 {
-	return mode;
+    return mode;
 }
 
 - (void)setState:(ViState)theState
 {
-	state = theState;
+    state = theState;
 }
 
 - (ViState)state
 {
-	return state;
+    return state;
 }
 
 - (void)setWindow:(NSWindow *)theWindow
 {
-	[command setWindow:theWindow];
+    [command setWindow:theWindow];
 }
 
 @end

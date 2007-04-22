@@ -15,19 +15,19 @@
 
 - (void)sendEvent:(NSEvent *)theEvent
 {
-	id event;
-	ViEventRouter *router = [ViEventRouter sharedViEventRouter];
-	
-	if ( [theEvent type] == NSKeyDown ) {
-		[router setWindow:self];
-		event = [router routeEvent:theEvent];
-			
-		if ( event != nil ) {
-			[super sendEvent:theEvent];
-		} 
-	} else {
-		[super sendEvent:theEvent];
-	}
+    id event;
+    ViEventRouter *router = [ViEventRouter sharedViEventRouter];
+    
+    if ( [theEvent type] == NSKeyDown ) {
+        [router setWindow:self];
+        event = [router routeEvent:theEvent];
+            
+        if ( event != nil ) {
+            [super sendEvent:theEvent];
+        } 
+    } else {
+        [super sendEvent:theEvent];
+    }
 }
 
 @end

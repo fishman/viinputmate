@@ -10,17 +10,17 @@
 
 @interface ViExecution : NSObject {
 
-	NSWindow *window;
-	id responder;
+    NSWindow *window;
+    id responder;
 
-	id router;
-	NSMutableArray *dataStack;
-	NSMutableArray *methodStack;
+    id router;
+    NSMutableArray *dataStack;
+    NSMutableArray *methodStack;
 }
 
 
 - (void)executeStack:(NSMutableArray *)theMethodStack 
-			withData:(NSMutableArray *)theDataStack;
+            withData:(NSMutableArray *)theDataStack;
 - (void)setWindow:(NSWindow *)theWindow;
 
 

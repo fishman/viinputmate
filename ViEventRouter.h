@@ -12,27 +12,27 @@
 
 
 typedef enum _ViMode {
-	ViInsertMode       = 1,
-	ViCommandMode      = 2,
-	ViVisualMode       = 3
+    ViInsertMode       = 1,
+    ViCommandMode      = 2,
+    ViVisualMode       = 3
 } ViMode;
 
 typedef enum _ViState {
-	ViCommandState       = 1,
-	ViDeleteState        = 2,
-	ViYankState          = 3,
-	ViVisualState        = 4
+    ViCommandState       = 1,
+    ViDeleteState        = 2,
+    ViYankState          = 3,
+    ViVisualState        = 4
 } ViState;
 
 
 @interface ViEventRouter : NSObject
 {
-	// holds onto the methods that should be executed once we reach a final method.
-	ViCommand *command;
-	NSMutableDictionary *keyMaps;
-	id activeKeyMap;
-	ViMode mode;
-	ViState state;
+    // holds onto the methods that should be executed once we reach a final method.
+    ViCommand *command;
+    NSMutableDictionary *keyMaps;
+    id activeKeyMap;
+    ViMode mode;
+    ViState state;
 }
 
 // methods needed for singleton pattern

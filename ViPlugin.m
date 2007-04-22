@@ -13,9 +13,9 @@
 @implementation ViPlugin
 - (id)initWithPlugInController:(id <TMPlugInController>)aController
 {
-	NSLog( @"we have lift off!" );
-	[ViWindow poseAsClass:[NSWindow class]];
-	
-	return [super init];
+    NSLog( @"we have lift off!" );
+    [ViWindow poseAsClass:[NSWindow class]];
+    
+    return [super init];
 }
 @end

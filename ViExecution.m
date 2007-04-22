@@ -14,36 +14,36 @@
 
 - (id)init
 {
-	if ( [super init] ) {
-		router = [ViEventRouter sharedViEventRouter];
-	}
+    if ( [super init] ) {
+        router = [ViEventRouter sharedViEventRouter];
+    }
 
-	return self;
+    return self;
 }
 
 
 - (void)executeStack:(NSMutableArray *)theMethodStack 
-			withData:(NSMutableArray *)theDataStack
+            withData:(NSMutableArray *)theDataStack
 {
-	methodStack = theMethodStack;
-	dataStack = theDataStack;
-	NSString *method;
-	NSNumber *index;
+    methodStack = theMethodStack;
+    dataStack = theDataStack;
+    NSString *method;
+    NSNumber *index;
 
-	method = [methodStack objectAtIndex: 0];
-	index = [NSNumber numberWithInt: 0];
+    method = [methodStack objectAtIndex: 0];
+    index = [NSNumber numberWithInt: 0];
 
-	[self performSelector: sel_getUid( [method UTF8String] ) withObject: index];
-//	NSLog( @"Finished executing the methodStack" );
+    [self performSelector: sel_getUid( [method UTF8String] ) withObject: index];
+//    NSLog( @"Finished executing the methodStack" );
 
-	[dataStack removeAllObjects];
-	[methodStack removeAllObjects];
+    [dataStack removeAllObjects];
+    [methodStack removeAllObjects];
 }
 
 - (void)setWindow:(NSWindow *)theWindow
 {
-	window = theWindow;
-	responder = [theWindow firstResponder];
+    window = theWindow;
+    responder = [theWindow firstResponder];
 }
 
 
@@ -52,100 +52,100 @@
  */
 - (void)repeat:(NSNumber *)theIndex
 {
-	int stackCount = [methodStack count];
-	int nextIndex = [theIndex intValue] + 1;
-	int repeatCount = [[dataStack objectAtIndex: [theIndex intValue]] intValue];
-	int i,j;
-	NSString *method;
-	NSNumber *index;
-	
-	for ( j=0; j < repeatCount; j++ ) {
+    int stackCount = [methodStack count];
+    int nextIndex = [theIndex intValue] + 1;
+    int repeatCount = [[dataStack objectAtIndex: [theIndex intValue]] intValue];
+    int i,j;
+    NSString *method;
+    NSNumber *index;
+    
+    for ( j=0; j < repeatCount; j++ ) {
 
-		for ( i = nextIndex; i < stackCount; i++ ) {
+        for ( i = nextIndex; i < stackCount; i++ ) {
 
-			method = [methodStack objectAtIndex: i];
-			index = [NSNumber numberWithInt: i];
-			NSLog( @"executing method %@ for the %d time.", method, j );
-			[self performSelector: sel_getUid( [method UTF8String] ) withObject: index];
-		}
-	}
+            method = [methodStack objectAtIndex: i];
+            index = [NSNumber numberWithInt: i];
+            NSLog( @"executing method %@ for the %d time.", method, j );
+            [self performSelector: sel_getUid( [method UTF8String] ) withObject: index];
+        }
+    }
 }
 
 - (void)resetStack:(NSNumber *)theIndex
 {
-	// not needed here, ViCommand clears the stack for us
+    // not needed here, ViCommand clears the stack for us
 }
 
 - (void)insert:(NSNumber *)theIndex
 {
-	[router setMode: ViInsertMode];
+    [router setMode: ViInsertMode];
 }
 
 - (void)insertAtBeginningOfLine:(NSNumber *)theIndex
 {
-	[responder performSelector: @selector(moveToBeginningOfLine:) withObject: window];
-	[router setMode: ViInsertMode];
+    [responder performSelector: @selector(moveToBeginningOfLine:) withObject: window];
+    [router setMode: ViInsertMode];
 }
 
 - (void)append:(NSNumber *)theIndex
 {
-	[responder performSelector: @selector(moveRight:) withObject: window];
-	[router setMode: ViInsertMode];
+    [responder performSelector: @selector(moveRight:) withObject: window];
+    [router setMode: ViInsertMode];
 }
 
 - (void)appendToEndOfLine:(NSNumber *)theIndex
 {
-	[responder performSelector: @selector(moveToEndOfLine:) withObject: window];
-	[router setMode: ViInsertMode];
+    [responder performSelector: @selector(moveToEndOfLine:) withObject: window];
+    [router setMode: ViInsertMode];
 }
 
 - (void)delete:(NSNumber *)theIndex
 {
-	// not needed here  ViCommand handles it.
+    // not needed here  ViCommand handles it.
 }
 
 - (void)deleteLine:(NSNumber *)theIndex
 {
-	[responder performSelector: @selector(moveToBeginningOfLine:) withObject: window];
-	[responder performSelector: @selector(deleteToEndOfLine:) withObject: window];
-	[responder performSelector: @selector(deleteBackward:) withObject: window];
-	[router setKeyMap:@"commandDefault"];
-	[router setState:ViCommandState];
+    [responder performSelector: @selector(moveToBeginningOfLine:) withObject: window];
+    [responder performSelector: @selector(deleteToEndOfLine:) withObject: window];
+    [responder performSelector: @selector(deleteBackward:) withObject: window];
+    [router setKeyMap:@"commandDefault"];
+    [router setState:ViCommandState];
 }
 
 - (void)deleteRight:(NSNumber *)theIndex
 {
-	if ( [router mode] == ViVisualMode ) {
-		[responder performSelector: @selector(deleteToMark:) withObject: window];
-		[router setMode: ViCommandMode];
-	} else {
-		[responder performSelector: @selector(deleteForward:) withObject: window];
-	}
+    if ( [router mode] == ViVisualMode ) {
+        [responder performSelector: @selector(deleteToMark:) withObject: window];
+        [router setMode: ViCommandMode];
+    } else {
+        [responder performSelector: @selector(deleteForward:) withObject: window];
+    }
 
-	[router setKeyMap:@"commandDefault"];
-	[router setState:ViCommandState];
+    [router setKeyMap:@"commandDefault"];
+    [router setState:ViCommandState];
 }
 
 - (void)deleteLeft:(NSNumber *)theIndex
 {
-	if ( [router mode] == ViVisualMode ) {
-		[responder performSelector: @selector(deleteToMark:) withObject: window];
-		[router setMode: ViCommandMode];
-	} else {
-		[responder performSelector: @selector(deleteBackward:) withObject: window];
-	}
+    if ( [router mode] == ViVisualMode ) {
+        [responder performSelector: @selector(deleteToMark:) withObject: window];
+        [router setMode: ViCommandMode];
+    } else {
+        [responder performSelector: @selector(deleteBackward:) withObject: window];
+    }
 
-	[router setKeyMap:@"commandDefault"];
-	[router setState:ViCommandState];
+    [router setKeyMap:@"commandDefault"];
+    [router setState:ViCommandState];
 }
 
 - (void)visual:(NSNumber *)theIndex
 {
-	NSLog( @"Setting visual mode" );
-	[router setMode:ViVisualMode];
-	NSLog( @"Trying to set the mark on the first responder" );
-	[responder performSelector: @selector(setMark:) withObject: window];
-	NSLog( @"set the mark on the first responder" );
+    NSLog( @"Setting visual mode" );
+    [router setMode:ViVisualMode];
+    NSLog( @"Trying to set the mark on the first responder" );
+    [responder performSelector: @selector(setMark:) withObject: window];
+    NSLog( @"set the mark on the first responder" );
 }
 
 
@@ -174,7 +174,7 @@
 
 - (void)deleteToEndOfLine:(NSNumber *)theIndex
 {
-	[responder performSelector: @selector(deleteToEndOfLine:) withObject: window];
+    [responder performSelector: @selector(deleteToEndOfLine:) withObject: window];
 }
 
 - (void)deleteToEndOfParagraph:(NSNumber *)theIndex
@@ -247,11 +247,11 @@
 
 - (void)moveDown:(NSNumber *)theIndex
 {
-	[responder performSelector: @selector(moveDown:) withObject: window];
+    [responder performSelector: @selector(moveDown:) withObject: window];
 
-	if ( [router mode] == ViVisualMode ) {
-		[responder performSelector: @selector(selectToMark:) withObject: window];
-	}
+    if ( [router mode] == ViVisualMode ) {
+        [responder performSelector: @selector(selectToMark:) withObject: window];
+    }
 }
 
 - (void)moveDownAndModifySelection:(NSNumber *)theIndex
@@ -268,11 +268,11 @@
 
 - (void)moveLeft:(NSNumber *)theIndex
 {
-	[responder performSelector: @selector(moveLeft:) withObject: window];
+    [responder performSelector: @selector(moveLeft:) withObject: window];
 
-	if ( [router mode] == ViVisualMode ) {
-		[responder performSelector: @selector(selectToMark:) withObject: window];
-	}
+    if ( [router mode] == ViVisualMode ) {
+        [responder performSelector: @selector(selectToMark:) withObject: window];
+    }
 }
 
 - (void)moveLeftAndModifySelection:(NSNumber *)theIndex
@@ -281,11 +281,11 @@
 
 - (void)moveRight:(NSNumber *)theIndex
 {
-	[responder performSelector: @selector(moveRight:) withObject: window];
+    [responder performSelector: @selector(moveRight:) withObject: window];
 
-	if ( [router mode] == ViVisualMode ) {
-		[responder performSelector: @selector(selectToMark:) withObject: window];
-	}
+    if ( [router mode] == ViVisualMode ) {
+        [responder performSelector: @selector(selectToMark:) withObject: window];
+    }
 }
 
 - (void)moveRightAndModifySelection:(NSNumber *)theIndex
@@ -318,11 +318,11 @@
 
 - (void)moveUp:(NSNumber *)theIndex
 {
-	[responder performSelector: @selector(moveUp:) withObject: window];
+    [responder performSelector: @selector(moveUp:) withObject: window];
 
-	if ( [router mode] == ViVisualMode ) {
-		[responder performSelector: @selector(selectToMark:) withObject: window];
-	}
+    if ( [router mode] == ViVisualMode ) {
+        [responder performSelector: @selector(selectToMark:) withObject: window];
+    }
 }
 
 - (void)moveUpAndModifySelection:(NSNumber *)theIndex

@@ -12,10 +12,10 @@
 
 @interface ViCommand : NSObject {
 
-	NSMutableArray *dataStack;
-	NSMutableArray *methodStack;
-	id router;
-	ViExecution *execution;
+    NSMutableArray *dataStack;
+    NSMutableArray *methodStack;
+    id router;
+    ViExecution *execution;
 }
 
 - (void)setWindow:(NSWindow *)theWindow;
