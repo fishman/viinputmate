@@ -1,0 +1,159 @@
+// !$*UTF8*$!
+{
+	089C1669FE841209C02AAC07 /* Project object */ = {
+		activeBuildConfigurationName = Debug;
+		activeTarget = 8D5B49AC048680CD000E48DA /* ViMate */;
+		addToTargets = (
+			8D5B49AC048680CD000E48DA /* ViMate */,
+		);
+		breakpointsGroup = C651120D0BBF28B800F3C94C /* XCBreakpointsBucket */;
+		codeSenseManager = C6FA9F9F0BBEF4C600E54E59 /* Code sense */;
+		perUserDictionary = {
+			PBXConfiguration.PBXFileTableDataSource3.PBXFileTableDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					341,
+					20,
+					48,
+					43,
+					43,
+					20,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+					PBXFileDataSource_Target_ColumnID,
+				);
+			};
+			PBXPerProjectTemplateStateSaveDate = 198940917;
+			PBXWorkspaceStateSaveDate = 198940917;
+		};
+		sourceControlManager = C6FA9F9E0BBEF4C600E54E59 /* Source Control */;
+		userBuildSettings = {
+		};
+	};
+	32DBCF630370AF2F00C91783 /* ViMate_Prefix.pch */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {845, 742}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRect = "{{0, 0}, {845, 742}}";
+		};
+	};
+	8D5B49AC048680CD000E48DA /* ViMate */ = {
+		activeExec = 0;
+	};
+	C65111CD0BBF183600F3C94C /* ViSelectorTest.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {845, 742}}";
+			sepNavSelRange = "{215, 0}";
+			sepNavVisRect = "{{0, 0}, {845, 742}}";
+		};
+	};
+	C65111CE0BBF183600F3C94C /* ViSelectorTest.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {845, 742}}";
+			sepNavSelRange = "{325, 0}";
+			sepNavVisRect = "{{0, 0}, {845, 742}}";
+		};
+	};
+	C651120D0BBF28B800F3C94C /* XCBreakpointsBucket */ = {
+		isa = XCBreakpointsBucket;
+		name = "Project Breakpoints";
+		objects = (
+		);
+	};
+	C65112360BBF2D9B00F3C94C /* ViCommand.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {844, 1216}}";
+			sepNavSelRange = "{2341, 0}";
+			sepNavVisRect = "{{0, 86}, {844, 324}}";
+			sepNavWindowFrame = "{{541, 7}, {884, 871}}";
+		};
+	};
+	C65112370BBF2D9B00F3C94C /* ViCommand.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {706, 7120}}";
+			sepNavSelRange = "{8624, 0}";
+			sepNavVisRect = "{{0, 793}, {689, 382}}";
+			sepNavWindowFrame = "{{15, 2}, {884, 871}}";
+		};
+	};
+	C651123F0BBF367700F3C94C /* ViEventRouter.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {844, 784}}";
+			sepNavSelRange = "{1142, 0}";
+			sepNavVisRect = "{{0, 335}, {844, 449}}";
+			sepNavWindowFrame = "{{15, 2}, {884, 871}}";
+		};
+	};
+	C65112400BBF367700F3C94C /* ViEventRouter.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {741, 2688}}";
+			sepNavSelRange = "{3465, 0}";
+			sepNavVisRect = "{{0, 2223}, {673, 401}}";
+			sepNavWindowFrame = "{{60, 7}, {884, 871}}";
+		};
+	};
+	C6D7B35A0BC5E35600A491A5 /* ViExecution.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {844, 1456}}";
+			sepNavSelRange = "{3143, 0}";
+			sepNavVisRect = "{{0, 0}, {844, 447}}";
+			sepNavWindowFrame = "{{279, -49}, {884, 871}}";
+		};
+	};
+	C6D7B35B0BC5E35600A491A5 /* ViExecution.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {673, 4704}}";
+			sepNavSelRange = "{2605, 71}";
+			sepNavVisRect = "{{0, 2400}, {673, 401}}";
+		};
+	};
+	C6FA9F9E0BBEF4C600E54E59 /* Source Control */ = {
+		isa = PBXSourceControlManager;
+		fallbackIsa = XCSourceControlManager;
+		isSCMEnabled = 0;
+		scmConfiguration = {
+		};
+		scmType = "";
+	};
+	C6FA9F9F0BBEF4C600E54E59 /* Code sense */ = {
+		isa = PBXCodeSenseManager;
+		indexTemplatePath = "";
+	};
+	C6FA9FA00BBEF4CA00E54E59 /* ViPlugin.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {845, 742}}";
+			sepNavSelRange = "{163, 0}";
+			sepNavVisRect = "{{0, 0}, {845, 742}}";
+		};
+	};
+	C6FA9FA10BBEF4CA00E54E59 /* ViPlugin.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {845, 742}}";
+			sepNavSelRange = "{375, 0}";
+			sepNavVisRect = "{{0, 0}, {845, 742}}";
+			sepNavWindowFrame = "{{15, 2}, {884, 871}}";
+		};
+	};
+	C6FA9FC70BBEFAED00E54E59 /* ViWindow.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {845, 742}}";
+			sepNavSelRange = "{216, 0}";
+			sepNavVisRect = "{{0, 0}, {845, 742}}";
+		};
+	};
+	C6FA9FC80BBEFAED00E54E59 /* ViWindow.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {844, 592}}";
+			sepNavSelRange = "{813, 0}";
+			sepNavVisRect = "{{0, 127}, {844, 449}}";
+		};
+	};
+}
