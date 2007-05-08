@@ -50,6 +50,15 @@
 /**
  * vi specific methods
  */
+- (void)visual:(NSNumber *)theIndex
+{
+    NSLog( @"Setting visual mode" );
+    [router setMode:ViVisualMode];
+    NSLog( @"Trying to set the mark on the first responder" );
+    [responder performSelector: @selector(setMark:) withObject: window];
+    NSLog( @"set the mark on the first responder" );
+}
+
 - (void)repeat:(NSNumber *)theIndex
 {
     int stackCount = [methodStack count];
@@ -99,12 +108,60 @@
     [router setMode: ViInsertMode];
 }
 
-- (void)delete:(NSNumber *)theIndex
+
+/**
+ * Cut Methods
+ */
+- (void)cut:(NSNumber *)theIndex
 {
     // not needed here  ViCommand handles it.
 }
 
-- (void)deleteLine:(NSNumber *)theIndex
+- (void)cutLine:(NSNumber *)theIndex
+{
+    [responder performSelector: @selector(selectLine:) withObject: window];
+    [responder performSelector: @selector(writeSelectionToPasteboard:) withObject: window];
+    [responder performSelector: @selector(deleteBackward:) withObject: window];
+    [router setKeyMap:@"commandDefault"];
+    [router setState:ViCommandState];
+}
+
+- (void)cutRight:(NSNumber *)theIndex
+{
+    NSArray * ranges;
+    NSRange range;
+
+    ranges = [responder performSelector: @selector(selectedRanges:) withObject: window];
+    NSLog( @"range = %@", [ranges objectAtIndex:0] );
+    [responder performSelector: @selector(selectLine:) withObject: window];
+    [responder performSelector: @selector(deleteForward:) withObject: window];
+}
+
+- (void)cutLeft:(NSNumber *)theIndex
+{
+    [responder performSelector: @selector(deleteBackward:) withObject: window];
+}
+
+- (void)cutToEndOfLine:(NSNumber *)theIndex
+{
+    [responder performSelector: @selector(deleteToEndOfLine:) withObject: window];
+}
+
+- (void)cutToBeginningOfLine:(NSNumber *)theIndex
+{
+    [responder performSelector: @selector(deleteToBeginningOfLine:) withObject: window];
+}
+
+
+/**
+ * Copy Methods
+ */
+- (void)copy:(NSNumber *)theIndex
+{
+    // not needed here  ViCommand handles it.
+}
+
+- (void)copyLine:(NSNumber *)theIndex
 {
     [responder performSelector: @selector(moveToBeginningOfLine:) withObject: window];
     [responder performSelector: @selector(deleteToEndOfLine:) withObject: window];
@@ -113,284 +170,130 @@
     [router setState:ViCommandState];
 }
 
-- (void)deleteRight:(NSNumber *)theIndex
+- (void)copyRight:(NSNumber *)theIndex
 {
-    if ( [router mode] == ViVisualMode ) {
-        [responder performSelector: @selector(deleteToMark:) withObject: window];
-        [router setMode: ViCommandMode];
-    } else {
-        [responder performSelector: @selector(deleteForward:) withObject: window];
-    }
-
-    [router setKeyMap:@"commandDefault"];
-    [router setState:ViCommandState];
+    [responder performSelector: @selector(deleteForward:) withObject: window];
 }
 
-- (void)deleteLeft:(NSNumber *)theIndex
+- (void)copyLeft:(NSNumber *)theIndex
 {
-    if ( [router mode] == ViVisualMode ) {
-        [responder performSelector: @selector(deleteToMark:) withObject: window];
-        [router setMode: ViCommandMode];
-    } else {
-        [responder performSelector: @selector(deleteBackward:) withObject: window];
-    }
-
-    [router setKeyMap:@"commandDefault"];
-    [router setState:ViCommandState];
+    [responder performSelector: @selector(deleteBackward:) withObject: window];
 }
 
-- (void)visual:(NSNumber *)theIndex
+- (void)copyToEndOfLine:(NSNumber *)theIndex
 {
-    NSLog( @"Setting visual mode" );
-    [router setMode:ViVisualMode];
-    NSLog( @"Trying to set the mark on the first responder" );
-    [responder performSelector: @selector(setMark:) withObject: window];
-    NSLog( @"set the mark on the first responder" );
 }
+
+- (void)copyToBeginningOfLine:(NSNumber *)theIndex
+{
+}
+
+
+/**
+ * Paste Methods
+ */
+- (void)pasteBefore:(NSNumber *)theIndex
+{
+}
+
+- (void)pasteAfter:(NSNumber *)theIndex
+{
+}
+
+
 
 
 /**
  * NSResponder methods
  */
-- (void)changeCaseOfLetter:(NSNumber *)theIndex
-{
-}
-
-- (void)deleteBackward:(NSNumber *)theIndex
-{
-}
-
-- (void)deleteForward:(NSNumber *)theIndex
-{
-}
-
-- (void)deleteToBeginningOfLine:(NSNumber *)theIndex
-{
-}
-
-- (void)deleteToBeginningOfParagraph:(NSNumber *)theIndex
-{
-}
-
-- (void)deleteToEndOfLine:(NSNumber *)theIndex
-{
-    [responder performSelector: @selector(deleteToEndOfLine:) withObject: window];
-}
-
-- (void)deleteToEndOfParagraph:(NSNumber *)theIndex
-{
-}
-
-- (void)deleteToMark:(NSNumber *)theIndex
-{
-}
-
-- (void)deleteWordBackward:(NSNumber *)theIndex
-{
-}
-
-- (void)deleteWordForward:(NSNumber *)theIndex
-{
-}
-
-- (void)indent:(NSNumber *)theIndex
-{
-}
-
-- (void)insertBacktab:(NSNumber *)theIndex
-{
-}
-
-- (void)insertContainerBreak:(NSNumber *)theIndex
-{
-}
-
-- (void)insertLineBreak:(NSNumber *)theIndex
-{
-}
-
-- (void)insertNewline:(NSNumber *)theIndex
-{
-}
-
-- (void)insertNewlineIgnoringFieldEditor:(NSNumber *)theIndex
-{
-}
-
-- (void)insertParagraphSeparator:(NSNumber *)theIndex
-{
-}
-
-- (void)insertTab:(NSNumber *)theIndex
-{
-}
-
-- (void)insertTabIgnoringFieldEditor:(NSNumber *)theIndex
-{
-}
-
-- (void)insertText:(NSNumber *)theIndex
-{
-}
-
-- (void)lowercaseWord:(NSNumber *)theIndex
-{
-}
-
-- (void)moveBackward:(NSNumber *)theIndex
-{
-}
-
-- (void)moveBackwardAndModifySelection:(NSNumber *)theIndex
-{
-}
-
 - (void)moveDown:(NSNumber *)theIndex
 {
     [responder performSelector: @selector(moveDown:) withObject: window];
-
-    if ( [router mode] == ViVisualMode ) {
-        [responder performSelector: @selector(selectToMark:) withObject: window];
-    }
 }
 
 - (void)moveDownAndModifySelection:(NSNumber *)theIndex
 {
-}
-
-- (void)moveForward:(NSNumber *)theIndex
-{
-}
-
-- (void)moveForwardAndModifySelection:(NSNumber *)theIndex
-{
+    [responder performSelector: @selector(moveDownAndModifySelection:) withObject: window];
 }
 
 - (void)moveLeft:(NSNumber *)theIndex
 {
     [responder performSelector: @selector(moveLeft:) withObject: window];
-
-    if ( [router mode] == ViVisualMode ) {
-        [responder performSelector: @selector(selectToMark:) withObject: window];
-    }
 }
 
 - (void)moveLeftAndModifySelection:(NSNumber *)theIndex
 {
+    [responder performSelector: @selector(moveLeftAndModifySelection:) withObject: window];
 }
 
 - (void)moveRight:(NSNumber *)theIndex
 {
     [responder performSelector: @selector(moveRight:) withObject: window];
-
-    if ( [router mode] == ViVisualMode ) {
-        [responder performSelector: @selector(selectToMark:) withObject: window];
-    }
 }
 
 - (void)moveRightAndModifySelection:(NSNumber *)theIndex
 {
+    [responder performSelector: @selector(moveRightAndModifySelection:) withObject: window];
 }
 
 - (void)moveToBeginningOfDocument:(NSNumber *)theIndex
 {
+    [responder performSelector: @selector(moveToBeginningOfDocument:) withObject: window];
 }
 
 - (void)moveToBeginningOfLine:(NSNumber *)theIndex
 {
-}
-
-- (void)moveToBeginningOfParagraph:(NSNumber *)theIndex
-{
+    [responder performSelector: @selector(moveToBeginningOfLine:) withObject: window];
 }
 
 - (void)moveToEndOfDocument:(NSNumber *)theIndex
 {
+    [responder performSelector: @selector(moveToEndOfDocument:) withObject: window];
 }
 
 - (void)moveToEndOfLine:(NSNumber *)theIndex
 {
-}
-
-- (void)moveToEndOfParagraph:(NSNumber *)theIndex
-{
+    [responder performSelector: @selector(moveToEndOfLine:) withObject: window];
 }
 
 - (void)moveUp:(NSNumber *)theIndex
 {
     [responder performSelector: @selector(moveUp:) withObject: window];
-
-    if ( [router mode] == ViVisualMode ) {
-        [responder performSelector: @selector(selectToMark:) withObject: window];
-    }
 }
 
 - (void)moveUpAndModifySelection:(NSNumber *)theIndex
 {
+    [responder performSelector: @selector(moveUpAndModifySelection:) withObject: window];
 }
 
 - (void)pageDown:(NSNumber *)theIndex
 {
+    [responder performSelector: @selector(pageDown:) withObject: window];
 }
 
 - (void)pageUp:(NSNumber *)theIndex
 {
+    [responder performSelector: @selector(pageUp:) withObject: window];
 }
 
 - (void)scrollLineDown:(NSNumber *)theIndex
 {
+    [responder performSelector: @selector(scrollLineDown:) withObject: window];
 }
 
 - (void)scrollLineUp:(NSNumber *)theIndex
 {
-}
-
-- (void)scrollPageDown:(NSNumber *)theIndex
-{
-}
-
-- (void)scrollPageUp:(NSNumber *)theIndex
-{
-}
-
-- (void)selectAll:(NSNumber *)theIndex
-{
+    [responder performSelector: @selector(scrollLineUp:) withObject: window];
 }
 
 - (void)selectLine:(NSNumber *)theIndex
 {
-}
-
-- (void)selectParagraph:(NSNumber *)theIndex
-{
-}
-
-- (void)selectToMark:(NSNumber *)theIndex
-{
+    [responder performSelector: @selector(selectLine:) withObject: window];
 }
 
 - (void)selectWord:(NSNumber *)theIndex
 {
-}
-
-- (void)setMark:(NSNumber *)theIndex
-{
-}
-
-- (void)showContextHelp:(NSNumber *)theIndex
-{
-}
-
-- (void)swapWithMark:(NSNumber *)theIndex
-{
-}
-
-- (void)uppercaseWord:(NSNumber *)theIndex
-{
-}
-
-- (void)yank:(NSNumber *)theIndex
-{
+    [responder performSelector: @selector(selectWord:) withObject: window];
 }
 
 @end

@@ -52,7 +52,15 @@ static ViEventRouter *sharedViEventRouter = nil;
 
         keyMaps = [NSMutableDictionary dictionaryWithCapacity:2];
         [keyMaps retain];
+        /**
+         * The following 'command' keymaps are used for the standard command mode.
+         * This map is used most often of the keymaps.  It is used at the following times:
+         *   - when first entering command mode.
+         *   - after the completion of a command sequence. e.x. d 4 w  (cut four words right)
+         *   - whenever the state is reset by pressing the escape key.
+         */
         [keyMaps setObject: [NSDictionary dictionaryWithObjectsAndKeys:
+                  @"controlDefault:", @"NSControlKeyMask",
                       @"resetStack:", [NSString stringWithCharacters:&escape length:1],
                           @"repeat:", @"1",
                           @"repeat:", @"2",
@@ -73,13 +81,21 @@ static ViEventRouter *sharedViEventRouter = nil;
          @"insertAtBeginningOfLine:", @"I",
                           @"append:", @"a",
                @"appendToEndOfLine:", @"A",
-                     @"deleteRight:", @"x",
-                      @"deleteLeft:", @"X", 
-                            @"delete:", @"d", 
-               @"deleteToEndOfLine:", @"D", 
+                        @"cutRight:", @"x",
+                         @"cutLeft:", @"X", 
+                             @"cut:", @"d", 
+                  @"cutToEndOfLine:", @"D", 
                           @"visual:", @"v",
                       NULL] forKey: @"commandDefault"];
+        /**
+         * This keymap restricts commands to those only those that work with a repeat 
+         * command.  The primary difference with this keymap vs. the commandDefault 
+         * keymap (asside from fewer commands) is that this one designates "0" 
+         * as a repeat integer while the comandDefault map assigns "0" to the 
+         * moveToBeginningOfLine command.
+         */
         [keyMaps setObject: [NSDictionary dictionaryWithObjectsAndKeys:
+                  @"controlDefault:", @"NSControlKeyMask",
                       @"resetStack:", [NSString stringWithCharacters:&escape length:1],
                           @"repeat:", @"0",
                           @"repeat:", @"1",
@@ -99,9 +115,15 @@ static ViEventRouter *sharedViEventRouter = nil;
          @"insertAtBeginningOfLine:", @"I",
                           @"append:", @"a",
                @"appendToEndOfLine:", @"A",
-                     @"deleteRight:", @"x",
-                      @"deleteLeft:", @"X",
+                        @"cutRight:", @"x",
+                         @"cutLeft:", @"X",
                       NULL] forKey: @"commandRepeat"];
+        /**
+         * The cutDefault keymap is responsible for handling the "cut" mode
+         * as in "cut, copy, and paste".  This keymap becomes the primary after 
+         * pressing the "d" key once.  It removes commands from the commandDefault
+         * keymap that cannot be used with the cut functionality.
+         */
         [keyMaps setObject: [NSDictionary dictionaryWithObjectsAndKeys:
                       @"resetStack:", [NSString stringWithCharacters:&escape length:1],
                           @"repeat:", @"1",
@@ -113,16 +135,23 @@ static ViEventRouter *sharedViEventRouter = nil;
                           @"repeat:", @"7",
                           @"repeat:", @"8",
                           @"repeat:", @"9",
-                      @"deleteLeft:", @"h",
-                      @"deleteDown:", @"j",
-                        @"deleteUp:", @"k",
-                     @"deleteRight:", @"l",
-         @"deleteToBeginningOfLine:", @"0",
-               @"deleteToEndOfLine:", @"$",
-                  @"deleteWordLeft:", @"b",
-                 @"deleteWordRight:", @"w",
-                      @"deleteLine:", @"d", 
-                      NULL] forKey: @"deleteDefault"];
+                         @"cutLeft:", @"h",
+                         @"cutDown:", @"j",
+                           @"cutUp:", @"k",
+                        @"cutRight:", @"l",
+            @"cutToBeginningOfLine:", @"0",
+                  @"cutToEndOfLine:", @"$",
+                     @"cutWordLeft:", @"b",
+                    @"cutWordRight:", @"w",
+                         @"cutLine:", @"d", 
+                      NULL] forKey: @"cutDefault"];
+        /**
+         * This keymap restricts commands to those only those that work with a repeat 
+         * command during a cut operation.  The primary difference with this keymap 
+         * vs. the commandDefault keymap (asside from fewer commands) is that this
+         * one designates "0" as a repeat integer while the comandDefault map assigns
+         * "0" to the moveToBeginningOfLine command.
+         */
         [keyMaps setObject: [NSDictionary dictionaryWithObjectsAndKeys:
                       @"resetStack:", [NSString stringWithCharacters:&escape length:1],
                           @"repeat:", @"0",
@@ -135,15 +164,81 @@ static ViEventRouter *sharedViEventRouter = nil;
                           @"repeat:", @"7",
                           @"repeat:", @"8",
                           @"repeat:", @"9",
-                      @"deleteLeft:", @"h",
-                      @"deleteDown:", @"j",
-                        @"deleteUp:", @"k",
-                     @"deleteRight:", @"l",
-               @"deleteToEndOfLine:", @"$",
-                  @"deleteWordLeft:", @"b",
-                 @"deleteWordRight:", @"w",
-                      @"deleteLine:", @"d", 
-                      NULL] forKey: @"deleteRepeat"];
+                         @"cutLeft:", @"h",
+                         @"cutDown:", @"j",
+                           @"cutUp:", @"k",
+                        @"cutRight:", @"l",
+                  @"cutToEndOfLine:", @"$",
+                     @"cutWordLeft:", @"b",
+                    @"cutWordRight:", @"w",
+                         @"cutLine:", @"d", 
+                      NULL] forKey: @"cutRepeat"];
+        /**
+         * The copyDefault keymap is responsible for handling the "copy" mode
+         * as in "cut, copy, and paste".  This keymap becomes the primary after 
+         * pressing the "y" key once.  It removes commands from the commandDefault
+         * keymap that cannot be used with the cut functionality.
+         */
+        [keyMaps setObject: [NSDictionary dictionaryWithObjectsAndKeys:
+                      @"resetStack:", [NSString stringWithCharacters:&escape length:1],
+                          @"repeat:", @"1",
+                          @"repeat:", @"2",
+                          @"repeat:", @"3",
+                          @"repeat:", @"4",
+                          @"repeat:", @"5",
+                          @"repeat:", @"6",
+                          @"repeat:", @"7",
+                          @"repeat:", @"8",
+                          @"repeat:", @"9",
+                        @"copyLeft:", @"h",
+                        @"copyDown:", @"j",
+                          @"copyUp:", @"k",
+                       @"copyRight:", @"l",
+           @"copyToBeginningOfLine:", @"0",
+                 @"copyToEndOfLine:", @"$",
+                    @"copyWordLeft:", @"b",
+                   @"copyWordRight:", @"w",
+                        @"copyLine:", @"y", 
+                      NULL] forKey: @"copyDefault"];
+        /**
+         * This keymap restricts commands to those only those that work with a repeat 
+         * command during a copy operation.  The primary difference with this keymap 
+         * vs. the commandDefault keymap (asside from fewer commands) is that this
+         * one designates "0" as a repeat integer while the comandDefault map assigns
+         * "0" to the moveToBeginningOfLine command.
+         */
+        [keyMaps setObject: [NSDictionary dictionaryWithObjectsAndKeys:
+                      @"resetStack:", [NSString stringWithCharacters:&escape length:1],
+                          @"repeat:", @"0",
+                          @"repeat:", @"1",
+                          @"repeat:", @"2",
+                          @"repeat:", @"3",
+                          @"repeat:", @"4",
+                          @"repeat:", @"5",
+                          @"repeat:", @"6",
+                          @"repeat:", @"7",
+                          @"repeat:", @"8",
+                          @"repeat:", @"9",
+                        @"copyLeft:", @"h",
+                        @"copyDown:", @"j",
+                          @"copyUp:", @"k",
+                       @"copyRight:", @"l",
+                 @"copyToEndOfLine:", @"$",
+                    @"copyWordLeft:", @"b",
+                   @"copyWordRight:", @"w",
+                        @"copyLine:", @"y", 
+                      NULL] forKey: @"copyRepeat"];
+        /**
+         * This keymap handles the commands that work with the control key modifier.
+         * When an event comes in with a control key modifier, this is the map
+         * that is used.
+         */
+        [keyMaps setObject: [NSDictionary dictionaryWithObjectsAndKeys:
+                          @"pageUp:", @"b",
+                        @"pageDown:", @"f",
+                    @"scrollLineUp:", @"y",
+                  @"scrollLineDown:", @"e",
+                      NULL] forKey: @"controlModifierDefault"];
 
         activeKeyMap = [keyMaps objectForKey:@"commandDefault"];
     }
@@ -197,7 +292,7 @@ static ViEventRouter *sharedViEventRouter = nil;
         case ViCommandMode:
             // find the method that corresponds to the key that was pressed 
             // given the current state's key map.
-            commandMethod = [activeKeyMap objectForKey: keyPress];
+            commandMethod = [[self keyMapWithEvent:theEvent] objectForKey: keyPress];
 
             if ( commandMethod != nil ) {
                 NSLog( @"routing the message" );
@@ -215,6 +310,7 @@ static ViEventRouter *sharedViEventRouter = nil;
     }
 }
 
+
 /**
  * Sets the activeKeyMap to a different map.  This is how we
  * attempt to keep track of the states.
@@ -222,6 +318,31 @@ static ViEventRouter *sharedViEventRouter = nil;
 - (void)setKeyMap:(NSString *)theKeyMapLabel
 {
     activeKeyMap = [keyMaps objectForKey: theKeyMapLabel];
+}
+
+/**
+ * Sets and returns the active key map with influence of the event.
+ * If there are modifier keys pressed (such as the control key)
+ * then it may change the key map if the current state allows it.
+ */
+- (id)keyMapWithEvent:(NSEvent *)theEvent
+{
+    NSString * keyMapName;
+
+    if ( ( [theEvent modifierFlags] & 0x0000FFFFU ) == 0 ) {
+
+        if ( [theEvent modifierFlags] & NSControlKeyMask ) {
+            keyMapName = [activeKeyMap objectForKey:@"NSControlKeyMask"];
+        }
+
+        if ( keyMapName == nil ) {
+            keyMapName = @"commandDefault";
+        }
+        
+        [self setKeyMap:keyMapName];
+    } 
+
+    return activeKeyMap;
 }
 
 /**

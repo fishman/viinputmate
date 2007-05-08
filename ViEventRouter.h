@@ -45,6 +45,7 @@ typedef enum _ViState {
 // methods we actually need to use
 - (NSEvent *)routeEvent:(NSEvent *)theEvent;
 - (void)setKeyMap:(NSString *)theKeyMapLabel;
+- (id)keyMapWithEvent:(NSEvent *)theEvent;
 - (void)setMode:(ViMode)theMode;
 - (ViMode)mode;
 - (void)setState:(ViState)theState;

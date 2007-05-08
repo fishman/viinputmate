@@ -42,6 +42,13 @@
 /**
  * vi specific methods
  */
+- (void)visual:(id)theEvent
+{
+    NSLog( @"trying to enter visual mode" );
+    [self pushMethod:@"visual:" withData:@"v"];
+    [execution executeStack: methodStack withData: dataStack];
+}
+
 - (void)repeat:(id)theEvent
 {
     int value;
@@ -68,7 +75,7 @@
 
     switch ( [router state] ) {
         case ViDeleteState:
-            [router setKeyMap: @"deleteRepeat"];
+            [router setKeyMap: @"cutRepeat"];
             break;
         case ViYankState:
             [router setKeyMap: @"yankRepeat"];
@@ -118,159 +125,43 @@
     [execution executeStack: methodStack withData: dataStack];
 }
 
-- (void)delete:(id)theEvent
+- (void)cut:(id)theEvent
 {
-    [router setKeyMap:@"deleteDefault"];
+    NSLog( @"changing state to the cut state." );
+    [router setKeyMap:@"cutDefault"];
     [router setState:ViDeleteState];
 }
 
-- (void)deleteLine:(id)theEvent
+- (void)cutLine:(id)theEvent
 {
-    NSLog( @"trying to deleteLine" );
-    [self pushMethod:@"deleteLine:" withData:@"d"];
+    NSLog( @"trying to cutLine" );
+    [self pushMethod:@"cutLine:" withData:@"d"];
     [execution executeStack: methodStack withData: dataStack];
 }
 
-- (void)deleteRight:(id)theEvent
+- (void)cutRight:(id)theEvent
 {
-    NSLog( @"trying to deleteRight" );
-    [self pushMethod:@"deleteRight:" withData:@"x"];
+    NSLog( @"trying to cutRight" );
+    [self pushMethod:@"cutRight:" withData:@"x"];
     [execution executeStack: methodStack withData: dataStack];
 }
 
-- (void)deleteLeft:(id)theEvent
+- (void)cutLeft:(id)theEvent
 {
-    NSLog( @"trying to deleteLeft" );
-    [self pushMethod:@"deleteLeft:" withData:@"X"];
-    [execution executeStack: methodStack withData: dataStack];
-}
-
-- (void)visual:(id)theEvent
-{
-    NSLog( @"trying to enter visual mode" );
-    [self pushMethod:@"visual:" withData:@"v"];
+    NSLog( @"trying to cutLeft" );
+    [self pushMethod:@"cutLeft:" withData:@"X"];
     [execution executeStack: methodStack withData: dataStack];
 }
 
 
 /**
- * NSResponder methods
+ * Select NSResponder Methods
  */
-- (void)changeCaseOfLetter:(id)theEvent
+- (void)cutToEndOfLine:(id)theEvent
 {
-    NSLog( @"Not Yet Implemented" );
-}
-
-- (void)deleteBackward:(id)theEvent
-{
-    NSLog( @"Not Yet Implemented" );
-}
-
-- (void)deleteForward:(id)theEvent
-{
-    NSLog( @"Not Yet Implemented" );
-}
-
-- (void)deleteToBeginningOfLine:(id)theEvent
-{
-    NSLog( @"Not Yet Implemented" );
-}
-
-- (void)deleteToBeginningOfParagraph:(id)theEvent
-{
-    NSLog( @"Not Yet Implemented" );
-}
-
-- (void)deleteToEndOfLine:(id)theEvent
-{
-    NSLog( @"trying to deleteToEndOfLine" );
-    [self pushMethod:@"deleteToEndOfLine:" withData:@"D"];
+    NSLog( @"trying to cutToEndOfLine" );
+    [self pushMethod:@"cutToEndOfLine:" withData:@"D"];
     [execution executeStack: methodStack withData: dataStack];
-}
-
-- (void)deleteToEndOfParagraph:(id)theEvent
-{
-    NSLog( @"Not Yet Implemented" );
-}
-
-- (void)deleteToMark:(id)theEvent
-{
-    NSLog( @"Not Yet Implemented" );
-}
-
-- (void)deleteWordBackward:(id)theEvent
-{
-    NSLog( @"Not Yet Implemented" );
-}
-
-- (void)deleteWordForward:(id)theEvent
-{
-    NSLog( @"Not Yet Implemented" );
-}
-
-- (void)indent:(id)theEvent
-{
-    NSLog( @"Not Yet Implemented" );
-}
-
-- (void)insertBacktab:(id)theEvent
-{
-    NSLog( @"Not Yet Implemented" );
-}
-
-- (void)insertContainerBreak:(id)theEvent
-{
-    NSLog( @"Not Yet Implemented" );
-}
-
-- (void)insertLineBreak:(id)theEvent
-{
-    NSLog( @"Not Yet Implemented" );
-}
-
-- (void)insertNewline:(id)theEvent
-{
-    NSLog( @"Not Yet Implemented" );
-}
-
-- (void)insertNewlineIgnoringFieldEditor:(id)theEvent
-{
-    NSLog( @"Not Yet Implemented" );
-}
-
-- (void)insertParagraphSeparator:(id)theEvent
-{
-    NSLog( @"Not Yet Implemented" );
-}
-
-- (void)insertTab:(id)theEvent
-{
-    NSLog( @"Not Yet Implemented" );
-}
-
-- (void)insertTabIgnoringFieldEditor:(id)theEvent
-{
-    NSLog( @"Not Yet Implemented" );
-}
-
-- (void)insertText:(id)theEvent
-{
-    NSLog( @"Not Yet Implemented" );
-}
-
-- (void)lowercaseWord:(id)theEvent
-{
-    NSLog( @"Not Yet Implemented" );
-}
-
-- (void)moveBackward:(id)theEvent
-{
-    NSLog( @"Not Yet Implemented" );
-}
-
-- (void)moveBackwardAndModifySelection:(id)theEvent
-{
-    NSLog( @"Not Yet Implemented" );
 }
 
 - (void)moveDown:(id)theEvent
@@ -282,17 +173,9 @@
 
 - (void)moveDownAndModifySelection:(id)theEvent
 {
-    NSLog( @"Not Yet Implemented" );
-}
-
-- (void)moveForward:(id)theEvent
-{
-    NSLog( @"Not Yet Implemented" );
-}
-
-- (void)moveForwardAndModifySelection:(id)theEvent
-{
-    NSLog( @"Not Yet Implemented" );
+    NSLog( @"trying to moveDownAndModifySelection" );
+    [self pushMethod:@"moveDownAndModifySelection:" withData:@"j"];
+    [execution executeStack: methodStack withData: dataStack];
 }
 
 - (void)moveLeft:(id)theEvent
@@ -304,7 +187,9 @@
 
 - (void)moveLeftAndModifySelection:(id)theEvent
 {
-    NSLog( @"Not Yet Implemented" );
+    NSLog( @"trying to moveLeftAndModifySelection" );
+    [self pushMethod:@"moveLeftAndModifySelection:" withData:@"h"];
+    [execution executeStack: methodStack withData: dataStack];
 }
 
 - (void)moveRight:(id)theEvent
@@ -316,37 +201,37 @@
 
 - (void)moveRightAndModifySelection:(id)theEvent
 {
-    NSLog( @"Not Yet Implemented" );
+    NSLog( @"trying to moveRightAndModifySelection" );
+    [self pushMethod:@"moveRightAndModifySelection:" withData:@"l"];
+    [execution executeStack: methodStack withData: dataStack];
 }
 
 - (void)moveToBeginningOfDocument:(id)theEvent
 {
-    NSLog( @"Not Yet Implemented" );
+    NSLog( @"trying to moveToBeginningOfDocument" );
+    [self pushMethod:@"moveToBeginningOfDocument:" withData:@"gg"];
+    [execution executeStack: methodStack withData: dataStack];
 }
 
 - (void)moveToBeginningOfLine:(id)theEvent
 {
-    NSLog( @"Not Yet Implemented" );
-}
-
-- (void)moveToBeginningOfParagraph:(id)theEvent
-{
-    NSLog( @"Not Yet Implemented" );
+    NSLog( @"trying to moveToBeginningOfLine" );
+    [self pushMethod:@"moveToBeginningOfLine:" withData:@"0"];
+    [execution executeStack: methodStack withData: dataStack];
 }
 
 - (void)moveToEndOfDocument:(id)theEvent
 {
-    NSLog( @"Not Yet Implemented" );
+    NSLog( @"trying to moveToEndOfDocument" );
+    [self pushMethod:@"moveToEndOfDocument:" withData:@"G"];
+    [execution executeStack: methodStack withData: dataStack];
 }
 
 - (void)moveToEndOfLine:(id)theEvent
 {
-    NSLog( @"Not Yet Implemented" );
-}
-
-- (void)moveToEndOfParagraph:(id)theEvent
-{
-    NSLog( @"Not Yet Implemented" );
+    NSLog( @"trying to moveToEndOfLine" );
+    [self pushMethod:@"moveToEndOfLine:" withData:@"$"];
+    [execution executeStack: methodStack withData: dataStack];
 }
 
 - (void)moveUp:(id)theEvent
@@ -358,87 +243,38 @@
 
 - (void)moveUpAndModifySelection:(id)theEvent
 {
-    NSLog( @"Not Yet Implemented" );
+    NSLog( @"trying to moveUpAndModifySelection" );
+    [self pushMethod:@"moveUpAndModifySelection:" withData:@"k"];
+    [execution executeStack: methodStack withData: dataStack];
 }
 
 - (void)pageDown:(id)theEvent
 {
-    NSLog( @"Not Yet Implemented" );
+    NSLog( @"trying to pageDown" );
+    [self pushMethod:@"pageDown:" withData:@"f"];
+    [execution executeStack: methodStack withData: dataStack];
 }
 
 - (void)pageUp:(id)theEvent
 {
-    NSLog( @"Not Yet Implemented" );
+    NSLog( @"trying to pageUp" );
+    [self pushMethod:@"pageUp:" withData:@"b"];
+    [execution executeStack: methodStack withData: dataStack];
 }
 
 - (void)scrollLineDown:(id)theEvent
 {
-    NSLog( @"Not Yet Implemented" );
+    NSLog( @"trying to scrollLineDown" );
+    [self pushMethod:@"scrollLineDown:" withData:@"e"];
+    [execution executeStack: methodStack withData: dataStack];
 }
 
 - (void)scrollLineUp:(id)theEvent
 {
-    NSLog( @"Not Yet Implemented" );
+    NSLog( @"trying to scrollLineUp" );
+    [self pushMethod:@"scrollLineUp:" withData:@"y"];
+    [execution executeStack: methodStack withData: dataStack];
 }
 
-- (void)scrollPageDown:(id)theEvent
-{
-    NSLog( @"Not Yet Implemented" );
-}
-
-- (void)scrollPageUp:(id)theEvent
-{
-    NSLog( @"Not Yet Implemented" );
-}
-
-- (void)selectAll:(id)theEvent
-{
-    NSLog( @"Not Yet Implemented" );
-}
-
-- (void)selectLine:(id)theEvent
-{
-    NSLog( @"Not Yet Implemented" );
-}
-
-- (void)selectParagraph:(id)theEvent
-{
-    NSLog( @"Not Yet Implemented" );
-}
-
-- (void)selectToMark:(id)theEvent
-{
-    NSLog( @"Not Yet Implemented" );
-}
-
-- (void)selectWord:(id)theEvent
-{
-    NSLog( @"Not Yet Implemented" );
-}
-
-- (void)setMark:(id)theEvent
-{
-    NSLog( @"Not Yet Implemented" );
-}
-
-- (void)showContextHelp:(id)theEvent
-{
-    NSLog( @"Not Yet Implemented" );
-}
-
-- (void)swapWithMark:(id)theEvent
-{
-    NSLog( @"Not Yet Implemented" );
-}
-
-- (void)uppercaseWord:(id)theEvent
-{
-    NSLog( @"Not Yet Implemented" );
-}
-
-- (void)yank:(id)theEvent
-{
-    NSLog( @"Not Yet Implemented" );
-}
 
 @end

@@ -288,7 +288,7 @@
 							<real>186</real>
 						</array>
 						<key>RubberWindowFrame</key>
-						<string>168 398 788 454 0 0 1440 878 </string>
+						<string>169 398 788 454 0 0 1440 878 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXSmartGroupTreeModule</string>
@@ -325,7 +325,7 @@
 								<key>Frame</key>
 								<string>{{0, 0}, {580, 0}}</string>
 								<key>RubberWindowFrame</key>
-								<string>168 398 788 454 0 0 1440 878 </string>
+								<string>169 398 788 454 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
@@ -347,7 +347,7 @@
 								<key>Frame</key>
 								<string>{{0, 5}, {580, 408}}</string>
 								<key>RubberWindowFrame</key>
-								<string>168 398 788 454 0 0 1440 878 </string>
+								<string>169 398 788 454 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>XCDetailModule</string>
@@ -371,9 +371,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>C658F48A0BDB98FF0019F291</string>
+				<string>C62945080BF020260083EE97</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>C658F48B0BDB98FF0019F291</string>
+				<string>C62945090BF020260083EE97</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -486,7 +486,7 @@
 	<key>PerspectivesBarVisible</key>
 	<false/>
 	<key>PinnedNavigatorIdentifier</key>
-	<string>C67628D00BC81FA900C981DA</string>
+	<string>C629451A0BF0374F0083EE97</string>
 	<key>ShelfIsVisible</key>
 	<false/>
 	<key>SourceDescription</key>
@@ -509,11 +509,11 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>C6FA9FB60BBEF66B00E54E59</string>
 		<string>/Users/kirt/work/ViMate/ViMate.xcodeproj</string>
+		<string>C6FA9FB60BBEF66B00E54E59</string>
 	</array>
 	<key>WindowString</key>
-	<string>168 398 788 454 0 0 1440 878 </string>
+	<string>169 398 788 454 0 0 1440 878 </string>
 	<key>WindowTools</key>
 	<array>
 		<dict>
@@ -534,7 +534,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string></string>
+								<string>ViExecution.m</string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -551,6 +551,8 @@
 							<string>414pt</string>
 						</dict>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -590,7 +592,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>C6FA9FB60BBEF66B00E54E59</string>
-				<string>C658F48C0BDB98FF0019F291</string>
+				<string>C629450A0BF020260083EE97</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -601,7 +603,7 @@
 			<key>WindowToolGUID</key>
 			<string>C6FA9FB60BBEF66B00E54E59</string>
 			<key>WindowToolIsVisible</key>
-			<false/>
+			<true/>
 		</dict>
 		<dict>
 			<key>Identifier</key>

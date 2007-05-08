@@ -31,8 +31,8 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 198940917;
-			PBXWorkspaceStateSaveDate = 198940917;
+			PBXPerProjectTemplateStateSaveDate = 200286211;
+			PBXWorkspaceStateSaveDate = 200286211;
 		};
 		sourceControlManager = C6FA9F9E0BBEF4C600E54E59 /* Source Control */;
 		userBuildSettings = {
@@ -94,9 +94,9 @@
 	};
 	C65112400BBF367700F3C94C /* ViEventRouter.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {741, 2688}}";
-			sepNavSelRange = "{3465, 0}";
-			sepNavVisRect = "{{0, 2223}, {673, 401}}";
+			sepNavIntBoundsRect = "{{0, 0}, {741, 6032}}";
+			sepNavSelRange = "{13435, 0}";
+			sepNavVisRect = "{{0, 4770}, {689, 382}}";
 			sepNavWindowFrame = "{{60, 7}, {884, 871}}";
 		};
 	};
@@ -113,6 +113,7 @@
 			sepNavIntBoundsRect = "{{0, 0}, {673, 4704}}";
 			sepNavSelRange = "{2605, 71}";
 			sepNavVisRect = "{{0, 2400}, {673, 401}}";
+			sepNavWindowFrame = "{{15, 2}, {884, 871}}";
 		};
 	};
 	C6FA9F9E0BBEF4C600E54E59 /* Source Control */ = {
