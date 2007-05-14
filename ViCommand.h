@@ -41,7 +41,10 @@
 - (void)cutLine:(id)theEvent;
 - (void)cutRight:(id)theEvent;
 - (void)cutLeft:(id)theEvent;
+- (void)cutWordLeft:(id)theEvent;
+- (void)cutWordRight:(id)theEvent;
 - (void)cutToEndOfLine:(id)theEvent;
+- (void)cutToBeginningOfLine:(id)theEvent;
 
 
 /**

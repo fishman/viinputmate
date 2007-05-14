@@ -259,7 +259,7 @@
 	C65112400BBF367700F3C94C /* ViEventRouter.m */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {909, 7872}}";
-			sepNavSelRange = "{18096, 0}";
+			sepNavSelRange = "{14841, 50}";
 			sepNavVisRect = "{{0, 5603}, {689, 299}}";
 			sepNavWindowFrame = "{{60, 7}, {884, 871}}";
 		};
@@ -274,9 +274,9 @@
 	};
 	C6D7B35B0BC5E35600A491A5 /* ViExecution.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {689, 7440}}";
-			sepNavSelRange = "{11874, 0}";
-			sepNavVisRect = "{{0, 5641}, {689, 382}}";
+			sepNavIntBoundsRect = "{{0, 0}, {706, 8464}}";
+			sepNavSelRange = "{14109, 0}";
+			sepNavVisRect = "{{0, 3747}, {689, 299}}";
 			sepNavWindowFrame = "{{15, 2}, {884, 871}}";
 		};
 	};

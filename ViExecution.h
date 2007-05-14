@@ -49,6 +49,8 @@
 - (void)cutLine:(NSNumber *)theIndex;
 - (void)cutRight:(NSNumber *)theIndex;
 - (void)cutLeft:(NSNumber *)theIndex;
+- (void)cutWordRight:(NSNumber *)theIndex;
+- (void)cutWordLeft:(NSNumber *)theIndex;
 - (void)cutToEndOfLine:(NSNumber *)theIndex;
 - (void)cutToBeginningOfLine:(NSNumber *)theIndex;
 

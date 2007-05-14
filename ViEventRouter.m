@@ -376,12 +376,13 @@ bool debugOn = true;
             commandMethod = [[self keyMapWithEvent:theEvent] objectForKey: keyPress];
 
             if ( commandMethod != nil ) {
-                //ViLog( @"routing the message" );
+                //ViLog( @"routing the message: %@", commandMethod );
                 [command performSelector: sel_getUid([commandMethod UTF8String]) withObject: theEvent];
                 return nil;
             } else {
                 // test for modifier keys down
                 // test for delete key
+                //ViLog( @"cannot route the message" );
                 [command performSelector: @selector(resetStack:) withObject: theEvent];
                 return [self eventPassThrough:theEvent];
             }
@@ -411,26 +412,9 @@ bool debugOn = true;
 {
     NSString * keyMapName;
 
-
-    if ( ( [theEvent modifierFlags] & 0xFFFF0000U ) != 0 ) {
-
-        if ( ( [theEvent modifierFlags] & NSControlKeyMask ) != 0 ) {
-            keyMapName = [activeKeyMap objectForKey:@"NSControlKeyMask"];
-            //[self setActiveKeyMap:@"controlDefault"];
-        }
-
-        if ( keyMapName == nil ) {
-            keyMapName = @"commandDefault";
-        }
-        
+    if ( ( [theEvent modifierFlags] & NSControlKeyMask ) != 0 ) {
+        keyMapName = [activeKeyMap objectForKey:@"NSControlKeyMask"];
         [self setActiveKeyMap:keyMapName];
-
-        /*
-        ViLog( @"activeKeyMap: %@", keyMapName );
-        ViLog( @"%@", [keyMapName class] );
-        ViLog( @"%@", [keyMaps objectForKey: keyMapName] );
-        ViLog( @"%@", activeKeyMap );
-        */
     }
 
     return activeKeyMap;

@@ -164,6 +164,20 @@
     [execution executeStack: methodStack withData: dataStack];
 }
 
+- (void)cutWordLeft:(id)theEvent
+{
+    ViLog( @"trying to cutWordLeft" );
+    [self pushMethod:@"cutWordLeft:" withData:@"b"];
+    [execution executeStack: methodStack withData: dataStack];
+}
+
+- (void)cutWordRight:(id)theEvent
+{
+    ViLog( @"trying to cutWordRight" );
+    [self pushMethod:@"cutWordRight:" withData:@"w"];
+    [execution executeStack: methodStack withData: dataStack];
+}
+
 - (void)cutToEndOfLine:(id)theEvent
 {
     ViLog( @"trying to cutToEndOfLine" );
@@ -171,6 +185,12 @@
     [execution executeStack: methodStack withData: dataStack];
 }
 
+- (void)cutToBeginningOfLine:(id)theEvent
+{
+    ViLog( @"trying to cutToBeginningOfLine" );
+    [self pushMethod:@"cutToBeginningOfLine:" withData:@"0"];
+    [execution executeStack: methodStack withData: dataStack];
+}
 
 
 /**

@@ -235,16 +235,59 @@
     [router setState:ViCommandState];
 }
 
+- (void)cutWordRight:(NSNumber *)theIndex
+{
+    [responder performSelector: @selector(moveWordForwardAndModifySelection:) withObject: window];
+    [responder writeSelectionToPasteboard:pasteboard 
+                                    types:[NSArray arrayWithObject:@"NSStringPboardType"] ];
+    [responder performSelector: @selector(deleteBackward:) withObject: window];
+
+    [router setActiveKeyMap:@"commandDefault"];
+    [router setState:ViCommandState];
+}
+
+- (void)cutWordLeft:(NSNumber *)theIndex
+{
+    [responder performSelector: @selector(moveWordForwardAndModifySelection:) withObject: window];
+    [responder writeSelectionToPasteboard:pasteboard 
+                                    types:[NSArray arrayWithObject:@"NSStringPboardType"] ];
+    [responder performSelector: @selector(deleteBackward:) withObject: window];
+
+    [router setActiveKeyMap:@"commandDefault"];
+    [router setState:ViCommandState];
+}
+
 - (void)cutToEndOfLine:(NSNumber *)theIndex
 {
-    [responder performSelector: @selector(deleteToEndOfLine:) withObject: window];
+    int column = [columnNumber intValue];
+
+    [responder performSelector: @selector(moveToEndOfLine:) withObject: window];
+
+    while ( column < [columnNumber intValue] ) {
+        [responder performSelector: @selector(moveLeftAndModifySelection:) withObject: window];
+    }
+
+    [responder writeSelectionToPasteboard:pasteboard 
+                                    types:[NSArray arrayWithObject:@"NSStringPboardType"] ];
+    [responder performSelector: @selector(deleteBackward:) withObject: window];
+
     [router setActiveKeyMap:@"commandDefault"];
     [router setState:ViCommandState];
 }
 
 - (void)cutToBeginningOfLine:(NSNumber *)theIndex
 {
-    [responder performSelector: @selector(deleteToBeginningOfLine:) withObject: window];
+    int column = [columnNumber intValue];
+
+    [responder performSelector: @selector(moveToBeginningOfLine:) withObject: window];
+
+    while ( column > [columnNumber intValue] ) {
+        [responder performSelector: @selector(moveRightAndModifySelection:) withObject: window];
+    }
+
+    [responder writeSelectionToPasteboard:pasteboard 
+                                    types:[NSArray arrayWithObject:@"NSStringPboardType"] ];
+    [responder performSelector: @selector(deleteBackward:) withObject: window];
     [router setActiveKeyMap:@"commandDefault"];
     [router setState:ViCommandState];
 }
