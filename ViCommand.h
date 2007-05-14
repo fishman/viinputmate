@@ -33,30 +33,63 @@
 - (void)append:(id)theEvent;
 - (void)appendToEndOfLine:(id)theEvent;
 
+
+/**
+ * Cut Methods
+ */
 - (void)cut:(id)theEvent;
 - (void)cutLine:(id)theEvent;
 - (void)cutRight:(id)theEvent;
 - (void)cutLeft:(id)theEvent;
+- (void)cutToEndOfLine:(id)theEvent;
+
 
 /**
- * NSResponder methods
+ * Copy Methods
  */
-- (void)cutToEndOfLine:(id)theEvent;
+- (void)copy:(id)theEvent;
+- (void)copyLine:(id)theEvent;
+- (void)copyRight:(id)theEvent;
+- (void)copyLeft:(id)theEvent;
+
+
+/**
+ * Paste Methods
+ */
+- (void)pasteBefore:(id)theEvent;
+- (void)pasteAfter:(id)theEvent;
+
+
+/**
+ * Movement Methods
+ */
 - (void)moveDown:(id)theEvent;
 - (void)moveDownAndModifySelection:(id)theEvent;
 - (void)moveLeft:(id)theEvent;
 - (void)moveLeftAndModifySelection:(id)theEvent;
 - (void)moveRight:(id)theEvent;
 - (void)moveRightAndModifySelection:(id)theEvent;
-- (void)moveToBeginningOfDocument:(id)theEvent;
-- (void)moveToBeginningOfLine:(id)theEvent;
-- (void)moveToEndOfDocument:(id)theEvent;
-- (void)moveToEndOfLine:(id)theEvent;
 - (void)moveUp:(id)theEvent;
 - (void)moveUpAndModifySelection:(id)theEvent;
-- (void)pageDown:(id)theEvent;
-- (void)pageUp:(id)theEvent;
+
+- (void)moveWordBackward:(id)theEvent;
+- (void)moveWordForward:(id)theEvent;
+
+- (void)moveToBeginningOfLine:(id)theEvent;
+- (void)moveToEndOfLine:(id)theEvent;
+
+- (void)moveToBeginningOfDocument:(id)theEvent;
+- (void)moveToEndOfDocument:(id)theEvent;
+
+- (void)scrollPageDown:(id)theEvent;
+- (void)scrollPageUp:(id)theEvent;
+
+- (void)scrollHalfPageDown:(id)theEvent;
+- (void)scrollHalfPageUp:(id)theEvent;
+
 - (void)scrollLineDown:(id)theEvent;
 - (void)scrollLineUp:(id)theEvent;
+
+- (void)undo:(id)theEvent;
 
 @end

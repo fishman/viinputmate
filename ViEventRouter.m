@@ -7,9 +7,12 @@
 //
 
 #import "ViEventRouter.h"
+#import "ViHelper.h"
 
 
 static ViEventRouter *sharedViEventRouter = nil;
+bool debugOn = true;
+//bool debugOn = false;
 
 /**
  * singleton instance of the event router.
@@ -46,6 +49,7 @@ static ViEventRouter *sharedViEventRouter = nil;
     unichar escape = 0x1B;
 
     if ((self = [super init])) {
+        lastWindow = nil;
         mode = ViInsertMode;
         command = [[ViCommand alloc] init];
 
@@ -60,7 +64,7 @@ static ViEventRouter *sharedViEventRouter = nil;
          *   - whenever the state is reset by pressing the escape key.
          */
         [keyMaps setObject: [NSDictionary dictionaryWithObjectsAndKeys:
-                  @"controlDefault:", @"NSControlKeyMask",
+                   @"controlDefault", @"NSControlKeyMask",
                       @"resetStack:", [NSString stringWithCharacters:&escape length:1],
                           @"repeat:", @"1",
                           @"repeat:", @"2",
@@ -75,6 +79,8 @@ static ViEventRouter *sharedViEventRouter = nil;
                         @"moveDown:", @"j",
                           @"moveUp:", @"k",
                        @"moveRight:", @"l",
+                @"moveWordBackward:", @"b",
+                 @"moveWordForward:", @"w",
            @"moveToBeginningOfLine:", @"0",
                  @"moveToEndOfLine:", @"$",
                           @"insert:", @"i",
@@ -85,6 +91,8 @@ static ViEventRouter *sharedViEventRouter = nil;
                          @"cutLeft:", @"X", 
                              @"cut:", @"d", 
                   @"cutToEndOfLine:", @"D", 
+                     @"pasteBefore:", @"P", 
+                      @"pasteAfter:", @"p", 
                           @"visual:", @"v",
                       NULL] forKey: @"commandDefault"];
         /**
@@ -95,7 +103,7 @@ static ViEventRouter *sharedViEventRouter = nil;
          * moveToBeginningOfLine command.
          */
         [keyMaps setObject: [NSDictionary dictionaryWithObjectsAndKeys:
-                  @"controlDefault:", @"NSControlKeyMask",
+                   @"controlDefault", @"NSControlKeyMask",
                       @"resetStack:", [NSString stringWithCharacters:&escape length:1],
                           @"repeat:", @"0",
                           @"repeat:", @"1",
@@ -111,13 +119,76 @@ static ViEventRouter *sharedViEventRouter = nil;
                         @"moveDown:", @"j",
                           @"moveUp:", @"k",
                        @"moveRight:", @"l",
+                @"moveWordBackward:", @"b",
+                 @"moveWordForward:", @"w",
                           @"insert:", @"i",
          @"insertAtBeginningOfLine:", @"I",
                           @"append:", @"a",
                @"appendToEndOfLine:", @"A",
+                     @"pasteBefore:", @"P", 
+                      @"pasteAfter:", @"p", 
                         @"cutRight:", @"x",
                          @"cutLeft:", @"X",
                       NULL] forKey: @"commandRepeat"];
+
+        /**
+         * The visual mode keymap.  I was hoping that I would not need
+         * to do this and to solve all of the visual mode trickery 
+         * with marks.  But alas, TextMate does not implement marks.
+         */
+        [keyMaps setObject: [NSDictionary dictionaryWithObjectsAndKeys:
+                   @"controlDefault", @"NSControlKeyMask",
+                      @"resetStack:", [NSString stringWithCharacters:&escape length:1],
+                          @"repeat:", @"1",
+                          @"repeat:", @"2",
+                          @"repeat:", @"3",
+                          @"repeat:", @"4",
+                          @"repeat:", @"5",
+                          @"repeat:", @"6",
+                          @"repeat:", @"7",
+                          @"repeat:", @"8",
+                          @"repeat:", @"9",
+      @"moveLeftAndModifySelection:", @"h",
+      @"moveDownAndModifySelection:", @"j",
+        @"moveUpAndModifySelection:", @"k",
+     @"moveRightAndModifySelection:", @"l",
+                          @"insert:", @"i",
+         @"insertAtBeginningOfLine:", @"I",
+                          @"append:", @"A",
+                        @"cutRight:", @"x",
+                         @"cutLine:", @"X", 
+                        @"cutRight:", @"d", 
+                         @"cutLine:", @"D", 
+                     @"pasteBefore:", @"P", 
+                      @"pasteAfter:", @"p", 
+                      NULL] forKey: @"visualDefault"];
+
+        [keyMaps setObject: [NSDictionary dictionaryWithObjectsAndKeys:
+                   @"controlDefault", @"NSControlKeyMask",
+                      @"resetStack:", [NSString stringWithCharacters:&escape length:1],
+                          @"repeat:", @"0",
+                          @"repeat:", @"1",
+                          @"repeat:", @"2",
+                          @"repeat:", @"3",
+                          @"repeat:", @"4",
+                          @"repeat:", @"5",
+                          @"repeat:", @"6",
+                          @"repeat:", @"7",
+                          @"repeat:", @"8",
+                          @"repeat:", @"9",
+      @"moveLeftAndModifySelection:", @"h",
+      @"moveDownAndModifySelection:", @"j",
+        @"moveUpAndModifySelection:", @"k",
+     @"moveRightAndModifySelection:", @"l",
+                          @"insert:", @"i",
+         @"insertAtBeginningOfLine:", @"I",
+                          @"append:", @"A",
+                        @"cutRight:", @"x",
+                         @"cutLine:", @"X", 
+                        @"cutRight:", @"d", 
+                         @"cutLine:", @"D", 
+                     @"pasteBefore:", @"P", 
+                      NULL] forKey: @"visualRepeat"];
         /**
          * The cutDefault keymap is responsible for handling the "cut" mode
          * as in "cut, copy, and paste".  This keymap becomes the primary after 
@@ -234,11 +305,14 @@ static ViEventRouter *sharedViEventRouter = nil;
          * that is used.
          */
         [keyMaps setObject: [NSDictionary dictionaryWithObjectsAndKeys:
-                          @"pageUp:", @"b",
-                        @"pageDown:", @"f",
+                   @"controlDefault", @"NSControlKeyMask",
+                    @"scrollPageUp:", @"b",
+                  @"scrollPageDown:", @"f",
+                @"scrollHalfPageUp:", @"u",
+              @"scrollHalfPageDown:", @"d",
                     @"scrollLineUp:", @"y",
                   @"scrollLineDown:", @"e",
-                      NULL] forKey: @"controlModifierDefault"];
+                      NULL] forKey: @"controlDefault"];
 
         activeKeyMap = [keyMaps objectForKey:@"commandDefault"];
     }
@@ -281,27 +355,35 @@ static ViEventRouter *sharedViEventRouter = nil;
         case ViInsertMode:
             // if escape is pressed.
             if ( [keyPress characterAtIndex:0] == 0x1B ) {
-                mode = ViCommandMode;
+                [self setMode:ViCommandMode];
+                [self setState:ViCommandState];
+
+                // if the a selection was made in insert mode. clear it
+                // before entering command mode.
+                if ( [responder hasSelection] ) {
+                    [responder performSelector: @selector(moveLeft:) withObject: lastWindow];
+                }
+
                 return nil;
             } else {
                 return theEvent;
             }
             break;
 
-        case ViVisualMode:
         case ViCommandMode:
             // find the method that corresponds to the key that was pressed 
             // given the current state's key map.
             commandMethod = [[self keyMapWithEvent:theEvent] objectForKey: keyPress];
 
             if ( commandMethod != nil ) {
-                NSLog( @"routing the message" );
+                //ViLog( @"routing the message" );
                 [command performSelector: sel_getUid([commandMethod UTF8String]) withObject: theEvent];
                 return nil;
             } else {
-                NSLog( @"could not find method for %@:", keyPress );
+                // test for modifier keys down
+                // test for delete key
                 [command performSelector: @selector(resetStack:) withObject: theEvent];
-                return nil;
+                return [self eventPassThrough:theEvent];
             }
 
             break;
@@ -315,7 +397,7 @@ static ViEventRouter *sharedViEventRouter = nil;
  * Sets the activeKeyMap to a different map.  This is how we
  * attempt to keep track of the states.
  */
-- (void)setKeyMap:(NSString *)theKeyMapLabel
+- (void)setActiveKeyMap:(NSString *)theKeyMapLabel
 {
     activeKeyMap = [keyMaps objectForKey: theKeyMapLabel];
 }
@@ -329,20 +411,49 @@ static ViEventRouter *sharedViEventRouter = nil;
 {
     NSString * keyMapName;
 
-    if ( ( [theEvent modifierFlags] & 0x0000FFFFU ) == 0 ) {
 
-        if ( [theEvent modifierFlags] & NSControlKeyMask ) {
+    if ( ( [theEvent modifierFlags] & 0xFFFF0000U ) != 0 ) {
+
+        if ( ( [theEvent modifierFlags] & NSControlKeyMask ) != 0 ) {
             keyMapName = [activeKeyMap objectForKey:@"NSControlKeyMask"];
+            //[self setActiveKeyMap:@"controlDefault"];
         }
 
         if ( keyMapName == nil ) {
             keyMapName = @"commandDefault";
         }
         
-        [self setKeyMap:keyMapName];
-    } 
+        [self setActiveKeyMap:keyMapName];
+
+        /*
+        ViLog( @"activeKeyMap: %@", keyMapName );
+        ViLog( @"%@", [keyMapName class] );
+        ViLog( @"%@", [keyMaps objectForKey: keyMapName] );
+        ViLog( @"%@", activeKeyMap );
+        */
+    }
 
     return activeKeyMap;
+}
+
+- (id)eventPassThrough:(NSEvent *)theEvent
+{
+    NSString * keyPress = [theEvent charactersIgnoringModifiers];
+
+    if ( ( [theEvent modifierFlags] & 0x0000FFFFU ) == 0 ) {
+        return theEvent;
+    }
+
+    switch ( [keyPress characterAtIndex:0] ) 
+    {
+        case 0x7F: // backspace
+        case 0x0D: // return
+            return theEvent;
+        default:
+            ViLog( @"could not find method for '%c' :: 0x%04X", [keyPress characterAtIndex:0], [keyPress characterAtIndex:0] );
+            ViLog( @"%@", activeKeyMap );
+            return nil;
+    }
 }
 
 /**
@@ -370,7 +481,11 @@ static ViEventRouter *sharedViEventRouter = nil;
 
 - (void)setWindow:(NSWindow *)theWindow
 {
-    [command setWindow:theWindow];
+    if ( lastWindow != theWindow ) {
+        lastWindow = theWindow;
+        [command setWindow:theWindow];
+        responder = [theWindow firstResponder];
+    }
 }
 
 @end

@@ -8,6 +8,7 @@
 
 #import "ViCommand.h"
 #import "ViEventRouter.h"
+#import "ViHelper.h"
 
 
 @implementation ViCommand
@@ -39,12 +40,14 @@
     [theMethod release];
 }
 
+
+
 /**
  * vi specific methods
  */
 - (void)visual:(id)theEvent
 {
-    NSLog( @"trying to enter visual mode" );
+    ViLog( @"trying to enter visual mode" );
     [self pushMethod:@"visual:" withData:@"v"];
     [execution executeStack: methodStack withData: dataStack];
 }
@@ -57,7 +60,7 @@
         // add the new number to the number that is already on the dataStack.
         // no need to add the method name to the stack since it is
         // already there.
-        NSLog( @"Adding to the repeat command" );
+        ViLog( @"Adding to the repeat command" );
         value = [[dataStack lastObject] intValue] * 10;
         value += [[theEvent charactersIgnoringModifiers] intValue];
         [dataStack removeLastObject];
@@ -65,7 +68,7 @@
         // add the number that was pressed to the data stack and 
         // add the repeat method name to the method stack for the 
         // first time.
-        NSLog( @"Creating a new repeat command" );
+        ViLog( @"Creating a new repeat command" );
         value = [[theEvent charactersIgnoringModifiers] intValue];
         [methodStack addObject: @"repeat:"];
         [[methodStack lastObject] release];
@@ -75,14 +78,17 @@
 
     switch ( [router state] ) {
         case ViDeleteState:
-            [router setKeyMap: @"cutRepeat"];
+            [router setActiveKeyMap: @"cutRepeat"];
             break;
         case ViYankState:
-            [router setKeyMap: @"yankRepeat"];
+            [router setActiveKeyMap: @"yankRepeat"];
+            break;
+        case ViVisualState:
+            [router setActiveKeyMap: @"visualRepeat"];
             break;
         case ViCommandState:
         default:
-            [router setKeyMap: @"commandRepeat"];
+            [router setActiveKeyMap: @"commandRepeat"];
             break;
     }
     // for some reason this causes the program to crash.
@@ -94,187 +100,298 @@
     [methodStack removeAllObjects];
     [dataStack removeAllObjects];
     [router setMode:ViCommandMode];
-    [router setKeyMap:@"commandDefault"];
+    [router setActiveKeyMap:@"commandDefault"];
 }
 
 - (void)insert:(id)theEvent
 {
-    NSLog( @"trying to insert" );
+    ViLog( @"trying to insert" );
     [self pushMethod:@"insert:" withData:@"i"];
     [execution executeStack: methodStack withData: dataStack];
 }
 
 - (void)insertAtBeginningOfLine:(id)theEvent
 {
-    NSLog( @"trying to insertAtBeginningOfLine" );
+    ViLog( @"trying to insertAtBeginningOfLine" );
     [self pushMethod:@"insertAtBeginningOfLine:" withData:@"I"];
     [execution executeStack: methodStack withData: dataStack];
 }
 
 - (void)append:(id)theEvent
 {
-    NSLog( @"trying to moveDown" );
+    ViLog( @"trying to moveDown" );
     [self pushMethod:@"append:" withData:@"a"];
     [execution executeStack: methodStack withData: dataStack];
 }
 
 - (void)appendToEndOfLine:(id)theEvent
 {
-    NSLog( @"trying to appendToEndOfLine" );
+    ViLog( @"trying to appendToEndOfLine" );
     [self pushMethod:@"appendToEndOfLine:" withData:@"A"];
     [execution executeStack: methodStack withData: dataStack];
 }
 
+
+
+/**
+ * Cut Methods
+ */
 - (void)cut:(id)theEvent
 {
-    NSLog( @"changing state to the cut state." );
-    [router setKeyMap:@"cutDefault"];
+    ViLog( @"changing state to the cut state." );
+    [router setActiveKeyMap:@"cutDefault"];
     [router setState:ViDeleteState];
 }
 
 - (void)cutLine:(id)theEvent
 {
-    NSLog( @"trying to cutLine" );
+    ViLog( @"trying to cutLine" );
     [self pushMethod:@"cutLine:" withData:@"d"];
     [execution executeStack: methodStack withData: dataStack];
 }
 
 - (void)cutRight:(id)theEvent
 {
-    NSLog( @"trying to cutRight" );
+    ViLog( @"trying to cutRight" );
     [self pushMethod:@"cutRight:" withData:@"x"];
     [execution executeStack: methodStack withData: dataStack];
 }
 
 - (void)cutLeft:(id)theEvent
 {
-    NSLog( @"trying to cutLeft" );
+    ViLog( @"trying to cutLeft" );
     [self pushMethod:@"cutLeft:" withData:@"X"];
     [execution executeStack: methodStack withData: dataStack];
 }
+
+- (void)cutToEndOfLine:(id)theEvent
+{
+    ViLog( @"trying to cutToEndOfLine" );
+    [self pushMethod:@"cutToEndOfLine:" withData:@"D"];
+    [execution executeStack: methodStack withData: dataStack];
+}
+
+
+
+/**
+ * Copy Methods
+ */
+- (void)copy:(id)theEvent
+{
+    ViLog( @"trying to copyToEndOfLine" );
+    [self pushMethod:@"copyToEndOfLine:" withData:@"y"];
+    [execution executeStack: methodStack withData: dataStack];
+}
+
+- (void)copyLine:(id)theEvent
+{
+    ViLog( @"trying to copyToEndOfLine" );
+    [self pushMethod:@"copyToEndOfLine:" withData:@"y"];
+    [execution executeStack: methodStack withData: dataStack];
+}
+
+- (void)copyRight:(id)theEvent
+{
+    ViLog( @"trying to copyToEndOfLine" );
+    [self pushMethod:@"copyToEndOfLine:" withData:@"l"];
+    [execution executeStack: methodStack withData: dataStack];
+}
+
+- (void)copyLeft:(id)theEvent
+{
+    ViLog( @"trying to copyToEndOfLine" );
+    [self pushMethod:@"copyToEndOfLine:" withData:@"h"];
+    [execution executeStack: methodStack withData: dataStack];
+}
+
+
+
+
+/**
+ * Paste Methods
+ */
+- (void)pasteBefore:(id)theEvent
+{
+    ViLog( @"trying to pasteBefore" );
+    [self pushMethod:@"pasteBefore:" withData:@"P"];
+    [execution executeStack: methodStack withData: dataStack];
+}
+
+- (void)pasteAfter:(id)theEvent
+{
+    ViLog( @"trying to pasteAfter" );
+    [self pushMethod:@"pasteAfter:" withData:@"p"];
+    [execution executeStack: methodStack withData: dataStack];
+}
+
+
 
 
 /**
  * Select NSResponder Methods
  */
-- (void)cutToEndOfLine:(id)theEvent
-{
-    NSLog( @"trying to cutToEndOfLine" );
-    [self pushMethod:@"cutToEndOfLine:" withData:@"D"];
-    [execution executeStack: methodStack withData: dataStack];
-}
-
 - (void)moveDown:(id)theEvent
 {
-    NSLog( @"trying to moveDown" );
+    ViLog( @"trying to moveDown" );
     [self pushMethod:@"moveDown:" withData:@"j"];
     [execution executeStack: methodStack withData: dataStack];
 }
 
 - (void)moveDownAndModifySelection:(id)theEvent
 {
-    NSLog( @"trying to moveDownAndModifySelection" );
+    ViLog( @"trying to moveDownAndModifySelection" );
     [self pushMethod:@"moveDownAndModifySelection:" withData:@"j"];
     [execution executeStack: methodStack withData: dataStack];
 }
 
 - (void)moveLeft:(id)theEvent
 {
-    NSLog( @"trying to moveLeft" );
+    ViLog( @"trying to moveLeft" );
     [self pushMethod:@"moveLeft:" withData:@"h"];
     [execution executeStack: methodStack withData: dataStack];
 }
 
 - (void)moveLeftAndModifySelection:(id)theEvent
 {
-    NSLog( @"trying to moveLeftAndModifySelection" );
+    ViLog( @"trying to moveLeftAndModifySelection" );
     [self pushMethod:@"moveLeftAndModifySelection:" withData:@"h"];
     [execution executeStack: methodStack withData: dataStack];
 }
 
 - (void)moveRight:(id)theEvent
 {
-    NSLog( @"trying to moveRight" );
+    ViLog( @"trying to moveRight" );
     [self pushMethod:@"moveRight:" withData:@"l"];
     [execution executeStack: methodStack withData: dataStack];
 }
 
 - (void)moveRightAndModifySelection:(id)theEvent
 {
-    NSLog( @"trying to moveRightAndModifySelection" );
+    ViLog( @"trying to moveRightAndModifySelection" );
     [self pushMethod:@"moveRightAndModifySelection:" withData:@"l"];
-    [execution executeStack: methodStack withData: dataStack];
-}
-
-- (void)moveToBeginningOfDocument:(id)theEvent
-{
-    NSLog( @"trying to moveToBeginningOfDocument" );
-    [self pushMethod:@"moveToBeginningOfDocument:" withData:@"gg"];
-    [execution executeStack: methodStack withData: dataStack];
-}
-
-- (void)moveToBeginningOfLine:(id)theEvent
-{
-    NSLog( @"trying to moveToBeginningOfLine" );
-    [self pushMethod:@"moveToBeginningOfLine:" withData:@"0"];
-    [execution executeStack: methodStack withData: dataStack];
-}
-
-- (void)moveToEndOfDocument:(id)theEvent
-{
-    NSLog( @"trying to moveToEndOfDocument" );
-    [self pushMethod:@"moveToEndOfDocument:" withData:@"G"];
-    [execution executeStack: methodStack withData: dataStack];
-}
-
-- (void)moveToEndOfLine:(id)theEvent
-{
-    NSLog( @"trying to moveToEndOfLine" );
-    [self pushMethod:@"moveToEndOfLine:" withData:@"$"];
     [execution executeStack: methodStack withData: dataStack];
 }
 
 - (void)moveUp:(id)theEvent
 {
-    NSLog( @"trying to moveUp" );
+    ViLog( @"trying to moveUp" );
     [self pushMethod:@"moveUp:" withData:@"k"];
     [execution executeStack: methodStack withData: dataStack];
 }
 
 - (void)moveUpAndModifySelection:(id)theEvent
 {
-    NSLog( @"trying to moveUpAndModifySelection" );
+    ViLog( @"trying to moveUpAndModifySelection" );
     [self pushMethod:@"moveUpAndModifySelection:" withData:@"k"];
     [execution executeStack: methodStack withData: dataStack];
 }
 
-- (void)pageDown:(id)theEvent
+
+/**
+ * Word Movement
+ */
+- (void)moveWordBackward:(id)theEvent
 {
-    NSLog( @"trying to pageDown" );
-    [self pushMethod:@"pageDown:" withData:@"f"];
+    ViLog( @"trying to moveWordBackward" );
+    [self pushMethod:@"moveWordBackward:" withData:@"b"];
     [execution executeStack: methodStack withData: dataStack];
 }
 
-- (void)pageUp:(id)theEvent
+- (void)moveWordForward:(id)theEvent
 {
-    NSLog( @"trying to pageUp" );
-    [self pushMethod:@"pageUp:" withData:@"b"];
+    ViLog( @"trying to moveWordForward" );
+    [self pushMethod:@"moveWordForward:" withData:@"b"];
+    [execution executeStack: methodStack withData: dataStack];
+}
+
+
+
+
+/**
+ * Line methods
+ */
+- (void)moveToBeginningOfLine:(id)theEvent
+{
+    ViLog( @"trying to moveToBeginningOfLine" );
+    [self pushMethod:@"moveToBeginningOfLine:" withData:@"0"];
+    [execution executeStack: methodStack withData: dataStack];
+}
+
+- (void)moveToEndOfLine:(id)theEvent
+{
+    ViLog( @"trying to moveToEndOfLine" );
+    [self pushMethod:@"moveToEndOfLine:" withData:@"$"];
+    [execution executeStack: methodStack withData: dataStack];
+}
+
+
+
+/**
+ * Document movement
+ */
+- (void)moveToBeginningOfDocument:(id)theEvent
+{
+    ViLog( @"trying to moveToBeginningOfDocument" );
+    [self pushMethod:@"moveToBeginningOfDocument:" withData:@"gg"];
+    [execution executeStack: methodStack withData: dataStack];
+}
+
+- (void)moveToEndOfDocument:(id)theEvent
+{
+    ViLog( @"trying to moveToEndOfDocument" );
+    [self pushMethod:@"moveToEndOfDocument:" withData:@"G"];
+    [execution executeStack: methodStack withData: dataStack];
+}
+
+
+
+- (void)scrollPageDown:(id)theEvent
+{
+    ViLog( @"trying to scrollPageDown" );
+    [self pushMethod:@"scrollPageDown:" withData:@"f"];
+    [execution executeStack: methodStack withData: dataStack];
+}
+
+- (void)scrollPageUp:(id)theEvent
+{
+    ViLog( @"trying to scrollPageUp" );
+    [self pushMethod:@"scrollPageUp:" withData:@"b"];
+    [execution executeStack: methodStack withData: dataStack];
+}
+
+- (void)scrollHalfPageDown:(id)theEvent
+{
+    ViLog( @"trying to scrollHalfPageDown" );
+    [self pushMethod:@"scrollHalfPageDown:" withData:@"d"];
+    [execution executeStack: methodStack withData: dataStack];
+}
+
+- (void)scrollHalfPageUp:(id)theEvent
+{
+    ViLog( @"trying to scrollHalfPageUp" );
+    [self pushMethod:@"scrollHalfPageUp:" withData:@"u"];
     [execution executeStack: methodStack withData: dataStack];
 }
 
 - (void)scrollLineDown:(id)theEvent
 {
-    NSLog( @"trying to scrollLineDown" );
+    ViLog( @"trying to scrollLineDown" );
     [self pushMethod:@"scrollLineDown:" withData:@"e"];
     [execution executeStack: methodStack withData: dataStack];
 }
 
 - (void)scrollLineUp:(id)theEvent
 {
-    NSLog( @"trying to scrollLineUp" );
+    ViLog( @"trying to scrollLineUp" );
     [self pushMethod:@"scrollLineUp:" withData:@"y"];
     [execution executeStack: methodStack withData: dataStack];
 }
 
+- (void)undo:(id)theEvent
+{
+    ViLog( @"trying to undo" );
+    [self pushMethod:@"undo:" withData:@"u"];
+    [execution executeStack: methodStack withData: dataStack];
+}
 
 @end

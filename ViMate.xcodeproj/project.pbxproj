@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8D5B49B0048680CD000E48DA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C167DFE841241C02AAC07 /* InfoPlist.strings */; };
 		8D5B49B4048680CD000E48DA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
+		C6103FBF0BF7B45500E0E228 /* ViHelper.c in Sources */ = {isa = PBXBuildFile; fileRef = C6103FBE0BF7B45500E0E228 /* ViHelper.c */; };
 		C65111CF0BBF183600F3C94C /* ViSelectorTest.m in Sources */ = {isa = PBXBuildFile; fileRef = C65111CE0BBF183600F3C94C /* ViSelectorTest.m */; };
 		C65112380BBF2D9B00F3C94C /* ViCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = C65112370BBF2D9B00F3C94C /* ViCommand.m */; };
 		C65112410BBF367700F3C94C /* ViEventRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = C65112400BBF367700F3C94C /* ViEventRouter.m */; };
@@ -25,6 +26,8 @@
 		32DBCF630370AF2F00C91783 /* ViMate_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViMate_Prefix.pch; sourceTree = "<group>"; };
 		8D5B49B6048680CD000E48DA /* ViMate.tmplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ViMate.tmplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D5B49B7048680CD000E48DA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Info.plist; sourceTree = "<group>"; };
+		C6103FBD0BF7B45500E0E228 /* ViHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViHelper.h; sourceTree = "<group>"; };
+		C6103FBE0BF7B45500E0E228 /* ViHelper.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ViHelper.c; sourceTree = "<group>"; };
 		C65111CD0BBF183600F3C94C /* ViSelectorTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViSelectorTest.h; sourceTree = "<group>"; };
 		C65111CE0BBF183600F3C94C /* ViSelectorTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViSelectorTest.m; sourceTree = "<group>"; };
 		C65112360BBF2D9B00F3C94C /* ViCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViCommand.h; sourceTree = "<group>"; };
@@ -55,6 +58,8 @@
 		089C166AFE841209C02AAC07 /* ViMate */ = {
 			isa = PBXGroup;
 			children = (
+				C6103FBD0BF7B45500E0E228 /* ViHelper.h */,
+				C6103FBE0BF7B45500E0E228 /* ViHelper.c */,
 				08FB77AFFE84173DC02AAC07 /* Classes */,
 				32C88E010371C26100C91783 /* Other Sources */,
 				089C167CFE841241C02AAC07 /* Resources */,
@@ -193,6 +198,7 @@
 				C65112380BBF2D9B00F3C94C /* ViCommand.m in Sources */,
 				C65112410BBF367700F3C94C /* ViEventRouter.m in Sources */,
 				C6D7B35C0BC5E35600A491A5 /* ViExecution.m in Sources */,
+				C6103FBF0BF7B45500E0E228 /* ViHelper.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

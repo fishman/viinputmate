@@ -10,11 +10,11 @@
 //#import "ViCommandStack.h"
 #import "ViCommand.h"
 
+extern bool debugOn;
 
 typedef enum _ViMode {
     ViInsertMode       = 1,
     ViCommandMode      = 2,
-    ViVisualMode       = 3
 } ViMode;
 
 typedef enum _ViState {
@@ -27,12 +27,14 @@ typedef enum _ViState {
 
 @interface ViEventRouter : NSObject
 {
+    ViMode mode;
+    ViState state;
+    NSWindow * lastWindow;
+    id responder;
     // holds onto the methods that should be executed once we reach a final method.
     ViCommand *command;
     NSMutableDictionary *keyMaps;
     id activeKeyMap;
-    ViMode mode;
-    ViState state;
 }
 
 // methods needed for singleton pattern
@@ -44,8 +46,9 @@ typedef enum _ViState {
 
 // methods we actually need to use
 - (NSEvent *)routeEvent:(NSEvent *)theEvent;
-- (void)setKeyMap:(NSString *)theKeyMapLabel;
+- (void)setActiveKeyMap:(NSString *)theKeyMapLabel;
 - (id)keyMapWithEvent:(NSEvent *)theEvent;
+- (id)eventPassThrough:(NSEvent *)theEvent;
 - (void)setMode:(ViMode)theMode;
 - (ViMode)mode;
 - (void)setState:(ViState)theState;

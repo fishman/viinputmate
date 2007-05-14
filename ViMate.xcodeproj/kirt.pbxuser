@@ -31,8 +31,24 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 200286211;
-			PBXWorkspaceStateSaveDate = 200286211;
+			PBXPerProjectTemplateStateSaveDate = 200763203;
+			PBXWorkspaceStateSaveDate = 200763203;
+		};
+		perUserProjectItems = {
+			C6103F870BF7883100E0E228 /* PBXTextBookmark */ = C6103F870BF7883100E0E228 /* PBXTextBookmark */;
+			C6103F880BF7883100E0E228 /* PBXTextBookmark */ = C6103F880BF7883100E0E228 /* PBXTextBookmark */;
+			C6103F890BF7883100E0E228 /* PBXTextBookmark */ = C6103F890BF7883100E0E228 /* PBXTextBookmark */;
+			C6103F8A0BF7883100E0E228 /* PBXTextBookmark */ = C6103F8A0BF7883100E0E228 /* PBXTextBookmark */;
+			C6103F8B0BF7883100E0E228 /* PBXTextBookmark */ = C6103F8B0BF7883100E0E228 /* PBXTextBookmark */;
+			C6103F8C0BF7883100E0E228 /* PBXTextBookmark */ = C6103F8C0BF7883100E0E228 /* PBXTextBookmark */;
+			C6103F8D0BF7883100E0E228 /* PBXTextBookmark */ = C6103F8D0BF7883100E0E228 /* PBXTextBookmark */;
+			C6103F8E0BF7883100E0E228 /* PBXTextBookmark */ = C6103F8E0BF7883100E0E228 /* PBXTextBookmark */;
+			C6103FC10BF7B61900E0E228 /* PBXTextBookmark */ = C6103FC10BF7B61900E0E228 /* PBXTextBookmark */;
+			C6103FC20BF7B61900E0E228 /* PBXTextBookmark */ = C6103FC20BF7B61900E0E228 /* PBXTextBookmark */;
+			C6103FC30BF7B61900E0E228 /* PBXTextBookmark */ = C6103FC30BF7B61900E0E228 /* PBXTextBookmark */;
+			C6103FC40BF7B61900E0E228 /* PBXTextBookmark */ = C6103FC40BF7B61900E0E228 /* PBXTextBookmark */;
+			C6103FC60BF7B61A00E0E228 /* PBXTextBookmark */ = C6103FC60BF7B61A00E0E228 /* PBXTextBookmark */;
+			C6103FC70BF7B61A00E0E228 /* PBXTextBookmark */ = C6103FC70BF7B61A00E0E228 /* PBXTextBookmark */;
 		};
 		sourceControlManager = C6FA9F9E0BBEF4C600E54E59 /* Source Control */;
 		userBuildSettings = {
@@ -47,6 +63,154 @@
 	};
 	8D5B49AC048680CD000E48DA /* ViMate */ = {
 		activeExec = 0;
+	};
+	C6103F870BF7883100E0E228 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C6D7B35A0BC5E35600A491A5 /* ViExecution.h */;
+		name = "ViExecution.h: 96";
+		rLen = 0;
+		rLoc = 2588;
+		rType = 0;
+		vrLen = 576;
+		vrLoc = 165;
+	};
+	C6103F880BF7883100E0E228 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C65112400BBF367700F3C94C /* ViEventRouter.m */;
+		name = "ViEventRouter.m: 363";
+		rLen = 0;
+		rLoc = 14739;
+		rType = 0;
+		vrLen = 892;
+		vrLoc = 14265;
+	};
+	C6103F890BF7883100E0E228 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		comments = "error: '_NSRange' undeclared (first use in this function)";
+		fRef = C6D7B35B0BC5E35600A491A5 /* ViExecution.m */;
+		rLen = 1;
+		rLoc = 180;
+		rType = 1;
+	};
+	C6103F8A0BF7883100E0E228 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C6D7B35B0BC5E35600A491A5 /* ViExecution.m */;
+		name = "ViExecution.m: 395";
+		rLen = 0;
+		rLoc = 9857;
+		rType = 0;
+		vrLen = 789;
+		vrLoc = 4559;
+	};
+	C6103F8B0BF7883100E0E228 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C6D7B35A0BC5E35600A491A5 /* ViExecution.h */;
+		name = "ViExecution.h: 96";
+		rLen = 0;
+		rLoc = 2588;
+		rType = 0;
+		vrLen = 576;
+		vrLoc = 165;
+	};
+	C6103F8C0BF7883100E0E228 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C6D7B35B0BC5E35600A491A5 /* ViExecution.m */;
+		name = "ViExecution.m: 387";
+		rLen = 0;
+		rLoc = 9547;
+		rType = 0;
+		vrLen = 558;
+		vrLoc = 222;
+	};
+	C6103F8D0BF7883100E0E228 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C65112400BBF367700F3C94C /* ViEventRouter.m */;
+		name = "ViEventRouter.m: 363";
+		rLen = 0;
+		rLoc = 14739;
+		rType = 0;
+		vrLen = 892;
+		vrLoc = 14265;
+	};
+	C6103F8E0BF7883100E0E228 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C6D7B35B0BC5E35600A491A5 /* ViExecution.m */;
+		name = "ViExecution.m: 397";
+		rLen = 0;
+		rLoc = 10008;
+		rType = 0;
+		vrLen = 715;
+		vrLoc = 4138;
+	};
+	C6103FBD0BF7B45500E0E228 /* ViHelper.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {689, 299}}";
+			sepNavSelRange = "{225, 0}";
+			sepNavVisRect = "{{0, 0}, {689, 299}}";
+			sepNavWindowFrame = "{{15, 4}, {868, 869}}";
+		};
+	};
+	C6103FBE0BF7B45500E0E228 /* ViHelper.c */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {689, 336}}";
+			sepNavSelRange = "{197, 18}";
+			sepNavVisRect = "{{0, 0}, {689, 299}}";
+		};
+	};
+	C6103FC10BF7B61900E0E228 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C6D7B35B0BC5E35600A491A5 /* ViExecution.m */;
+		name = "ViExecution.m: 465";
+		rLen = 0;
+		rLoc = 11874;
+		rType = 0;
+		vrLen = 767;
+		vrLoc = 9247;
+	};
+	C6103FC20BF7B61900E0E228 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		comments = "warning: invalid receiver type 'id*'";
+		fRef = C65112400BBF367700F3C94C /* ViEventRouter.m */;
+		rLen = 1;
+		rLoc = 411;
+		rType = 1;
+	};
+	C6103FC30BF7B61900E0E228 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C6D7B35B0BC5E35600A491A5 /* ViExecution.m */;
+		name = "ViExecution.m: 465";
+		rLen = 0;
+		rLoc = 11874;
+		rType = 0;
+		vrLen = 767;
+		vrLoc = 9247;
+	};
+	C6103FC40BF7B61900E0E228 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C65112400BBF367700F3C94C /* ViEventRouter.m */;
+		name = "ViEventRouter.m: 481";
+		rLen = 0;
+		rLoc = 17788;
+		rType = 0;
+		vrLen = 805;
+		vrLoc = 16036;
+	};
+	C6103FC60BF7B61A00E0E228 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C6103FBD0BF7B45500E0E228 /* ViHelper.h */;
+		rLen = 0;
+		rLoc = 220;
+		rType = 0;
+	};
+	C6103FC70BF7B61A00E0E228 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = C6103FBD0BF7B45500E0E228 /* ViHelper.h */;
+		name = "ViHelper.h: 17";
+		rLen = 0;
+		rLoc = 220;
+		rType = 0;
+		vrLen = 220;
+		vrLoc = 0;
 	};
 	C65111CD0BBF183600F3C94C /* ViSelectorTest.h */ = {
 		uiCtxt = {
@@ -78,9 +242,9 @@
 	};
 	C65112370BBF2D9B00F3C94C /* ViCommand.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {706, 7120}}";
-			sepNavSelRange = "{8624, 0}";
-			sepNavVisRect = "{{0, 793}, {689, 382}}";
+			sepNavIntBoundsRect = "{{0, 0}, {706, 6144}}";
+			sepNavSelRange = "{929, 45}";
+			sepNavVisRect = "{{0, 601}, {689, 382}}";
 			sepNavWindowFrame = "{{15, 2}, {884, 871}}";
 		};
 	};
@@ -94,25 +258,25 @@
 	};
 	C65112400BBF367700F3C94C /* ViEventRouter.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {741, 6032}}";
-			sepNavSelRange = "{13435, 0}";
-			sepNavVisRect = "{{0, 4770}, {689, 382}}";
+			sepNavIntBoundsRect = "{{0, 0}, {909, 7872}}";
+			sepNavSelRange = "{18096, 0}";
+			sepNavVisRect = "{{0, 5603}, {689, 299}}";
 			sepNavWindowFrame = "{{60, 7}, {884, 871}}";
 		};
 	};
 	C6D7B35A0BC5E35600A491A5 /* ViExecution.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {844, 1456}}";
-			sepNavSelRange = "{3143, 0}";
-			sepNavVisRect = "{{0, 0}, {844, 447}}";
+			sepNavIntBoundsRect = "{{0, 0}, {689, 1728}}";
+			sepNavSelRange = "{2799, 0}";
+			sepNavVisRect = "{{0, 1427}, {689, 299}}";
 			sepNavWindowFrame = "{{279, -49}, {884, 871}}";
 		};
 	};
 	C6D7B35B0BC5E35600A491A5 /* ViExecution.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {673, 4704}}";
-			sepNavSelRange = "{2605, 71}";
-			sepNavVisRect = "{{0, 2400}, {673, 401}}";
+			sepNavIntBoundsRect = "{{0, 0}, {689, 7440}}";
+			sepNavSelRange = "{11874, 0}";
+			sepNavVisRect = "{{0, 5641}, {689, 382}}";
 			sepNavWindowFrame = "{{15, 2}, {884, 871}}";
 		};
 	};

@@ -10,18 +10,25 @@
 
 @interface ViExecution : NSObject {
 
-    NSWindow *window;
+    NSWindow * window;
     id responder;
 
     id router;
-    NSMutableArray *dataStack;
-    NSMutableArray *methodStack;
+    NSMutableArray * dataStack;
+    NSMutableArray * methodStack;
+    NSNumber * lineNumber;
+    NSNumber * columnNumber;
+    NSPasteboard * pasteboard;
 }
 
+- (void)setLineNumber:(id)theLineNumber;
+- (NSNumber *)lineNumber;
+- (void)setColumnNumber:(id)theColumnNumber;
+- (NSNumber *)columnNumber;
 
+- (void)setWindow:(NSWindow *)theWindow;
 - (void)executeStack:(NSMutableArray *)theMethodStack 
             withData:(NSMutableArray *)theDataStack;
-- (void)setWindow:(NSWindow *)theWindow;
 
 
 /**
@@ -71,17 +78,30 @@
 - (void)moveLeftAndModifySelection:(NSNumber *)theIndex;
 - (void)moveRight:(NSNumber *)theIndex;
 - (void)moveRightAndModifySelection:(NSNumber *)theIndex;
-- (void)moveToBeginningOfDocument:(NSNumber *)theIndex;
-- (void)moveToBeginningOfLine:(NSNumber *)theIndex;
-- (void)moveToEndOfDocument:(NSNumber *)theIndex;
-- (void)moveToEndOfLine:(NSNumber *)theIndex;
 - (void)moveUp:(NSNumber *)theIndex;
 - (void)moveUpAndModifySelection:(NSNumber *)theIndex;
-- (void)pageDown:(NSNumber *)theIndex;
-- (void)pageUp:(NSNumber *)theIndex;
+
+- (void)moveWordBackward:(NSNumber *)theIndex;
+- (void)moveWordForward:(NSNumber *)theIndex;
+
+- (void)moveToBeginningOfLine:(NSNumber *)theIndex;
+- (void)moveToEndOfLine:(NSNumber *)theIndex;
+
+- (void)moveToBeginningOfDocument:(NSNumber *)theIndex;
+- (void)moveToEndOfDocument:(NSNumber *)theIndex;
+
+- (void)scrollPageDown:(NSNumber *)theIndex;
+- (void)scrollPageUp:(NSNumber *)theIndex;
+
+- (void)scrollHalfPageDown:(NSNumber *)theIndex;
+- (void)scrollHalfPageUp:(NSNumber *)theIndex;
+
 - (void)scrollLineDown:(NSNumber *)theIndex;
 - (void)scrollLineUp:(NSNumber *)theIndex;
+
 - (void)selectLine:(NSNumber *)theIndex;
 - (void)selectWord:(NSNumber *)theIndex;
+
+- (void)undo:(NSNumber *)theIndex;
 
 @end
