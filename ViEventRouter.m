@@ -91,6 +91,7 @@ bool debugOn = true;
                          @"cutLeft:", @"X", 
                              @"cut:", @"d", 
                   @"cutToEndOfLine:", @"D", 
+                            @"copy:", @"y", 
                      @"pasteBefore:", @"P", 
                       @"pasteAfter:", @"p", 
                           @"visual:", @"v",
@@ -129,6 +130,7 @@ bool debugOn = true;
                       @"pasteAfter:", @"p", 
                         @"cutRight:", @"x",
                          @"cutLeft:", @"X",
+                            @"copy:", @"y", 
                       NULL] forKey: @"commandRepeat"];
 
         /**

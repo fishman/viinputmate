@@ -61,6 +61,8 @@
 - (void)copyLine:(NSNumber *)theIndex;
 - (void)copyRight:(NSNumber *)theIndex;
 - (void)copyLeft:(NSNumber *)theIndex;
+- (void)copyWordRight:(NSNumber *)theIndex;
+- (void)copyWordLeft:(NSNumber *)theIndex;
 - (void)copyToEndOfLine:(NSNumber *)theIndex;
 - (void)copyToBeginningOfLine:(NSNumber *)theIndex;
 

@@ -173,6 +173,8 @@
  */
 - (void)cut:(NSNumber *)theIndex
 {
+    // not needed, ViCommand Takes care of it.
+    /*
     // if nothing is selected then we should select the 
     // first character to the right.
     if ( ! [responder hasSelection] ) {
@@ -186,6 +188,7 @@
 
     [router setActiveKeyMap:@"commandDefault"];
     [router setState:ViCommandState];
+    */
 }
 
 - (void)cutLine:(NSNumber *)theIndex
@@ -237,7 +240,7 @@
 
 - (void)cutWordRight:(NSNumber *)theIndex
 {
-    [responder performSelector: @selector(moveWordForwardAndModifySelection:) withObject: window];
+    [responder performSelector: @selector(moveWordRightAndModifySelection:) withObject: window];
     [responder writeSelectionToPasteboard:pasteboard 
                                     types:[NSArray arrayWithObject:@"NSStringPboardType"] ];
     [responder performSelector: @selector(deleteBackward:) withObject: window];
@@ -248,7 +251,7 @@
 
 - (void)cutWordLeft:(NSNumber *)theIndex
 {
-    [responder performSelector: @selector(moveWordForwardAndModifySelection:) withObject: window];
+    [responder performSelector: @selector(moveWordLeftAndModifySelection:) withObject: window];
     [responder writeSelectionToPasteboard:pasteboard 
                                     types:[NSArray arrayWithObject:@"NSStringPboardType"] ];
     [responder performSelector: @selector(deleteBackward:) withObject: window];
@@ -293,33 +296,127 @@
 }
 
 
+
 /**
  * Copy Methods
  */
 - (void)copy:(NSNumber *)theIndex
 {
-    // not needed here  ViCommand handles it.
+    // not needed, ViCommand Takes care of it.
+    /*
+    // if nothing is selected then we should select the 
+    // first character to the right.
+    if ( ! [responder hasSelection] ) {
+        ViLog( @"No selection found" );
+        return;
+    }
+
+    [responder writeSelectionToPasteboard:pasteboard 
+                                    types:[NSArray arrayWithObject:@"NSStringPboardType"] ];
+    [responder performSelector: @selector(moveBackward:) withObject: window];
+    [router setActiveKeyMap:@"commandDefault"];
+    [router setState:ViCommandState];
+    */
 }
 
 - (void)copyLine:(NSNumber *)theIndex
 {
+    NSArray * types = [NSArray arrayWithObject:@"NSStringPboardType"];
+
+    ViLog( @"Trying to cutLine" );
+    [responder performSelector: @selector(selectLine:) withObject: window];
+    [responder writeSelectionToPasteboard:pasteboard types:types];
+    [responder performSelector: @selector(moveBackward:) withObject: window];
+    [router setActiveKeyMap:@"commandDefault"];
+    [router setState:ViCommandState];
 }
 
 - (void)copyRight:(NSNumber *)theIndex
 {
+    // if nothing is selected then we should select the 
+    // first character to the right.
+    if ( ! [responder hasSelection] ) {
+        [responder performSelector: @selector(moveRightAndModifySelection:) 
+                        withObject: window];
+    }
+
+    [responder writeSelectionToPasteboard:pasteboard 
+                                    types:[NSArray arrayWithObject:@"NSStringPboardType"] ];
+    [responder performSelector: @selector(moveBackward:) withObject: window];
+    [router setActiveKeyMap:@"commandDefault"];
+    [router setState:ViCommandState];
 }
 
 - (void)copyLeft:(NSNumber *)theIndex
 {
+    // if nothing is selected then we should select the 
+    // first character to the right.
+    if ( ! [responder hasSelection] ) {
+        [responder performSelector: @selector(moveLeftAndModifySelection:) 
+                        withObject: window];
+    }
+
+    [responder writeSelectionToPasteboard:pasteboard 
+                                    types:[NSArray arrayWithObject:@"NSStringPboardType"] ];
+    [responder performSelector: @selector(moveBackward:) withObject: window];
+    [router setActiveKeyMap:@"commandDefault"];
+    [router setState:ViCommandState];
+}
+
+- (void)copyWordRight:(NSNumber *)theIndex
+{
+    [responder performSelector: @selector(moveWordRightAndModifySelection:) withObject: window];
+    [responder writeSelectionToPasteboard:pasteboard 
+                                    types:[NSArray arrayWithObject:@"NSStringPboardType"] ];
+    [responder performSelector: @selector(moveBackward:) withObject: window];
+    [router setActiveKeyMap:@"commandDefault"];
+    [router setState:ViCommandState];
+}
+
+- (void)copyWordLeft:(NSNumber *)theIndex
+{
+    [responder performSelector: @selector(moveWordLeftAndModifySelection:) withObject: window];
+    [responder writeSelectionToPasteboard:pasteboard 
+                                    types:[NSArray arrayWithObject:@"NSStringPboardType"] ];
+    [responder performSelector: @selector(moveBackward:) withObject: window];
+    [router setActiveKeyMap:@"commandDefault"];
+    [router setState:ViCommandState];
 }
 
 - (void)copyToEndOfLine:(NSNumber *)theIndex
 {
+    int column = [columnNumber intValue];
+
+    [responder performSelector: @selector(moveToEndOfLine:) withObject: window];
+
+    while ( column < [columnNumber intValue] ) {
+        [responder performSelector: @selector(moveLeftAndModifySelection:) withObject: window];
+    }
+
+    [responder writeSelectionToPasteboard:pasteboard 
+                                    types:[NSArray arrayWithObject:@"NSStringPboardType"] ];
+    [responder performSelector: @selector(moveBackward:) withObject: window];
+    [router setActiveKeyMap:@"commandDefault"];
+    [router setState:ViCommandState];
 }
 
 - (void)copyToBeginningOfLine:(NSNumber *)theIndex
 {
+    int column = [columnNumber intValue];
+
+    [responder performSelector: @selector(moveToBeginningOfLine:) withObject: window];
+
+    while ( column > [columnNumber intValue] ) {
+        [responder performSelector: @selector(moveRightAndModifySelection:) withObject: window];
+    }
+
+    [responder writeSelectionToPasteboard:pasteboard 
+                                    types:[NSArray arrayWithObject:@"NSStringPboardType"] ];
+    [responder performSelector: @selector(moveBackward:) withObject: window];
+    [router setActiveKeyMap:@"commandDefault"];
+    [router setState:ViCommandState];
 }
+
 
 
 /**
@@ -361,6 +458,7 @@
             [responder performSelector: @selector(moveToBeginningOfLine:) withObject: window];
         } else {
             //ViLog( @"pasteAfter as a string." );
+            [self moveRight:theIndex];
             [responder readSelectionFromPasteboard:pasteboard];
         }
     }

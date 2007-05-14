@@ -77,10 +77,10 @@
     [dataStack addObject: [NSNumber numberWithInt: value]];
 
     switch ( [router state] ) {
-        case ViDeleteState:
+        case ViCutState:
             [router setActiveKeyMap: @"cutRepeat"];
             break;
-        case ViYankState:
+        case ViCopyState:
             [router setActiveKeyMap: @"yankRepeat"];
             break;
         case ViVisualState:
@@ -140,7 +140,7 @@
 {
     ViLog( @"changing state to the cut state." );
     [router setActiveKeyMap:@"cutDefault"];
-    [router setState:ViDeleteState];
+    [router setState:ViCutState];
 }
 
 - (void)cutLine:(id)theEvent
@@ -198,29 +198,59 @@
  */
 - (void)copy:(id)theEvent
 {
-    ViLog( @"trying to copyToEndOfLine" );
-    [self pushMethod:@"copyToEndOfLine:" withData:@"y"];
-    [execution executeStack: methodStack withData: dataStack];
+    ViLog( @"trying to copy" );
+    [router setActiveKeyMap:@"copyDefault"];
+    [router setState:ViCopyState];
+    //[self pushMethod:@"copy:" withData:@"y"];
+    //[execution executeStack: methodStack withData: dataStack];
 }
 
 - (void)copyLine:(id)theEvent
 {
-    ViLog( @"trying to copyToEndOfLine" );
-    [self pushMethod:@"copyToEndOfLine:" withData:@"y"];
+    ViLog( @"trying to copyLine" );
+    [self pushMethod:@"copyLine:" withData:@"y"];
     [execution executeStack: methodStack withData: dataStack];
 }
 
 - (void)copyRight:(id)theEvent
 {
-    ViLog( @"trying to copyToEndOfLine" );
-    [self pushMethod:@"copyToEndOfLine:" withData:@"l"];
+    ViLog( @"trying to copyRight" );
+    [self pushMethod:@"copyRight:" withData:@"l"];
     [execution executeStack: methodStack withData: dataStack];
 }
 
 - (void)copyLeft:(id)theEvent
 {
+    ViLog( @"trying to copyLeft" );
+    [self pushMethod:@"copyLeft:" withData:@"h"];
+    [execution executeStack: methodStack withData: dataStack];
+}
+
+- (void)copyWordRight:(id)theEvent
+{
+    ViLog( @"trying to copyWordRight" );
+    [self pushMethod:@"copyWordRight:" withData:@"w"];
+    [execution executeStack: methodStack withData: dataStack];
+}
+
+- (void)copyWordLeft:(id)theEvent
+{
+    ViLog( @"trying to copyWordLeft" );
+    [self pushMethod:@"copyWordLeft:" withData:@"b"];
+    [execution executeStack: methodStack withData: dataStack];
+}
+
+- (void)copyToEndOfLine:(id)theEvent
+{
     ViLog( @"trying to copyToEndOfLine" );
-    [self pushMethod:@"copyToEndOfLine:" withData:@"h"];
+    [self pushMethod:@"copyToEndOfLine:" withData:@"$"];
+    [execution executeStack: methodStack withData: dataStack];
+}
+
+- (void)copyToBeginningOfLine:(id)theEvent
+{
+    ViLog( @"trying to copyToBeginningOfLine" );
+    [self pushMethod:@"copyToBeginningOfLine:" withData:@"0"];
     [execution executeStack: methodStack withData: dataStack];
 }
 

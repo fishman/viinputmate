@@ -19,8 +19,8 @@ typedef enum _ViMode {
 
 typedef enum _ViState {
     ViCommandState       = 1,
-    ViDeleteState        = 2,
-    ViYankState          = 3,
+    ViCutState           = 2,
+    ViCopyState          = 3,
     ViVisualState        = 4
 } ViState;
 

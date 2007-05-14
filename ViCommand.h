@@ -54,6 +54,10 @@
 - (void)copyLine:(id)theEvent;
 - (void)copyRight:(id)theEvent;
 - (void)copyLeft:(id)theEvent;
+- (void)copyWordRight:(id)theEvent;
+- (void)copyWordLeft:(id)theEvent;
+- (void)copyToEndOfLine:(id)theEvent;
+- (void)copyToBeginningOfLine:(id)theEvent;
 
 
 /**
