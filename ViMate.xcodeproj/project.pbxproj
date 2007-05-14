@@ -18,6 +18,23 @@
 		C6FA9FC90BBEFAED00E54E59 /* ViWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = C6FA9FC80BBEFAED00E54E59 /* ViWindow.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXBuildStyle section */
+		C616BA9A0BF8B9B00045E19E /* Development */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = Development;
+		};
+		C616BA9B0BF8B9B00045E19E /* Deployment */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+			};
+			name = Deployment;
+		};
+/* End PBXBuildStyle section */
+
 /* Begin PBXFileReference section */
 		089C1672FE841209C02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		089C167EFE841241C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -167,6 +184,12 @@
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			buildConfigurationList = 1DEB913E08733D840010E9CD /* Build configuration list for PBXProject "ViMate" */;
+			buildSettings = {
+			};
+			buildStyles = (
+				C616BA9A0BF8B9B00045E19E /* Development */,
+				C616BA9B0BF8B9B00045E19E /* Deployment */,
+			);
 			hasScannedForEncodings = 1;
 			mainGroup = 089C166AFE841209C02AAC07 /* ViMate */;
 			projectDirPath = "";
@@ -220,6 +243,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
+				EXECUTABLE_EXTENSION = tmplugin;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
@@ -241,6 +265,7 @@
 					ppc,
 					i386,
 				);
+				EXECUTABLE_EXTENSION = tmplugin;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

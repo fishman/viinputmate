@@ -11,7 +11,6 @@
 
 
 @interface ViCommand : NSObject {
-
     NSMutableArray *dataStack;
     NSMutableArray *methodStack;
     id router;
@@ -28,16 +27,23 @@
 - (void)visual:(id)theEvent;
 - (void)repeat:(id)theEvent;
 - (void)resetStack:(id)theEvent;
-- (void)insert:(id)theEvent;
+
+/**
+ * Insert Methods
+ */
+- (void)insertLeft:(id)theEvent;
+- (void)insertRight:(id)theEvent;
+- (void)insertAbove:(id)theEvent;
+- (void)insertBelow:(id)theEvent;
 - (void)insertAtBeginningOfLine:(id)theEvent;
-- (void)append:(id)theEvent;
-- (void)appendToEndOfLine:(id)theEvent;
+- (void)insertAtEndOfLine:(id)theEvent;
 
 
 /**
  * Cut Methods
  */
 - (void)cut:(id)theEvent;
+- (void)cutState:(id)theEvent;
 - (void)cutLine:(id)theEvent;
 - (void)cutRight:(id)theEvent;
 - (void)cutLeft:(id)theEvent;
@@ -51,6 +57,7 @@
  * Copy Methods
  */
 - (void)copy:(id)theEvent;
+- (void)copyState:(id)theEvent;
 - (void)copyLine:(id)theEvent;
 - (void)copyRight:(id)theEvent;
 - (void)copyLeft:(id)theEvent;

@@ -97,16 +97,45 @@
 
 - (void)resetStack:(id)theEvent
 {
+    ViLog( @"trying to resetStack" );
     [methodStack removeAllObjects];
     [dataStack removeAllObjects];
     [router setMode:ViCommandMode];
     [router setActiveKeyMap:@"commandDefault"];
+    [self pushMethod:@"resetStack:" withData:@"esc"];
+    [execution executeStack: methodStack withData: dataStack];
 }
 
-- (void)insert:(id)theEvent
+
+
+/**
+ * Insert Methods
+ */
+- (void)insertLeft:(id)theEvent
 {
-    ViLog( @"trying to insert" );
-    [self pushMethod:@"insert:" withData:@"i"];
+    ViLog( @"trying to insertLeft" );
+    [self pushMethod:@"insertLeft:" withData:@"i"];
+    [execution executeStack: methodStack withData: dataStack];
+}
+
+- (void)insertRight:(id)theEvent
+{
+    ViLog( @"trying to insertRight" );
+    [self pushMethod:@"insertRight:" withData:@"a"];
+    [execution executeStack: methodStack withData: dataStack];
+}
+
+- (void)insertAbove:(id)theEvent
+{
+    ViLog( @"trying to insertAbove" );
+    [self pushMethod:@"insertAbove:" withData:@"O"];
+    [execution executeStack: methodStack withData: dataStack];
+}
+
+- (void)insertBelow:(id)theEvent
+{
+    ViLog( @"trying to insertBelow" );
+    [self pushMethod:@"insertBelow:" withData:@"o"];
     [execution executeStack: methodStack withData: dataStack];
 }
 
@@ -117,17 +146,10 @@
     [execution executeStack: methodStack withData: dataStack];
 }
 
-- (void)append:(id)theEvent
+- (void)insertAtEndOfLine:(id)theEvent
 {
-    ViLog( @"trying to moveDown" );
-    [self pushMethod:@"append:" withData:@"a"];
-    [execution executeStack: methodStack withData: dataStack];
-}
-
-- (void)appendToEndOfLine:(id)theEvent
-{
-    ViLog( @"trying to appendToEndOfLine" );
-    [self pushMethod:@"appendToEndOfLine:" withData:@"A"];
+    ViLog( @"trying to insertAtEndOfLine" );
+    [self pushMethod:@"insertAtEndOfLine:" withData:@"A"];
     [execution executeStack: methodStack withData: dataStack];
 }
 
@@ -137,6 +159,13 @@
  * Cut Methods
  */
 - (void)cut:(id)theEvent
+{
+    ViLog( @"trying to cut" );
+    [self pushMethod:@"cut:" withData:@"d"];
+    [execution executeStack: methodStack withData: dataStack];
+}
+
+- (void)cutState:(id)theEvent
 {
     ViLog( @"changing state to the cut state." );
     [router setActiveKeyMap:@"cutDefault"];
@@ -199,10 +228,15 @@
 - (void)copy:(id)theEvent
 {
     ViLog( @"trying to copy" );
+    [self pushMethod:@"copy:" withData:@"y"];
+    [execution executeStack: methodStack withData: dataStack];
+}
+
+- (void)copyState:(id)theEvent
+{
+    ViLog( @"trying to set copyState" );
     [router setActiveKeyMap:@"copyDefault"];
     [router setState:ViCopyState];
-    //[self pushMethod:@"copy:" withData:@"y"];
-    //[execution executeStack: methodStack withData: dataStack];
 }
 
 - (void)copyLine:(id)theEvent

@@ -141,11 +141,40 @@
 
 - (void)resetStack:(NSNumber *)theIndex
 {
-    // not needed here, ViCommand clears the stack for us
+    [responder performSelector: @selector(moveRight:) withObject: window];
 }
 
-- (void)insert:(NSNumber *)theIndex
+
+/**
+ * Insert Methods
+ */
+- (void)insertLeft:(NSNumber *)theIndex
 {
+    [router setMode: ViInsertMode];
+}
+
+- (void)insertRight:(NSNumber *)theIndex
+{
+    [responder performSelector: @selector(moveRight:) withObject: window];
+    [router setMode: ViInsertMode];
+}
+
+- (void)insertAbove:(NSNumber *)theIndex
+{
+    [responder performSelector: @selector(moveToBeginningOfLine:) withObject: window];
+
+    [responder insertText:@"\n"];
+
+    [responder performSelector: @selector(moveUp:) withObject: window];
+    [router setMode: ViInsertMode];
+}
+
+- (void)insertBelow:(NSNumber *)theIndex
+{
+	ViLog( @"trying to moveToEndOfLine");
+    [responder performSelector: @selector(moveToEndOfLine:) withObject: window];
+	ViLog( @"trying to insertText");
+    [responder insertText:@"\n"];
     [router setMode: ViInsertMode];
 }
 
@@ -155,13 +184,7 @@
     [router setMode: ViInsertMode];
 }
 
-- (void)append:(NSNumber *)theIndex
-{
-    [responder performSelector: @selector(moveRight:) withObject: window];
-    [router setMode: ViInsertMode];
-}
-
-- (void)appendToEndOfLine:(NSNumber *)theIndex
+- (void)insertAtEndOfLine:(NSNumber *)theIndex
 {
     [responder performSelector: @selector(moveToEndOfLine:) withObject: window];
     [router setMode: ViInsertMode];
@@ -173,10 +196,7 @@
  */
 - (void)cut:(NSNumber *)theIndex
 {
-    // not needed, ViCommand Takes care of it.
-    /*
-    // if nothing is selected then we should select the 
-    // first character to the right.
+    // if nothing is selected then we do nothing
     if ( ! [responder hasSelection] ) {
         ViLog( @"No selection found" );
         return;
@@ -188,7 +208,6 @@
 
     [router setActiveKeyMap:@"commandDefault"];
     [router setState:ViCommandState];
-    */
 }
 
 - (void)cutLine:(NSNumber *)theIndex
@@ -302,10 +321,7 @@
  */
 - (void)copy:(NSNumber *)theIndex
 {
-    // not needed, ViCommand Takes care of it.
-    /*
-    // if nothing is selected then we should select the 
-    // first character to the right.
+    // if nothing is selected then we do nothing.
     if ( ! [responder hasSelection] ) {
         ViLog( @"No selection found" );
         return;
@@ -316,7 +332,6 @@
     [responder performSelector: @selector(moveBackward:) withObject: window];
     [router setActiveKeyMap:@"commandDefault"];
     [router setState:ViCommandState];
-    */
 }
 
 - (void)copyLine:(NSNumber *)theIndex
@@ -436,6 +451,7 @@
         } else {
             //ViLog( @"pasteBefore as a string." );
             [responder readSelectionFromPasteboard:pasteboard];
+            [responder performSelector: @selector(moveLeft:) withObject: window];
         }
     }
      
@@ -460,6 +476,7 @@
             //ViLog( @"pasteAfter as a string." );
             [self moveRight:theIndex];
             [responder readSelectionFromPasteboard:pasteboard];
+            [responder performSelector: @selector(moveLeft:) withObject: window];
         }
     }
      

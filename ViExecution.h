@@ -37,10 +37,12 @@
 - (void)visual:(NSNumber *)theIndex;
 - (void)repeat:(NSNumber *)theIndex;
 - (void)resetStack:(NSNumber *)theIndex;
-- (void)insert:(NSNumber *)theIndex;
+- (void)insertLeft:(NSNumber *)theIndex;
+- (void)insertRight:(NSNumber *)theIndex;
+- (void)insertAbove:(NSNumber *)theIndex;
+- (void)insertBelow:(NSNumber *)theIndex;
 - (void)insertAtBeginningOfLine:(NSNumber *)theIndex;
-- (void)append:(NSNumber *)theIndex;
-- (void)appendToEndOfLine:(NSNumber *)theIndex;
+- (void)insertAtEndOfLine:(NSNumber *)theIndex;
 
 /**
  * Cut Methods
