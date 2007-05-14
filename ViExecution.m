@@ -141,7 +141,9 @@
 
 - (void)resetStack:(NSNumber *)theIndex
 {
-    [responder performSelector: @selector(moveRight:) withObject: window];
+    if ( [responder hasSelection] ) {
+    	[responder performSelector: @selector(moveLeft:) withObject: window];
+	}
 }
 
 
@@ -155,7 +157,7 @@
 
 - (void)insertRight:(NSNumber *)theIndex
 {
-    [responder performSelector: @selector(moveRight:) withObject: window];
+	[self moveRight];
     [router setMode: ViInsertMode];
 }
 
@@ -430,6 +432,59 @@
     [responder performSelector: @selector(moveBackward:) withObject: window];
     [router setActiveKeyMap:@"commandDefault"];
     [router setState:ViCommandState];
+}
+
+
+
+/**
+ * Change Methods
+ */
+- (void)change:(NSNumber *)theIndex
+{
+	[self cut:theIndex];
+	[self insertLeft:theIndex];
+}
+
+- (void)changeLine:(NSNumber *)theIndex
+{
+	[self cutLine:theIndex];
+	[self insertAbove:theIndex];
+}
+
+- (void)changeRight:(NSNumber *)theIndex
+{
+	[self cutRight:theIndex];
+	[self insertLeft:theIndex];
+}
+
+- (void)changeLeft:(NSNumber *)theIndex
+{
+	[self cutLeft:theIndex];
+	[self insertLeft:theIndex];
+}
+
+- (void)changeWordRight:(NSNumber *)theIndex
+{
+	[self cutWordRight:theIndex];
+	[self insertLeft:theIndex];
+}
+
+- (void)changeWordLeft:(NSNumber *)theIndex
+{
+	[self cutWordLeft:theIndex];
+	[self insertLeft:theIndex];
+}
+
+- (void)changeToEndOfLine:(NSNumber *)theIndex
+{
+	[self cutToEndOfLine:theIndex];
+	[self insertLeft:theIndex];
+}
+
+- (void)changeToBeginningOfLine:(NSNumber *)theIndex
+{
+	[self cutToBeginningOfLine:theIndex];
+	[self insertLeft:theIndex];
 }
 
 

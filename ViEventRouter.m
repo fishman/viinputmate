@@ -90,11 +90,13 @@ bool debugOn = true;
 					 @"insertBelow:", @"o",
          @"insertAtBeginningOfLine:", @"I",
                @"insertAtEndOfLine:", @"A",
+                        @"cutState:", @"d", 
                         @"cutRight:", @"x",
                          @"cutLeft:", @"X", 
-                        @"cutState:", @"d", 
                   @"cutToEndOfLine:", @"D", 
                        @"copyState:", @"y", 
+               @"changeToEndOfLine:", @"C", 
+                     @"changeState:", @"c", 
                      @"pasteBefore:", @"P", 
                       @"pasteAfter:", @"p", 
                           @"visual:", @"v",
@@ -305,6 +307,61 @@ bool debugOn = true;
                    @"copyWordRight:", @"w",
                         @"copyLine:", @"y", 
                       NULL] forKey: @"copyRepeat"];
+        /**
+         * The cutDefault keymap is responsible for handling the "cut" mode
+         * as in "cut, copy, and paste".  This keymap becomes the primary after 
+         * pressing the "d" key once.  It removes commands from the commandDefault
+         * keymap that cannot be used with the cut functionality.
+         */
+        [keyMaps setObject: [NSDictionary dictionaryWithObjectsAndKeys:
+                      @"resetStack:", [NSString stringWithCharacters:&escape length:1],
+                          @"repeat:", @"1",
+                          @"repeat:", @"2",
+                          @"repeat:", @"3",
+                          @"repeat:", @"4",
+                          @"repeat:", @"5",
+                          @"repeat:", @"6",
+                          @"repeat:", @"7",
+                          @"repeat:", @"8",
+                          @"repeat:", @"9",
+                      @"changeLeft:", @"h",
+                      @"changeDown:", @"j",
+                        @"changeUp:", @"k",
+                     @"changeRight:", @"l",
+         @"changeToBeginningOfLine:", @"0",
+               @"changeToEndOfLine:", @"$",
+                  @"changeWordLeft:", @"b",
+                 @"changeWordRight:", @"w",
+                      @"changeLine:", @"c", 
+                      NULL] forKey: @"changeDefault"];
+        /**
+         * This keymap restricts commands to those only those that work with a repeat 
+         * command during a cut operation.  The primary difference with this keymap 
+         * vs. the commandDefault keymap (asside from fewer commands) is that this
+         * one designates "0" as a repeat integer while the comandDefault map assigns
+         * "0" to the moveToBeginningOfLine command.
+         */
+        [keyMaps setObject: [NSDictionary dictionaryWithObjectsAndKeys:
+                      @"resetStack:", [NSString stringWithCharacters:&escape length:1],
+                          @"repeat:", @"0",
+                          @"repeat:", @"1",
+                          @"repeat:", @"2",
+                          @"repeat:", @"3",
+                          @"repeat:", @"4",
+                          @"repeat:", @"5",
+                          @"repeat:", @"6",
+                          @"repeat:", @"7",
+                          @"repeat:", @"8",
+                          @"repeat:", @"9",
+                      @"changeLeft:", @"h",
+                      @"changeDown:", @"j",
+                        @"changeUp:", @"k",
+                     @"changeRight:", @"l",
+               @"changeToEndOfLine:", @"$",
+                  @"changeWordLeft:", @"b",
+                 @"changeWordRight:", @"w",
+                      @"changeLine:", @"d", 
+                      NULL] forKey: @"changeRepeat"];
         /**
          * This keymap handles the commands that work with the control key modifier.
          * When an event comes in with a control key modifier, this is the map

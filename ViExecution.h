@@ -69,6 +69,18 @@
 - (void)copyToBeginningOfLine:(NSNumber *)theIndex;
 
 /**
+ * Change Methods
+ */
+- (void)change:(NSNumber *)theIndex;
+- (void)changeLine:(NSNumber *)theIndex;
+- (void)changeRight:(NSNumber *)theIndex;
+- (void)changeLeft:(NSNumber *)theIndex;
+- (void)changeWordRight:(NSNumber *)theIndex;
+- (void)changeWordLeft:(NSNumber *)theIndex;
+- (void)changeToEndOfLine:(NSNumber *)theIndex;
+- (void)changeToBeginningOfLine:(NSNumber *)theIndex;
+
+/**
  * Paste Methods
  */
 - (void)pasteBefore:(NSNumber *)theIndex;

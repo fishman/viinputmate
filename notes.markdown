@@ -11,12 +11,13 @@
 * cut and paste does not work in visual mode like it should
 * insertAbove & insertBelow do not autoindent
 * insertAtBeginningOfLine moves all the way to the start of the line instead of the first non-whitespace character.
+* command mode should pass through events when a message box has focus.
 
 
 ### To Implement
 * repeatable cut and copy, must cut multiple lines in one chunk
 * e
-* gg and G
+* gg
 * s
 * r
 * .

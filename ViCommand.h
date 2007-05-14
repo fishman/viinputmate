@@ -68,6 +68,20 @@
 
 
 /**
+ * Change Methods
+ */
+- (void)change:(id)theEvent;
+- (void)changeState:(id)theEvent;
+- (void)changeLine:(id)theEvent;
+- (void)changeRight:(id)theEvent;
+- (void)changeLeft:(id)theEvent;
+- (void)changeWordRight:(id)theEvent;
+- (void)changeWordLeft:(id)theEvent;
+- (void)changeToEndOfLine:(id)theEvent;
+- (void)changeToBeginningOfLine:(id)theEvent;
+
+
+/**
  * Paste Methods
  */
 - (void)pasteBefore:(id)theEvent;

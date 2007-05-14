@@ -81,7 +81,10 @@
             [router setActiveKeyMap: @"cutRepeat"];
             break;
         case ViCopyState:
-            [router setActiveKeyMap: @"yankRepeat"];
+            [router setActiveKeyMap: @"copyRepeat"];
+            break;
+        case ViChangeState:
+            [router setActiveKeyMap: @"changeRepeat"];
             break;
         case ViVisualState:
             [router setActiveKeyMap: @"visualRepeat"];
@@ -285,6 +288,75 @@
 {
     ViLog( @"trying to copyToBeginningOfLine" );
     [self pushMethod:@"copyToBeginningOfLine:" withData:@"0"];
+    [execution executeStack: methodStack withData: dataStack];
+}
+
+
+
+
+/**
+ * Change Methods
+ */
+- (void)change:(id)theEvent
+{
+    ViLog( @"trying to change" );
+    [self pushMethod:@"change:" withData:@"y"];
+    [execution executeStack: methodStack withData: dataStack];
+}
+
+- (void)changeState:(id)theEvent
+{
+    ViLog( @"trying to set changeState" );
+    [router setActiveKeyMap:@"changeDefault"];
+    [router setState:ViCopyState];
+}
+
+- (void)changeLine:(id)theEvent
+{
+    ViLog( @"trying to changeLine" );
+    [self pushMethod:@"changeLine:" withData:@"y"];
+    [execution executeStack: methodStack withData: dataStack];
+}
+
+- (void)changeRight:(id)theEvent
+{
+    ViLog( @"trying to changeRight" );
+    [self pushMethod:@"changeRight:" withData:@"l"];
+    [execution executeStack: methodStack withData: dataStack];
+}
+
+- (void)changeLeft:(id)theEvent
+{
+    ViLog( @"trying to changeLeft" );
+    [self pushMethod:@"changeLeft:" withData:@"h"];
+    [execution executeStack: methodStack withData: dataStack];
+}
+
+- (void)changeWordRight:(id)theEvent
+{
+    ViLog( @"trying to changeWordRight" );
+    [self pushMethod:@"changeWordRight:" withData:@"w"];
+    [execution executeStack: methodStack withData: dataStack];
+}
+
+- (void)changeWordLeft:(id)theEvent
+{
+    ViLog( @"trying to changeWordLeft" );
+    [self pushMethod:@"changeWordLeft:" withData:@"b"];
+    [execution executeStack: methodStack withData: dataStack];
+}
+
+- (void)changeToEndOfLine:(id)theEvent
+{
+    ViLog( @"trying to changeToEndOfLine" );
+    [self pushMethod:@"changeToEndOfLine:" withData:@"$"];
+    [execution executeStack: methodStack withData: dataStack];
+}
+
+- (void)changeToBeginningOfLine:(id)theEvent
+{
+    ViLog( @"trying to changeToBeginningOfLine" );
+    [self pushMethod:@"changeToBeginningOfLine:" withData:@"0"];
     [execution executeStack: methodStack withData: dataStack];
 }
 
