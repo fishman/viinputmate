@@ -386,17 +386,10 @@
 /**
  * Select NSResponder Methods
  */
-- (void)moveDown:(id)theEvent
+- (void)moveRight:(id)theEvent
 {
-    ViLog( @"trying to moveDown" );
-    [self pushMethod:@"moveDown:" withData:@"j"];
-    [execution executeStack: methodStack withData: dataStack];
-}
-
-- (void)moveDownAndModifySelection:(id)theEvent
-{
-    ViLog( @"trying to moveDownAndModifySelection" );
-    [self pushMethod:@"moveDownAndModifySelection:" withData:@"j"];
+    ViLog( @"trying to moveRight" );
+    [self pushMethod:@"moveRight:" withData:@"l"];
     [execution executeStack: methodStack withData: dataStack];
 }
 
@@ -407,27 +400,6 @@
     [execution executeStack: methodStack withData: dataStack];
 }
 
-- (void)moveLeftAndModifySelection:(id)theEvent
-{
-    ViLog( @"trying to moveLeftAndModifySelection" );
-    [self pushMethod:@"moveLeftAndModifySelection:" withData:@"h"];
-    [execution executeStack: methodStack withData: dataStack];
-}
-
-- (void)moveRight:(id)theEvent
-{
-    ViLog( @"trying to moveRight" );
-    [self pushMethod:@"moveRight:" withData:@"l"];
-    [execution executeStack: methodStack withData: dataStack];
-}
-
-- (void)moveRightAndModifySelection:(id)theEvent
-{
-    ViLog( @"trying to moveRightAndModifySelection" );
-    [self pushMethod:@"moveRightAndModifySelection:" withData:@"l"];
-    [execution executeStack: methodStack withData: dataStack];
-}
-
 - (void)moveUp:(id)theEvent
 {
     ViLog( @"trying to moveUp" );
@@ -435,17 +407,13 @@
     [execution executeStack: methodStack withData: dataStack];
 }
 
-- (void)moveUpAndModifySelection:(id)theEvent
+- (void)moveDown:(id)theEvent
 {
-    ViLog( @"trying to moveUpAndModifySelection" );
-    [self pushMethod:@"moveUpAndModifySelection:" withData:@"k"];
+    ViLog( @"trying to moveDown" );
+    [self pushMethod:@"moveDown:" withData:@"j"];
     [execution executeStack: methodStack withData: dataStack];
 }
 
-
-/**
- * Word Movement
- */
 - (void)moveWordBackward:(id)theEvent
 {
     ViLog( @"trying to moveWordBackward" );
@@ -456,16 +424,17 @@
 - (void)moveWordForward:(id)theEvent
 {
     ViLog( @"trying to moveWordForward" );
-    [self pushMethod:@"moveWordForward:" withData:@"b"];
+    [self pushMethod:@"moveWordForward:" withData:@"w"];
     [execution executeStack: methodStack withData: dataStack];
 }
 
+- (void)moveToEndOfWord:(id)theEvent
+{
+    ViLog( @"trying to moveToEndOfWord" );
+    [self pushMethod:@"moveToEndOfWord:" withData:@"e"];
+    [execution executeStack: methodStack withData: dataStack];
+}
 
-
-
-/**
- * Line methods
- */
 - (void)moveToBeginningOfLine:(id)theEvent
 {
     ViLog( @"trying to moveToBeginningOfLine" );
@@ -480,11 +449,6 @@
     [execution executeStack: methodStack withData: dataStack];
 }
 
-
-
-/**
- * Document movement
- */
 - (void)moveToBeginningOfDocument:(id)theEvent
 {
     ViLog( @"trying to moveToBeginningOfDocument" );
@@ -501,17 +465,75 @@
 
 
 
-- (void)scrollPageDown:(id)theEvent
+
+/**
+ * Visual Movement Methods
+ */
+- (void)moveRightAndModifySelection:(id)theEvent
 {
-    ViLog( @"trying to scrollPageDown" );
-    [self pushMethod:@"scrollPageDown:" withData:@"f"];
+    ViLog( @"trying to moveRightAndModifySelection" );
+    [self pushMethod:@"moveRightAndModifySelection:" withData:@"l"];
     [execution executeStack: methodStack withData: dataStack];
 }
 
-- (void)scrollPageUp:(id)theEvent
+- (void)moveLeftAndModifySelection:(id)theEvent
 {
-    ViLog( @"trying to scrollPageUp" );
-    [self pushMethod:@"scrollPageUp:" withData:@"b"];
+    ViLog( @"trying to moveLeftAndModifySelection" );
+    [self pushMethod:@"moveLeftAndModifySelection:" withData:@"h"];
+    [execution executeStack: methodStack withData: dataStack];
+}
+
+- (void)moveUpAndModifySelection:(id)theEvent
+{
+    ViLog( @"trying to moveUpAndModifySelection" );
+    [self pushMethod:@"moveUpAndModifySelection:" withData:@"k"];
+    [execution executeStack: methodStack withData: dataStack];
+}
+
+- (void)moveDownAndModifySelection:(id)theEvent
+{
+    ViLog( @"trying to moveDownAndModifySelection" );
+    [self pushMethod:@"moveDownAndModifySelection:" withData:@"j"];
+    [execution executeStack: methodStack withData: dataStack];
+}
+
+- (void)moveWordBackwardAndModifySelection:(id)theEvent
+{
+    ViLog( @"trying to moveWordBackwardAndModifySelection" );
+    [self pushMethod:@"moveWordBackwardAndModifySelection:" withData:@"b"];
+    [execution executeStack: methodStack withData: dataStack];
+}
+
+- (void)moveWordForwardAndModifySelection:(id)theEvent
+{
+    ViLog( @"trying to moveWordForwardAndModifySelection" );
+    [self pushMethod:@"moveWordForwardAndModifySelection:" withData:@"w"];
+    [execution executeStack: methodStack withData: dataStack];
+}
+
+- (void)moveToEndOfWordAndModifySelection:(id)theEvent
+{
+    ViLog( @"trying to moveToEndOfWordAndModifySelection" );
+    [self pushMethod:@"moveToEndOfWordAndModifySelection:" withData:@"e"];
+    [execution executeStack: methodStack withData: dataStack];
+}
+
+
+
+/**
+ * Scroll Methods
+ */
+- (void)scrollLineDown:(id)theEvent
+{
+    ViLog( @"trying to scrollLineDown" );
+    [self pushMethod:@"scrollLineDown:" withData:@"e"];
+    [execution executeStack: methodStack withData: dataStack];
+}
+
+- (void)scrollLineUp:(id)theEvent
+{
+    ViLog( @"trying to scrollLineUp" );
+    [self pushMethod:@"scrollLineUp:" withData:@"y"];
     [execution executeStack: methodStack withData: dataStack];
 }
 
@@ -529,17 +551,17 @@
     [execution executeStack: methodStack withData: dataStack];
 }
 
-- (void)scrollLineDown:(id)theEvent
+- (void)scrollPageDown:(id)theEvent
 {
-    ViLog( @"trying to scrollLineDown" );
-    [self pushMethod:@"scrollLineDown:" withData:@"e"];
+    ViLog( @"trying to scrollPageDown" );
+    [self pushMethod:@"scrollPageDown:" withData:@"f"];
     [execution executeStack: methodStack withData: dataStack];
 }
 
-- (void)scrollLineUp:(id)theEvent
+- (void)scrollPageUp:(id)theEvent
 {
-    ViLog( @"trying to scrollLineUp" );
-    [self pushMethod:@"scrollLineUp:" withData:@"y"];
+    ViLog( @"trying to scrollPageUp" );
+    [self pushMethod:@"scrollPageUp:" withData:@"b"];
     [execution executeStack: methodStack withData: dataStack];
 }
 

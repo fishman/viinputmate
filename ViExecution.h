@@ -88,26 +88,34 @@
 
 
 /**
- * NSResponder methods
+ * Movement Methods
  */
-- (void)moveDown:(NSNumber *)theIndex;
-- (void)moveDownAndModifySelection:(NSNumber *)theIndex;
-- (void)moveLeft:(NSNumber *)theIndex;
-- (void)moveLeftAndModifySelection:(NSNumber *)theIndex;
 - (void)moveRight:(NSNumber *)theIndex;
-- (void)moveRightAndModifySelection:(NSNumber *)theIndex;
+- (void)moveLeft:(NSNumber *)theIndex;
 - (void)moveUp:(NSNumber *)theIndex;
-- (void)moveUpAndModifySelection:(NSNumber *)theIndex;
-
+- (void)moveDown:(NSNumber *)theIndex;
 - (void)moveWordBackward:(NSNumber *)theIndex;
 - (void)moveWordForward:(NSNumber *)theIndex;
-
+- (void)moveToEndOfWord:(NSNumber *)theIndex;
 - (void)moveToBeginningOfLine:(NSNumber *)theIndex;
 - (void)moveToEndOfLine:(NSNumber *)theIndex;
-
 - (void)moveToBeginningOfDocument:(NSNumber *)theIndex;
 - (void)moveToEndOfDocument:(NSNumber *)theIndex;
 
+/**
+ * Visual Movement Methods
+ */
+- (void)moveRightAndModifySelection:(NSNumber *)theIndex;
+- (void)moveLeftAndModifySelection:(NSNumber *)theIndex;
+- (void)moveUpAndModifySelection:(NSNumber *)theIndex;
+- (void)moveDownAndModifySelection:(NSNumber *)theIndex;
+- (void)moveWordBackwardAndModifySelection:(NSNumber *)theIndex;
+- (void)moveWordForwardAndModifySelection:(NSNumber *)theIndex;
+- (void)moveToEndOfWordAndModifySelection:(NSNumber *)theIndex;
+
+/**
+ * Scroll Methods
+ */
 - (void)scrollPageDown:(NSNumber *)theIndex;
 - (void)scrollPageUp:(NSNumber *)theIndex;
 

@@ -91,32 +91,39 @@
 /**
  * Movement Methods
  */
-- (void)moveDown:(id)theEvent;
-- (void)moveDownAndModifySelection:(id)theEvent;
-- (void)moveLeft:(id)theEvent;
-- (void)moveLeftAndModifySelection:(id)theEvent;
 - (void)moveRight:(id)theEvent;
-- (void)moveRightAndModifySelection:(id)theEvent;
+- (void)moveLeft:(id)theEvent;
 - (void)moveUp:(id)theEvent;
-- (void)moveUpAndModifySelection:(id)theEvent;
-
+- (void)moveDown:(id)theEvent;
 - (void)moveWordBackward:(id)theEvent;
 - (void)moveWordForward:(id)theEvent;
-
+- (void)moveToEndOfWord:(id)theEvent;
 - (void)moveToBeginningOfLine:(id)theEvent;
 - (void)moveToEndOfLine:(id)theEvent;
-
 - (void)moveToBeginningOfDocument:(id)theEvent;
 - (void)moveToEndOfDocument:(id)theEvent;
 
+/**
+ * Visual Movement Methods
+ */
+- (void)moveRightAndModifySelection:(id)theEvent;
+- (void)moveLeftAndModifySelection:(id)theEvent;
+- (void)moveUpAndModifySelection:(id)theEvent;
+- (void)moveDownAndModifySelection:(id)theEvent;
+- (void)moveWordBackwardAndModifySelection:(id)theEvent;
+- (void)moveWordForwardAndModifySelection:(id)theEvent;
+
+/**
+ * Scroll Methods
+ */
+- (void)scrollLineDown:(id)theEvent;
+- (void)scrollLineUp:(id)theEvent;
+- (void)scrollHalfPageDown:(id)theEvent;
+- (void)scrollHalfPageUp:(id)theEvent;
 - (void)scrollPageDown:(id)theEvent;
 - (void)scrollPageUp:(id)theEvent;
 
-- (void)scrollHalfPageDown:(id)theEvent;
-- (void)scrollHalfPageUp:(id)theEvent;
 
-- (void)scrollLineDown:(id)theEvent;
-- (void)scrollLineUp:(id)theEvent;
 
 - (void)undo:(id)theEvent;
 
