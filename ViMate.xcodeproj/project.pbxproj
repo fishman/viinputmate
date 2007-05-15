@@ -18,23 +18,6 @@
 		C6FA9FC90BBEFAED00E54E59 /* ViWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = C6FA9FC80BBEFAED00E54E59 /* ViWindow.m */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXBuildStyle section */
-		C616BA9A0BF8B9B00045E19E /* Development */ = {
-			isa = PBXBuildStyle;
-			buildSettings = {
-				COPY_PHASE_STRIP = NO;
-			};
-			name = Development;
-		};
-		C616BA9B0BF8B9B00045E19E /* Deployment */ = {
-			isa = PBXBuildStyle;
-			buildSettings = {
-				COPY_PHASE_STRIP = YES;
-			};
-			name = Deployment;
-		};
-/* End PBXBuildStyle section */
-
 /* Begin PBXFileReference section */
 		089C1672FE841209C02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		089C167EFE841241C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -184,12 +167,6 @@
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			buildConfigurationList = 1DEB913E08733D840010E9CD /* Build configuration list for PBXProject "ViMate" */;
-			buildSettings = {
-			};
-			buildStyles = (
-				C616BA9A0BF8B9B00045E19E /* Development */,
-				C616BA9B0BF8B9B00045E19E /* Deployment */,
-			);
 			hasScannedForEncodings = 1;
 			mainGroup = 089C166AFE841209C02AAC07 /* ViMate */;
 			projectDirPath = "";

@@ -142,7 +142,7 @@
 - (void)resetStack:(NSNumber *)theIndex
 {
     if ( [responder hasSelection] ) {
-    	[responder performSelector: @selector(moveLeft:) withObject: window];
+    	[responder performSelector: @selector(moveBackward:) withObject: window];
 	}
 }
 
@@ -150,14 +150,14 @@
 /**
  * Insert Methods
  */
-- (void)insertLeft:(NSNumber *)theIndex
+- (void)insertBackward:(NSNumber *)theIndex
 {
     [router setMode: ViInsertMode];
 }
 
-- (void)insertRight:(NSNumber *)theIndex
+- (void)insertForward:(NSNumber *)theIndex
 {
-	[self moveRight];
+	[self moveForward];
     [router setMode: ViInsertMode];
 }
 
@@ -221,13 +221,13 @@
     [router setState:ViCommandState];
 }
 
-- (void)cutRight:(NSNumber *)theIndex
+- (void)cutForward:(NSNumber *)theIndex
 {
     // if nothing is selected then we should select the 
     // first character to the right.
     if ( ! [responder hasSelection] ) {
-        [responder performSelector: @selector(moveRightAndModifySelection:) 
-                        withObject: window];
+        //[responder performSelector: @selector(moveForwardAndModifySelection:) withObject: window];
+		[self moveForwardAndModifySelection:nil];
     }
 
     [responder writeSelectionToPasteboard:pasteboard 
@@ -238,13 +238,13 @@
     [router setState:ViCommandState];
 }
 
-- (void)cutLeft:(NSNumber *)theIndex
+- (void)cutBackward:(NSNumber *)theIndex
 {
     // if nothing is selected then we should select the 
     // first character to the right.
     if ( ! [responder hasSelection] ) {
-        [responder performSelector: @selector(moveLeftAndModifySelection:) 
-                        withObject: window];
+        //[responder performSelector: @selector(moveBackwardAndModifySelection:) withObject: window];
+		[self moveBackwardAndModifySelection:nil];
     }
 
     [responder writeSelectionToPasteboard:pasteboard 
@@ -255,10 +255,10 @@
     [router setState:ViCommandState];
 }
 
-- (void)cutWordRight:(NSNumber *)theIndex
+- (void)cutWordForward:(NSNumber *)theIndex
 {
-    //[responder performSelector: @selector(moveWordRightAndModifySelection:) withObject: window];
-	[self moveWordRightAndModifySelection];
+    //[responder performSelector: @selector(moveWordForwardAndModifySelection:) withObject: window];
+	[self moveWordForwardAndModifySelection:nil];
     [responder writeSelectionToPasteboard:pasteboard 
                                     types:[NSArray arrayWithObject:@"NSStringPboardType"] ];
     [responder performSelector: @selector(deleteBackward:) withObject: window];
@@ -267,9 +267,22 @@
     [router setState:ViCommandState];
 }
 
-- (void)cutWordLeft:(NSNumber *)theIndex
+- (void)cutWordBackward:(NSNumber *)theIndex
 {
-    [responder performSelector: @selector(moveWordLeftAndModifySelection:) withObject: window];
+    //[responder performSelector: @selector(moveWordBackwardAndModifySelection:) withObject: window];
+	[self moveWordBackwardAndModifySelection:nil];
+    [responder writeSelectionToPasteboard:pasteboard 
+                                    types:[NSArray arrayWithObject:@"NSStringPboardType"] ];
+    [responder performSelector: @selector(deleteBackward:) withObject: window];
+
+    [router setActiveKeyMap:@"commandDefault"];
+    [router setState:ViCommandState];
+}
+
+- (void)cutToEndOfWord:(NSNumber *)theIndex
+{
+    //[responder performSelector: @selector(moveWordBackwardAndModifySelection:) withObject: window];
+	[self moveToEndOfWordAndModifySelection:nil];
     [responder writeSelectionToPasteboard:pasteboard 
                                     types:[NSArray arrayWithObject:@"NSStringPboardType"] ];
     [responder performSelector: @selector(deleteBackward:) withObject: window];
@@ -285,13 +298,12 @@
     [responder performSelector: @selector(moveToEndOfLine:) withObject: window];
 
     while ( column < [columnNumber intValue] ) {
-        [responder performSelector: @selector(moveLeftAndModifySelection:) withObject: window];
+        [responder performSelector: @selector(moveBackwardAndModifySelection:) withObject: window];
     }
 
     [responder writeSelectionToPasteboard:pasteboard 
                                     types:[NSArray arrayWithObject:@"NSStringPboardType"] ];
     [responder performSelector: @selector(deleteBackward:) withObject: window];
-
     [router setActiveKeyMap:@"commandDefault"];
     [router setState:ViCommandState];
 }
@@ -303,7 +315,7 @@
     [responder performSelector: @selector(moveToBeginningOfLine:) withObject: window];
 
     while ( column > [columnNumber intValue] ) {
-        [responder performSelector: @selector(moveRightAndModifySelection:) withObject: window];
+        [responder performSelector: @selector(moveForwardAndModifySelection:) withObject: window];
     }
 
     [responder writeSelectionToPasteboard:pasteboard 
@@ -345,13 +357,13 @@
     [router setState:ViCommandState];
 }
 
-- (void)copyRight:(NSNumber *)theIndex
+- (void)copyForward:(NSNumber *)theIndex
 {
     // if nothing is selected then we should select the 
     // first character to the right.
     if ( ! [responder hasSelection] ) {
-        [responder performSelector: @selector(moveRightAndModifySelection:) 
-                        withObject: window];
+        //[responder performSelector: @selector(moveForwardAndModifySelection:) withObject: window];
+		[self moveForwardAndModifySelection:nil];
     }
 
     [responder writeSelectionToPasteboard:pasteboard 
@@ -361,13 +373,13 @@
     [router setState:ViCommandState];
 }
 
-- (void)copyLeft:(NSNumber *)theIndex
+- (void)copyBackward:(NSNumber *)theIndex
 {
     // if nothing is selected then we should select the 
     // first character to the right.
     if ( ! [responder hasSelection] ) {
-        [responder performSelector: @selector(moveLeftAndModifySelection:) 
-                        withObject: window];
+        //[responder performSelector: @selector(moveBackwardAndModifySelection:) withObject: window];
+		[self moveBackwardAndModifySelection:nil];
     }
 
     [responder writeSelectionToPasteboard:pasteboard 
@@ -377,9 +389,9 @@
     [router setState:ViCommandState];
 }
 
-- (void)copyWordRight:(NSNumber *)theIndex
+- (void)copyWordForward:(NSNumber *)theIndex
 {
-    //[responder performSelector: @selector(moveWordRightAndModifySelection:) withObject: window];
+    //[responder performSelector: @selector(moveWordForwardAndModifySelection:) withObject: window];
 	[self moveWordForwardAndModifySelection:nil];
     [responder writeSelectionToPasteboard:pasteboard 
                                     types:[NSArray arrayWithObject:@"NSStringPboardType"] ];
@@ -388,14 +400,26 @@
     [router setState:ViCommandState];
 }
 
-- (void)copyWordLeft:(NSNumber *)theIndex
+- (void)copyWordBackward:(NSNumber *)theIndex
 {
-    //[responder performSelector: @selector(moveWordLeftAndModifySelection:) withObject: window];
+    //[responder performSelector: @selector(moveWordBackwardAndModifySelection:) withObject: window];
 	[self moveWordBackwardAndModifySelection:nil];
     [responder writeSelectionToPasteboard:pasteboard 
                                     types:[NSArray arrayWithObject:@"NSStringPboardType"] ];
-    //[responder performSelector: @selector(moveBackward:) withObject: window];
-	[self moveLeft:nil];
+    [responder performSelector: @selector(moveBackward:) withObject: window];
+	//[self moveBackward:nil];
+    [router setActiveKeyMap:@"commandDefault"];
+    [router setState:ViCommandState];
+}
+
+- (void)copyToEndOfWord:(NSNumber *)theIndex
+{
+    //[responder performSelector: @selector(moveWordBackwardAndModifySelection:) withObject: window];
+	[self moveToEndOfWordAndModifySelection:nil];
+    [responder writeSelectionToPasteboard:pasteboard 
+                                    types:[NSArray arrayWithObject:@"NSStringPboardType"] ];
+    [responder performSelector: @selector(moveBackward:) withObject: window];
+	//[self moveBackward:nil];
     [router setActiveKeyMap:@"commandDefault"];
     [router setState:ViCommandState];
 }
@@ -408,14 +432,14 @@
 	[self moveToEndOfLine:nil];
 
     while ( column < [columnNumber intValue] ) {
-        [responder performSelector: @selector(moveLeftAndModifySelection:) withObject: window];
-		//[self moveLeftAndModifySelection:nil];
+        [responder performSelector: @selector(moveBackwardAndModifySelection:) withObject: window];
+		//[self moveBackwardAndModifySelection:nil];
     }
 
     [responder writeSelectionToPasteboard:pasteboard 
                                     types:[NSArray arrayWithObject:@"NSStringPboardType"] ];
-    //[responder performSelector: @selector(moveBackward:) withObject: window];
-	[self moveBackward:nil];
+    [responder performSelector: @selector(moveBackward:) withObject: window];
+	//[self moveBackward:nil];
     [router setActiveKeyMap:@"commandDefault"];
     [router setState:ViCommandState];
 }
@@ -428,14 +452,14 @@
 	[self moveToBeginningOfLine:nil];
 
     while ( column > [columnNumber intValue] ) {
-        [responder performSelector: @selector(moveRightAndModifySelection:) withObject: window];
-		//[self moveRightAndModifySelection:nil];
+        [responder performSelector: @selector(moveForwardAndModifySelection:) withObject: window];
+		//[self moveForwardAndModifySelection:nil];
     }
 
     [responder writeSelectionToPasteboard:pasteboard 
                                     types:[NSArray arrayWithObject:@"NSStringPboardType"] ];
-    //[responder performSelector: @selector(moveBackward:) withObject: window];
-	[self moveBackward:nil];
+    [responder performSelector: @selector(moveBackward:) withObject: window];
+	//[self moveBackward:nil];
     [router setActiveKeyMap:@"commandDefault"];
     [router setState:ViCommandState];
 }
@@ -448,7 +472,7 @@
 - (void)change:(NSNumber *)theIndex
 {
 	[self cut:theIndex];
-	[self insertLeft:theIndex];
+	[self insertBackward:theIndex];
 }
 
 - (void)changeLine:(NSNumber *)theIndex
@@ -457,40 +481,46 @@
 	[self insertAbove:theIndex];
 }
 
-- (void)changeRight:(NSNumber *)theIndex
+- (void)changeForward:(NSNumber *)theIndex
 {
-	[self cutRight:theIndex];
-	[self insertLeft:theIndex];
+	[self cutForward:theIndex];
+	[self insertBackward:theIndex];
 }
 
-- (void)changeLeft:(NSNumber *)theIndex
+- (void)changeBackward:(NSNumber *)theIndex
 {
-	[self cutLeft:theIndex];
-	[self insertLeft:theIndex];
+	[self cutBackward:theIndex];
+	[self insertBackward:theIndex];
 }
 
-- (void)changeWordRight:(NSNumber *)theIndex
+- (void)changeWordForward:(NSNumber *)theIndex
 {
-	[self cutWordRight:theIndex];
-	[self insertLeft:theIndex];
+	[self cutWordForward:theIndex];
+	[self insertBackward:theIndex];
 }
 
-- (void)changeWordLeft:(NSNumber *)theIndex
+- (void)changeWordBackward:(NSNumber *)theIndex
 {
-	[self cutWordLeft:theIndex];
-	[self insertLeft:theIndex];
+	[self cutWordBackward:theIndex];
+	[self insertBackward:theIndex];
+}
+
+- (void)changeToEndOfWord:(NSNumber *)theIndex
+{
+	[self cutToEndOfWord:theIndex];
+	[self insertBackward:theIndex];
 }
 
 - (void)changeToEndOfLine:(NSNumber *)theIndex
 {
 	[self cutToEndOfLine:theIndex];
-	[self insertLeft:theIndex];
+	[self insertBackward:theIndex];
 }
 
 - (void)changeToBeginningOfLine:(NSNumber *)theIndex
 {
 	[self cutToBeginningOfLine:theIndex];
-	[self insertLeft:theIndex];
+	[self insertBackward:theIndex];
 }
 
 
@@ -508,16 +538,16 @@
 
         if ( [str characterAtIndex:( [str length] - 1 )] == '\n' ) {
             //ViLog( @"pasteBefore as a new line." );
-            //[responder performSelector: @selector(moveToBeginningOfLine:) withObject: window];
-			[self moveToBeginningOfLine:nil];
+            [responder performSelector: @selector(moveToBeginningOfLine:) withObject: window];
+			//[self moveToBeginningOfLine:nil];
             [responder readSelectionFromPasteboard:pasteboard];
-            //[responder performSelector: @selector(moveToBeginningOfLine:) withObject: window];
-			[self moveToBeginningOfLine:nil];
+            [responder performSelector: @selector(moveToBeginningOfLine:) withObject: window];
+			//[self moveToBeginningOfLine:nil];
         } else {
             //ViLog( @"pasteBefore as a string." );
             [responder readSelectionFromPasteboard:pasteboard];
-            //[responder performSelector: @selector(moveLeft:) withObject: window];
-			[self moveLeft:nil];
+            [responder performSelector: @selector(moveBackward:) withObject: window];
+			//[self moveBackward:nil];
         }
     }
      
@@ -542,10 +572,13 @@
 			[self moveToBeginningOfLine:nil];
         } else {
             //ViLog( @"pasteAfter as a string." );
-            [self moveRight:nil];
+			if ( ! [responder hasSelection] ) {
+            	[self moveForward:nil];
+			}
+
             [responder readSelectionFromPasteboard:pasteboard];
-            //[responder performSelector: @selector(moveLeft:) withObject: window];
-			[self moveLeft:nil];
+            [responder performSelector: @selector(moveBackward:) withObject: window];
+			//[self moveBackward:nil];
         }
     }
      
@@ -560,21 +593,21 @@
 /**
  * Movement Methods
  */
-- (void)moveRight:(NSNumber *)theIndex
+- (void)moveForward:(NSNumber *)theIndex
 {
     int line = [lineNumber intValue];
 
-    [responder performSelector: @selector(moveRight:) withObject: window];
+    [responder performSelector: @selector(moveForward:) withObject: window];
 
     if ( [lineNumber intValue] > line ) {
-        [responder performSelector: @selector(moveLeft:) withObject: window];
+        [responder performSelector: @selector(moveBackward:) withObject: window];
     }
 }
 
-- (void)moveLeft:(NSNumber *)theIndex
+- (void)moveBackward:(NSNumber *)theIndex
 {
     if ( [columnNumber intValue] > 0 ) {
-        [responder performSelector: @selector(moveLeft:) withObject: window];
+        [responder performSelector: @selector(moveBackward:) withObject: window];
     }
 }
 
@@ -632,21 +665,21 @@
 /**
  * Visual Movement Methods
  */
-- (void)moveRightAndModifySelection:(NSNumber *)theIndex
+- (void)moveForwardAndModifySelection:(NSNumber *)theIndex
 {
     int line = [lineNumber intValue];
 
-    [responder performSelector: @selector(moveRightAndModifySelection:) withObject: window];
+    [responder performSelector: @selector(moveForwardAndModifySelection:) withObject: window];
 
     if ( [lineNumber intValue] > line ) {
-        [responder performSelector: @selector(moveLeftAndModifySelection:) withObject: window];
+        [responder performSelector: @selector(moveBackwardAndModifySelection:) withObject: window];
     }
 }
 
-- (void)moveLeftAndModifySelection:(NSNumber *)theIndex
+- (void)moveBackwardAndModifySelection:(NSNumber *)theIndex
 {
     if ( [columnNumber intValue] > 0 ) {
-        [responder performSelector: @selector(moveLeftAndModifySelection:) withObject: window];
+        [responder performSelector: @selector(moveBackwardAndModifySelection:) withObject: window];
     }
 }
 

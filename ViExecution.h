@@ -37,8 +37,8 @@
 - (void)visual:(NSNumber *)theIndex;
 - (void)repeat:(NSNumber *)theIndex;
 - (void)resetStack:(NSNumber *)theIndex;
-- (void)insertLeft:(NSNumber *)theIndex;
-- (void)insertRight:(NSNumber *)theIndex;
+- (void)insertBackward:(NSNumber *)theIndex;
+- (void)insertForward:(NSNumber *)theIndex;
 - (void)insertAbove:(NSNumber *)theIndex;
 - (void)insertBelow:(NSNumber *)theIndex;
 - (void)insertAtBeginningOfLine:(NSNumber *)theIndex;
@@ -49,10 +49,11 @@
  */
 - (void)cut:(NSNumber *)theIndex;
 - (void)cutLine:(NSNumber *)theIndex;
-- (void)cutRight:(NSNumber *)theIndex;
-- (void)cutLeft:(NSNumber *)theIndex;
-- (void)cutWordRight:(NSNumber *)theIndex;
-- (void)cutWordLeft:(NSNumber *)theIndex;
+- (void)cutForward:(NSNumber *)theIndex;
+- (void)cutBackward:(NSNumber *)theIndex;
+- (void)cutWordForward:(NSNumber *)theIndex;
+- (void)cutWordBackward:(NSNumber *)theIndex;
+- (void)cutToEndOfWord:(NSNumber *)theIndex;
 - (void)cutToEndOfLine:(NSNumber *)theIndex;
 - (void)cutToBeginningOfLine:(NSNumber *)theIndex;
 
@@ -61,10 +62,11 @@
  */
 - (void)copy:(NSNumber *)theIndex;
 - (void)copyLine:(NSNumber *)theIndex;
-- (void)copyRight:(NSNumber *)theIndex;
-- (void)copyLeft:(NSNumber *)theIndex;
-- (void)copyWordRight:(NSNumber *)theIndex;
-- (void)copyWordLeft:(NSNumber *)theIndex;
+- (void)copyForward:(NSNumber *)theIndex;
+- (void)copyBackward:(NSNumber *)theIndex;
+- (void)copyWordForward:(NSNumber *)theIndex;
+- (void)copyWordBackward:(NSNumber *)theIndex;
+- (void)copyToEndOfWord:(NSNumber *)theIndex;
 - (void)copyToEndOfLine:(NSNumber *)theIndex;
 - (void)copyToBeginningOfLine:(NSNumber *)theIndex;
 
@@ -73,10 +75,11 @@
  */
 - (void)change:(NSNumber *)theIndex;
 - (void)changeLine:(NSNumber *)theIndex;
-- (void)changeRight:(NSNumber *)theIndex;
-- (void)changeLeft:(NSNumber *)theIndex;
-- (void)changeWordRight:(NSNumber *)theIndex;
-- (void)changeWordLeft:(NSNumber *)theIndex;
+- (void)changeForward:(NSNumber *)theIndex;
+- (void)changeBackward:(NSNumber *)theIndex;
+- (void)changeWordForward:(NSNumber *)theIndex;
+- (void)changeWordBackward:(NSNumber *)theIndex;
+- (void)changeToEndOfWord:(NSNumber *)theIndex;
 - (void)changeToEndOfLine:(NSNumber *)theIndex;
 - (void)changeToBeginningOfLine:(NSNumber *)theIndex;
 
@@ -90,8 +93,8 @@
 /**
  * Movement Methods
  */
-- (void)moveRight:(NSNumber *)theIndex;
-- (void)moveLeft:(NSNumber *)theIndex;
+- (void)moveForward:(NSNumber *)theIndex;
+- (void)moveBackward:(NSNumber *)theIndex;
 - (void)moveUp:(NSNumber *)theIndex;
 - (void)moveDown:(NSNumber *)theIndex;
 - (void)moveWordBackward:(NSNumber *)theIndex;
@@ -105,8 +108,8 @@
 /**
  * Visual Movement Methods
  */
-- (void)moveRightAndModifySelection:(NSNumber *)theIndex;
-- (void)moveLeftAndModifySelection:(NSNumber *)theIndex;
+- (void)moveForwardAndModifySelection:(NSNumber *)theIndex;
+- (void)moveBackwardAndModifySelection:(NSNumber *)theIndex;
 - (void)moveUpAndModifySelection:(NSNumber *)theIndex;
 - (void)moveDownAndModifySelection:(NSNumber *)theIndex;
 - (void)moveWordBackwardAndModifySelection:(NSNumber *)theIndex;
@@ -124,9 +127,6 @@
 
 - (void)scrollLineDown:(NSNumber *)theIndex;
 - (void)scrollLineUp:(NSNumber *)theIndex;
-
-- (void)selectLine:(NSNumber *)theIndex;
-- (void)selectWord:(NSNumber *)theIndex;
 
 - (void)undo:(NSNumber *)theIndex;
 

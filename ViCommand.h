@@ -31,8 +31,8 @@
 /**
  * Insert Methods
  */
-- (void)insertLeft:(id)theEvent;
-- (void)insertRight:(id)theEvent;
+- (void)insertBackward:(id)theEvent;
+- (void)insertForward:(id)theEvent;
 - (void)insertAbove:(id)theEvent;
 - (void)insertBelow:(id)theEvent;
 - (void)insertAtBeginningOfLine:(id)theEvent;
@@ -45,10 +45,11 @@
 - (void)cut:(id)theEvent;
 - (void)cutState:(id)theEvent;
 - (void)cutLine:(id)theEvent;
-- (void)cutRight:(id)theEvent;
-- (void)cutLeft:(id)theEvent;
-- (void)cutWordLeft:(id)theEvent;
-- (void)cutWordRight:(id)theEvent;
+- (void)cutForward:(id)theEvent;
+- (void)cutBackward:(id)theEvent;
+- (void)cutWordBackward:(id)theEvent;
+- (void)cutWordForward:(id)theEvent;
+- (void)cutToEndOfWord:(id)theEvent;
 - (void)cutToEndOfLine:(id)theEvent;
 - (void)cutToBeginningOfLine:(id)theEvent;
 
@@ -59,10 +60,11 @@
 - (void)copy:(id)theEvent;
 - (void)copyState:(id)theEvent;
 - (void)copyLine:(id)theEvent;
-- (void)copyRight:(id)theEvent;
-- (void)copyLeft:(id)theEvent;
-- (void)copyWordRight:(id)theEvent;
-- (void)copyWordLeft:(id)theEvent;
+- (void)copyForward:(id)theEvent;
+- (void)copyBackward:(id)theEvent;
+- (void)copyWordForward:(id)theEvent;
+- (void)copyWordBackward:(id)theEvent;
+- (void)copyToEndOfWord:(id)theEvent;
 - (void)copyToEndOfLine:(id)theEvent;
 - (void)copyToBeginningOfLine:(id)theEvent;
 
@@ -73,10 +75,11 @@
 - (void)change:(id)theEvent;
 - (void)changeState:(id)theEvent;
 - (void)changeLine:(id)theEvent;
-- (void)changeRight:(id)theEvent;
-- (void)changeLeft:(id)theEvent;
-- (void)changeWordRight:(id)theEvent;
-- (void)changeWordLeft:(id)theEvent;
+- (void)changeForward:(id)theEvent;
+- (void)changeBackward:(id)theEvent;
+- (void)changeWordForward:(id)theEvent;
+- (void)changeWordBackward:(id)theEvent;
+- (void)changeToEndOfWord:(id)theEvent;
 - (void)changeToEndOfLine:(id)theEvent;
 - (void)changeToBeginningOfLine:(id)theEvent;
 
@@ -91,8 +94,8 @@
 /**
  * Movement Methods
  */
-- (void)moveRight:(id)theEvent;
-- (void)moveLeft:(id)theEvent;
+- (void)moveForward:(id)theEvent;
+- (void)moveBackward:(id)theEvent;
 - (void)moveUp:(id)theEvent;
 - (void)moveDown:(id)theEvent;
 - (void)moveWordBackward:(id)theEvent;
@@ -106,8 +109,8 @@
 /**
  * Visual Movement Methods
  */
-- (void)moveRightAndModifySelection:(id)theEvent;
-- (void)moveLeftAndModifySelection:(id)theEvent;
+- (void)moveForwardAndModifySelection:(id)theEvent;
+- (void)moveBackwardAndModifySelection:(id)theEvent;
 - (void)moveUpAndModifySelection:(id)theEvent;
 - (void)moveDownAndModifySelection:(id)theEvent;
 - (void)moveWordBackwardAndModifySelection:(id)theEvent;

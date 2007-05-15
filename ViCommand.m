@@ -114,17 +114,17 @@
 /**
  * Insert Methods
  */
-- (void)insertLeft:(id)theEvent
+- (void)insertBackward:(id)theEvent
 {
-    ViLog( @"trying to insertLeft" );
-    [self pushMethod:@"insertLeft:" withData:@"i"];
+    ViLog( @"trying to insertBackward" );
+    [self pushMethod:@"insertBackward:" withData:@"i"];
     [execution executeStack: methodStack withData: dataStack];
 }
 
-- (void)insertRight:(id)theEvent
+- (void)insertForward:(id)theEvent
 {
-    ViLog( @"trying to insertRight" );
-    [self pushMethod:@"insertRight:" withData:@"a"];
+    ViLog( @"trying to insertForward" );
+    [self pushMethod:@"insertForward:" withData:@"a"];
     [execution executeStack: methodStack withData: dataStack];
 }
 
@@ -182,31 +182,38 @@
     [execution executeStack: methodStack withData: dataStack];
 }
 
-- (void)cutRight:(id)theEvent
+- (void)cutForward:(id)theEvent
 {
-    ViLog( @"trying to cutRight" );
-    [self pushMethod:@"cutRight:" withData:@"x"];
+    ViLog( @"trying to cutForward" );
+    [self pushMethod:@"cutForward:" withData:@"x"];
     [execution executeStack: methodStack withData: dataStack];
 }
 
-- (void)cutLeft:(id)theEvent
+- (void)cutBackward:(id)theEvent
 {
-    ViLog( @"trying to cutLeft" );
-    [self pushMethod:@"cutLeft:" withData:@"X"];
+    ViLog( @"trying to cutBackward" );
+    [self pushMethod:@"cutBackward:" withData:@"X"];
     [execution executeStack: methodStack withData: dataStack];
 }
 
-- (void)cutWordLeft:(id)theEvent
+- (void)cutWordBackward:(id)theEvent
 {
-    ViLog( @"trying to cutWordLeft" );
-    [self pushMethod:@"cutWordLeft:" withData:@"b"];
+    ViLog( @"trying to cutWordBackward" );
+    [self pushMethod:@"cutWordBackward:" withData:@"b"];
     [execution executeStack: methodStack withData: dataStack];
 }
 
-- (void)cutWordRight:(id)theEvent
+- (void)cutWordForward:(id)theEvent
 {
-    ViLog( @"trying to cutWordRight" );
-    [self pushMethod:@"cutWordRight:" withData:@"w"];
+    ViLog( @"trying to cutWordForward" );
+    [self pushMethod:@"cutWordForward:" withData:@"w"];
+    [execution executeStack: methodStack withData: dataStack];
+}
+
+- (void)cutToEndOfWord:(id)theEvent
+{
+    ViLog( @"trying to cutToEndOfWord" );
+    [self pushMethod:@"cutToEndOfWord:" withData:@"w"];
     [execution executeStack: methodStack withData: dataStack];
 }
 
@@ -249,31 +256,38 @@
     [execution executeStack: methodStack withData: dataStack];
 }
 
-- (void)copyRight:(id)theEvent
+- (void)copyForward:(id)theEvent
 {
-    ViLog( @"trying to copyRight" );
-    [self pushMethod:@"copyRight:" withData:@"l"];
+    ViLog( @"trying to copyForward" );
+    [self pushMethod:@"copyForward:" withData:@"l"];
     [execution executeStack: methodStack withData: dataStack];
 }
 
-- (void)copyLeft:(id)theEvent
+- (void)copyBackward:(id)theEvent
 {
-    ViLog( @"trying to copyLeft" );
-    [self pushMethod:@"copyLeft:" withData:@"h"];
+    ViLog( @"trying to copyBackward" );
+    [self pushMethod:@"copyBackward:" withData:@"h"];
     [execution executeStack: methodStack withData: dataStack];
 }
 
-- (void)copyWordRight:(id)theEvent
+- (void)copyWordForward:(id)theEvent
 {
-    ViLog( @"trying to copyWordRight" );
-    [self pushMethod:@"copyWordRight:" withData:@"w"];
+    ViLog( @"trying to copyWordForward" );
+    [self pushMethod:@"copyWordForward:" withData:@"w"];
     [execution executeStack: methodStack withData: dataStack];
 }
 
-- (void)copyWordLeft:(id)theEvent
+- (void)copyWordBackward:(id)theEvent
 {
-    ViLog( @"trying to copyWordLeft" );
-    [self pushMethod:@"copyWordLeft:" withData:@"b"];
+    ViLog( @"trying to copyWordBackward" );
+    [self pushMethod:@"copyWordBackward:" withData:@"b"];
+    [execution executeStack: methodStack withData: dataStack];
+}
+
+- (void)copyToEndOfWord:(id)theEvent
+{
+    ViLog( @"trying to copyToEndOfWord" );
+    [self pushMethod:@"copyToEndOfWord:" withData:@"b"];
     [execution executeStack: methodStack withData: dataStack];
 }
 
@@ -318,31 +332,38 @@
     [execution executeStack: methodStack withData: dataStack];
 }
 
-- (void)changeRight:(id)theEvent
+- (void)changeForward:(id)theEvent
 {
-    ViLog( @"trying to changeRight" );
-    [self pushMethod:@"changeRight:" withData:@"l"];
+    ViLog( @"trying to changeForward" );
+    [self pushMethod:@"changeForward:" withData:@"l"];
     [execution executeStack: methodStack withData: dataStack];
 }
 
-- (void)changeLeft:(id)theEvent
+- (void)changeBackward:(id)theEvent
 {
-    ViLog( @"trying to changeLeft" );
-    [self pushMethod:@"changeLeft:" withData:@"h"];
+    ViLog( @"trying to changeBackward" );
+    [self pushMethod:@"changeBackward:" withData:@"h"];
     [execution executeStack: methodStack withData: dataStack];
 }
 
-- (void)changeWordRight:(id)theEvent
+- (void)changeWordForward:(id)theEvent
 {
-    ViLog( @"trying to changeWordRight" );
-    [self pushMethod:@"changeWordRight:" withData:@"w"];
+    ViLog( @"trying to changeWordForward" );
+    [self pushMethod:@"changeWordForward:" withData:@"w"];
     [execution executeStack: methodStack withData: dataStack];
 }
 
-- (void)changeWordLeft:(id)theEvent
+- (void)changeWordBackward:(id)theEvent
 {
-    ViLog( @"trying to changeWordLeft" );
-    [self pushMethod:@"changeWordLeft:" withData:@"b"];
+    ViLog( @"trying to changeWordBackward" );
+    [self pushMethod:@"changeWordBackward:" withData:@"b"];
+    [execution executeStack: methodStack withData: dataStack];
+}
+
+- (void)changeToEndOfWord:(id)theEvent
+{
+    ViLog( @"trying to changeToEndOfWord" );
+    [self pushMethod:@"changeToEndOfWord:" withData:@"b"];
     [execution executeStack: methodStack withData: dataStack];
 }
 
@@ -386,17 +407,17 @@
 /**
  * Select NSResponder Methods
  */
-- (void)moveRight:(id)theEvent
+- (void)moveForward:(id)theEvent
 {
-    ViLog( @"trying to moveRight" );
-    [self pushMethod:@"moveRight:" withData:@"l"];
+    ViLog( @"trying to moveForward" );
+    [self pushMethod:@"moveForward:" withData:@"l"];
     [execution executeStack: methodStack withData: dataStack];
 }
 
-- (void)moveLeft:(id)theEvent
+- (void)moveBackward:(id)theEvent
 {
-    ViLog( @"trying to moveLeft" );
-    [self pushMethod:@"moveLeft:" withData:@"h"];
+    ViLog( @"trying to moveBackward" );
+    [self pushMethod:@"moveBackward:" withData:@"h"];
     [execution executeStack: methodStack withData: dataStack];
 }
 
@@ -469,17 +490,17 @@
 /**
  * Visual Movement Methods
  */
-- (void)moveRightAndModifySelection:(id)theEvent
+- (void)moveForwardAndModifySelection:(id)theEvent
 {
-    ViLog( @"trying to moveRightAndModifySelection" );
-    [self pushMethod:@"moveRightAndModifySelection:" withData:@"l"];
+    ViLog( @"trying to moveForwardAndModifySelection" );
+    [self pushMethod:@"moveForwardAndModifySelection:" withData:@"l"];
     [execution executeStack: methodStack withData: dataStack];
 }
 
-- (void)moveLeftAndModifySelection:(id)theEvent
+- (void)moveBackwardAndModifySelection:(id)theEvent
 {
-    ViLog( @"trying to moveLeftAndModifySelection" );
-    [self pushMethod:@"moveLeftAndModifySelection:" withData:@"h"];
+    ViLog( @"trying to moveBackwardAndModifySelection" );
+    [self pushMethod:@"moveBackwardAndModifySelection:" withData:@"h"];
     [execution executeStack: methodStack withData: dataStack];
 }
 
