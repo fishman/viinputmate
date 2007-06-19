@@ -13,12 +13,19 @@
 
 @implementation ViWindow
 
+
+- (BOOL)isValidWindowType:(NSWindow *)theWindow
+{
+	return [[theWindow firstResponder] isKindOfClass:NSClassFromString(@"OakTextView")];
+}
+
+
 - (void)sendEvent:(NSEvent *)theEvent
 {
     id event;
-    ViEventRouter *router = [ViEventRouter sharedViEventRouter];
-    
-    if ( [theEvent type] == NSKeyDown ) {
+	
+	if( [self isValidWindowType:self] && [theEvent type] == NSKeyDown ) {
+		ViEventRouter *router = [ViEventRouter sharedViEventRouter];
         [router setWindow:self];
         event = [router routeEvent:theEvent];
             
