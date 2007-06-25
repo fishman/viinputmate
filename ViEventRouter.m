@@ -11,8 +11,8 @@
 
 
 static ViEventRouter *sharedViEventRouter = nil;
-bool debugOn = true;
-//bool debugOn = false;
+//bool debugOn = true;
+bool debugOn = false;
 
 /**
  * singleton instance of the event router.
