@@ -9,13 +9,12 @@
 #import <Cocoa/Cocoa.h>
 //#import "ViCommandStack.h"
 #import "ViCommand.h"
+#import "ViView.h"
+#import "ViMode.h"
 
 extern bool debugOn;
 
-typedef enum _ViMode {
-    ViInsertMode       = 1,
-    ViCommandMode      = 2,
-} ViMode;
+
 
 typedef enum _ViState {
     ViCommandState       = 1,
@@ -36,6 +35,8 @@ typedef enum _ViState {
     ViCommand *command;
     NSMutableDictionary *keyMaps;
     id activeKeyMap;
+	
+	ViView * currentCursorView;
 }
 
 // methods needed for singleton pattern

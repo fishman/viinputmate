@@ -50,6 +50,7 @@ bool debugOn = false;
 
     if ((self = [super init])) {
         lastWindow = nil;
+		currentCursorView = nil;
         mode = ViInsertMode;
         command = [[ViCommand alloc] init];
 
@@ -524,6 +525,7 @@ bool debugOn = false;
 - (void)setMode:(ViMode)theMode
 {
     mode = theMode;
+	[currentCursorView setMode:theMode];	
 }
 
 - (ViMode)mode
@@ -547,7 +549,12 @@ bool debugOn = false;
         lastWindow = theWindow;
         [command setWindow:theWindow];
         responder = [theWindow firstResponder];
-    }
+		
+		// NSLog(@"Creating subview");
+        currentCursorView = [[ViView alloc] initWithFrame:[responder bounds]];
+        [responder addSubview:currentCursorView];
+		[currentCursorView setMode:mode];
+	}
 }
 
 @end
