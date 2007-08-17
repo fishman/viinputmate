@@ -8,10 +8,9 @@
 
 #import "ViEventRouter.h"
 #import "ViHelper.h"
-
+#import "ViWindow.h"
 
 static ViEventRouter *sharedViEventRouter = nil;
-//bool debugOn = true;
 bool debugOn = false;
 
 /**
@@ -550,10 +549,20 @@ bool debugOn = false;
         [command setWindow:theWindow];
         responder = [theWindow firstResponder];
 		
-		// NSLog(@"Creating subview");
-        currentCursorView = [[ViView alloc] initWithFrame:[responder bounds]];
-        [responder addSubview:currentCursorView];
+		[currentCursorView removeFromSuperview];
+		currentCursorView = [[ViView alloc] initWithFrame:[responder bounds]];
+		[responder addSubview:currentCursorView];
 		[currentCursorView setMode:mode];
+	}
+}
+
+- (void)releaseWindow:(NSWindow*)theWindow
+{
+	if( lastWindow == theWindow){
+		[command releaseWindow:theWindow];
+		lastWindow = nil;
+		responder = nil;
+		[currentCursorView removeFromSuperview];
 	}
 }
 

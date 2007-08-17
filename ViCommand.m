@@ -32,6 +32,11 @@
     [execution setWindow: theWindow];
 }
 
+- (void)releaseWindow:(NSWindow *)theWindow
+{
+	[execution releaseWindow:theWindow];
+}
+
 - (void)pushMethod:(NSString *)theMethod withData:(NSString *)theData
 {
     [dataStack addObject: theData];

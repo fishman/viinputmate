@@ -14,6 +14,7 @@
 
 }
 
++ (BOOL)isValidWindowType:(NSWindow *)theWindow;
 - (void)sendEvent:(NSEvent *)theEvent;
 
 @end

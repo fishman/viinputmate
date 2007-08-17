@@ -18,6 +18,7 @@
 }
 
 - (void)setWindow:(NSWindow *)theWindow;
+- (void)releaseWindow:(NSWindow *)theWindow;
 - (void)pushMethod:(NSString *)theMethod withData:(NSString *)theData;
 
 

@@ -73,20 +73,25 @@
 
 - (void)setWindow:(NSWindow *)theWindow
 {
-    ViLog( @"Setting the Window" );
-
-    // cleanup
+    ViLog( @"%s %@", _cmd, @"cleanup" );
     if ( responder != nil ) {
         [responder unbind:@"lineNumber"];
         [responder unbind:@"columnNumber"];
     }
 
+    ViLog( @"%s %@ [%@]", _cmd, @"Setting the Window", theWindow );
     window = theWindow;
     responder = [theWindow firstResponder];
 
-    ViLog( @"Binding parameters" );
+    ViLog( @"%s %@", _cmd, @"Binding parameters" );
     [responder bind:@"lineNumber"   toObject:self withKeyPath:@"lineNumber"   options:nil];
     [responder bind:@"columnNumber" toObject:self withKeyPath:@"columnNumber" options:nil];
+}
+
+- (void)releaseWindow:(NSWindow *)theWindow
+{
+	responder = nil;
+	window = nil;
 }
 
 - (void)executeStack:(NSMutableArray *)theMethodStack 

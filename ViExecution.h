@@ -27,6 +27,7 @@
 - (NSNumber *)columnNumber;
 
 - (void)setWindow:(NSWindow *)theWindow;
+- (void)releaseWindow:(NSWindow *)theWindow;
 - (void)executeStack:(NSMutableArray *)theMethodStack 
             withData:(NSMutableArray *)theDataStack;
 

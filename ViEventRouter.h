@@ -56,5 +56,6 @@ typedef enum _ViState {
 - (void)setState:(ViState)theState;
 - (ViState)state;
 - (void)setWindow:(NSWindow *)theWindow;
+- (void)releaseWindow:(NSWindow *)theWindow;
 
 @end

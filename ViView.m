@@ -7,7 +7,7 @@
 //
 
 #import "ViView.h"
-
+#import "NSColor_categories.h"
 
 @implementation ViView
 
