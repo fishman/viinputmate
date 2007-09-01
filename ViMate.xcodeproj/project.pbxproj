@@ -36,7 +36,9 @@
 		C65112370BBF2D9B00F3C94C /* ViController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViController.m; sourceTree = "<group>"; };
 		C651123F0BBF367700F3C94C /* ViEventDispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViEventDispatcher.h; sourceTree = "<group>"; };
 		C65112400BBF367700F3C94C /* ViEventDispatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViEventDispatcher.m; sourceTree = "<group>"; };
-		C6D7B35A0BC5E35600A491A5 /* ViExecution.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViExecution.h; sourceTree = "<group>"; };
+		C6D648AA0C89E90500C5F546 /* ViExecution.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViExecution.h; sourceTree = "<group>"; };
+		C6D648AB0C89E91600C5F546 /* ViExecution.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViExecution.m; sourceTree = "<group>"; };
+		C6D7B35A0BC5E35600A491A5 /* ViEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViEditor.h; sourceTree = "<group>"; };
 		C6D7B35B0BC5E35600A491A5 /* ViExecution.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViExecution.m; sourceTree = "<group>"; };
 		C6FA9FA00BBEF4CA00E54E59 /* ViPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViPlugin.h; sourceTree = "<group>"; };
 		C6FA9FA10BBEF4CA00E54E59 /* ViPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViPlugin.m; sourceTree = "<group>"; };
@@ -104,7 +106,9 @@
 				DC2094200C332986003D9E8C /* ViView.m */,
 				C65112360BBF2D9B00F3C94C /* ViController.h */,
 				C65112370BBF2D9B00F3C94C /* ViController.m */,
-				C6D7B35A0BC5E35600A491A5 /* ViExecution.h */,
+				C6D648AA0C89E90500C5F546 /* ViExecution.h */,
+				C6D7B35A0BC5E35600A491A5 /* ViEditor.h */,
+				C6D648AB0C89E91600C5F546 /* ViExecution.m */,
 				C6D7B35B0BC5E35600A491A5 /* ViExecution.m */,
 				C651123F0BBF367700F3C94C /* ViEventDispatcher.h */,
 				C65112400BBF367700F3C94C /* ViEventDispatcher.m */,
