@@ -1,5 +1,5 @@
 //
-//  ViEventRouter.h
+//  ViEventDispatcher.h
 //  ViMate
 //
 //  Created by Kirt Fitzpatrick on 3/31/07.
@@ -7,8 +7,8 @@
 //
 
 #import <Cocoa/Cocoa.h>
-//#import "ViCommandStack.h"
-#import "ViCommand.h"
+//#import "ViControllerStack.h"
+#import "ViController.h"
 #import "ViView.h"
 #import "ViMode.h"
 
@@ -17,7 +17,7 @@ extern bool debugOn;
 
 
 typedef enum _ViState {
-    ViCommandState       = 1,
+    ViControllerState       = 1,
     ViVisualState        = 2,
     ViCutState           = 3,
     ViCopyState          = 4,
@@ -25,14 +25,14 @@ typedef enum _ViState {
 } ViState;
 
 
-@interface ViEventRouter : NSObject
+@interface ViEventDispatcher : NSObject
 {
     ViMode mode;
     ViState state;
     NSWindow * lastWindow;
     id responder;
     // holds onto the methods that should be executed once we reach a final method.
-    ViCommand *command;
+    ViController *command;
     NSMutableDictionary *keyMaps;
     id activeKeyMap;
 	
@@ -40,7 +40,7 @@ typedef enum _ViState {
 }
 
 // methods needed for singleton pattern
-+ (ViEventRouter *)sharedViEventRouter;
++ (ViEventDispatcher *)sharedViEventDispatcher;
 + (id)allocWithZone:(NSZone *)zone;
 - (id)init;
 - (id)copyWithZone:(NSZone *)zone;

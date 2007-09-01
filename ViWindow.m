@@ -8,7 +8,7 @@
 
 #import "ViWindow.h"
 //#import "ViSelectorTest.h"
-#import "ViEventRouter.h"
+#import "ViEventDispatcher.h"
 
 
 @implementation ViWindow
@@ -24,7 +24,7 @@
 	ViLog( @"[ViWindow %s]", _cmd );
 	
 	if( [ViWindow isValidWindowType:self] ){
-		ViEventRouter *router = [ViEventRouter sharedViEventRouter];
+		ViEventDispatcher *router = [ViEventDispatcher sharedViEventDispatcher];
 		[router releaseWindow:self];
 	}
 	[super dealloc];
@@ -35,7 +35,7 @@
     id event;
 	
 	if( [ViWindow isValidWindowType:self] && [theEvent type] == NSKeyDown ) {
-		ViEventRouter *router = [ViEventRouter sharedViEventRouter];
+		ViEventDispatcher *router = [ViEventDispatcher sharedViEventDispatcher];
         [router setWindow:self];
         event = [router routeEvent:theEvent];
             

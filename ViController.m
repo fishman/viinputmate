@@ -7,7 +7,7 @@
 //
 
 #import "ViCommand.h"
-#import "ViEventRouter.h"
+#import "ViEventDispatcher.h"
 #import "ViHelper.h"
 
 
@@ -16,7 +16,7 @@
 - (id)init
 {
     if ( [super init] ) {
-        router = [ViEventRouter sharedViEventRouter];
+        router = [ViEventDispatcher sharedViEventDispatcher];
         dataStack = [NSMutableArray arrayWithCapacity: 4];
         methodStack = [NSMutableArray arrayWithCapacity: 4];
         [dataStack retain];

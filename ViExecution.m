@@ -7,7 +7,7 @@
 //
 
 #import "ViExecution.h"
-#import "ViEventRouter.h"
+#import "ViEventDispatcher.h"
 #import "ViHelper.h"
 
 
@@ -16,7 +16,7 @@
 - (id)init
 {
     if ( [super init] ) {
-        router = [ViEventRouter sharedViEventRouter];
+        router = [ViEventDispatcher sharedViEventDispatcher];
         window = nil;
         responder = nil;
         lineNumber = [NSNumber numberWithInt: 0];

@@ -1,32 +1,32 @@
 //
-//  ViEventRouter.m
+//  ViEventDispatcher.m
 //  ViMate
 //
 //  Created by Kirt Fitzpatrick on 3/31/07.
 //  Copyright 2007 __MyCompanyName__. All rights reserved.
 //
 
-#import "ViEventRouter.h"
+#import "ViEventDispatcher.h"
 #import "ViHelper.h"
 #import "ViWindow.h"
 
-static ViEventRouter *sharedViEventRouter = nil;
+static ViEventDispatcher *sharedViEventDispatcher = nil;
 bool debugOn = false;
 
 /**
  * singleton instance of the event router.
  *
- * @return the ViEventRouter instance
+ * @return the ViEventDispatcher instance
  */
-@implementation ViEventRouter
-+ (ViEventRouter *)sharedViEventRouter
+@implementation ViEventDispatcher
++ (ViEventDispatcher *)sharedViEventDispatcher
 {
 
-    if (sharedViEventRouter == nil) {
+    if (sharedViEventDispatcher == nil) {
         [[self alloc] init];
     }
     
-    return sharedViEventRouter;
+    return sharedViEventDispatcher;
 }
 
 /**
@@ -34,10 +34,10 @@ bool debugOn = false;
  */
 + (id)allocWithZone:(NSZone *)zone
 {
-    if (sharedViEventRouter == nil) {
-        sharedViEventRouter = [super allocWithZone:zone];
+    if (sharedViEventDispatcher == nil) {
+        sharedViEventDispatcher = [super allocWithZone:zone];
 
-        return sharedViEventRouter ;  // assignment and return on first allocation
+        return sharedViEventDispatcher ;  // assignment and return on first allocation
     }
     
     return nil; // on subsequent allocation attempts return nil
@@ -51,7 +51,7 @@ bool debugOn = false;
         lastWindow = nil;
 		currentCursorView = nil;
         mode = ViInsertMode;
-        command = [[ViCommand alloc] init];
+        command = [[ViController alloc] init];
 
 
         keyMaps = [NSMutableDictionary dictionaryWithCapacity:2];
