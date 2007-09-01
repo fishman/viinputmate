@@ -22,7 +22,6 @@
         [dataStack retain];
         [methodStack retain];
         execution = [[ViEditor alloc] init];
-        repeatOn = false;
     }
 
     return self;
@@ -46,12 +45,6 @@
     [theMethod release];
 }
 
-- (void)setActiveKeyMap:(NSString *)theMapName
-{
-    if ( repeatOn ) {
-    } else {
-    }
-}
 
 
 
@@ -124,6 +117,13 @@
 }
 
 
+
+- (void)testCommand:(id)theEvent
+{
+    ViLog( @"trying to testCommand" );
+    [self pushMethod:@"testCommand:" withData:@"d"];
+    [execution executeStack: methodStack withData: dataStack];
+}
 
 /**
  * Insert Methods

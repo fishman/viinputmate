@@ -102,6 +102,8 @@
     NSString *method;
     NSNumber *index;
 
+    beginningColumnNumber = [NSNumber numberWithInt: [columnNumber intValue]];
+    beginningLineNumber = [NSNumber numberWithInt: [lineNumber intValue]];
     method = [methodStack objectAtIndex: 0];
     index = [NSNumber numberWithInt: 0];
 
@@ -110,6 +112,22 @@
 
     [dataStack removeAllObjects];
     [methodStack removeAllObjects];
+}
+
+- (void)moveCursorToColumnNumber:(NSNumber *)theColumnNumber
+{
+    int i;
+    int line = [lineNumber intValue];
+
+
+    for ( i=0; i < [theColumnNumber intValue]; i++ ) {
+        [responder performSelector: @selector(moveForward:) withObject: window];
+
+        if ( [lineNumber intValue] > line ) {
+            [responder performSelector: @selector(moveBackward:) withObject: window];
+            break;
+        }
+    }
 }
 
 
@@ -137,8 +155,9 @@
         for ( i = nextIndex; i < stackCount; i++ ) {
 
             method = [methodStack objectAtIndex: i];
-            index = [NSNumber numberWithInt: i];
             ViLog( @"executing method %@ for the %d time.", method, j );
+            index = [NSNumber numberWithInt: (repeatCount - 1 - j)];
+
             [self performSelector: sel_getUid( [method UTF8String] ) withObject: index];
         }
     }
@@ -152,6 +171,30 @@
 }
 
 
+- (void)testCommand:(NSNumber *)theIndex
+{
+    int line = [lineNumber intValue];
+
+
+    ViLog( @"Trying to testCommand" );
+    ViLog( @"theIndex: %d", [theIndex intValue] );
+
+	[self moveWordBackwardAndModifySelection:nil];
+
+    if ( [theIndex intValue] == 0 ) {
+
+        if ( [lineNumber intValue] < line ) {
+            [responder performSelector: @selector(moveForwardAndModifySelection:) withObject: window];
+        }
+
+        [responder writeSelectionToPasteboard:pasteboard types:[NSArray arrayWithObject:@"NSStringPboardType"] ];
+        [responder performSelector: @selector(deleteBackward:) withObject: window];
+
+        [router setActiveKeyMap:@"commandDefault"];
+        [router setState:ViCommandState];
+    }
+}
+
 /**
  * Insert Methods
  */
@@ -162,7 +205,7 @@
 
 - (void)insertForward:(NSNumber *)theIndex
 {
-	[self moveForward];
+    [self moveForward:nil];
     [router setMode: ViInsertMode];
 }
 
@@ -216,14 +259,26 @@
 - (void)cutLine:(NSNumber *)theIndex
 {
     NSArray * types = [NSArray arrayWithObject:@"NSStringPboardType"];
+    int i;
+
 
     ViLog( @"Trying to cutLine" );
-    [responder performSelector: @selector(selectLine:) withObject: window];
-    [responder writeSelectionToPasteboard:pasteboard types:types];
-    [responder performSelector: @selector(deleteBackward:) withObject: window];
-     
-    [router setActiveKeyMap:@"commandDefault"];
-    [router setState:ViCommandState];
+    ViLog( @"theIndex: %d", [theIndex intValue] );
+
+    if ( [columnNumber intValue] != 0 ) {
+        [responder performSelector: @selector(moveToBeginningOfLine:) withObject: window];
+    }
+
+    [responder performSelector: @selector(moveDownAndModifySelection:) withObject: window];
+
+    if ([theIndex intValue] == 0) {
+        [responder writeSelectionToPasteboard:pasteboard types:types];
+        [responder performSelector: @selector(deleteBackward:) withObject: window];
+        [self moveCursorToColumnNumber:beginningColumnNumber];
+
+        [router setActiveKeyMap:@"commandDefault"];
+        [router setState:ViCommandState];
+    }
 }
 
 - (void)cutForward:(NSNumber *)theIndex
@@ -262,26 +317,50 @@
 
 - (void)cutWordForward:(NSNumber *)theIndex
 {
-    //[responder performSelector: @selector(moveWordForwardAndModifySelection:) withObject: window];
-	[self moveWordForwardAndModifySelection:nil];
-    [responder writeSelectionToPasteboard:pasteboard 
-                                    types:[NSArray arrayWithObject:@"NSStringPboardType"] ];
-    [responder performSelector: @selector(deleteBackward:) withObject: window];
+    int line = [lineNumber intValue];
 
-    [router setActiveKeyMap:@"commandDefault"];
-    [router setState:ViCommandState];
+
+    ViLog( @"Trying to testCommand" );
+    ViLog( @"theIndex: %d", [theIndex intValue] );
+
+	[self moveWordForwardAndModifySelection:nil];
+
+    if ( [theIndex intValue] == 0 ) {
+
+        if ( [lineNumber intValue] > line ) {
+            [responder performSelector: @selector(moveBackwardAndModifySelection:) withObject: window];
+        }
+
+        [responder writeSelectionToPasteboard:pasteboard types:[NSArray arrayWithObject:@"NSStringPboardType"] ];
+        [responder performSelector: @selector(deleteBackward:) withObject: window];
+
+        [router setActiveKeyMap:@"commandDefault"];
+        [router setState:ViCommandState];
+    }
 }
 
 - (void)cutWordBackward:(NSNumber *)theIndex
 {
-    //[responder performSelector: @selector(moveWordBackwardAndModifySelection:) withObject: window];
-	[self moveWordBackwardAndModifySelection:nil];
-    [responder writeSelectionToPasteboard:pasteboard 
-                                    types:[NSArray arrayWithObject:@"NSStringPboardType"] ];
-    [responder performSelector: @selector(deleteBackward:) withObject: window];
+    int line = [lineNumber intValue];
 
-    [router setActiveKeyMap:@"commandDefault"];
-    [router setState:ViCommandState];
+
+    ViLog( @"Trying to testCommand" );
+    ViLog( @"theIndex: %d", [theIndex intValue] );
+
+	[self moveWordBackwardAndModifySelection:nil];
+
+    if ( [theIndex intValue] == 0 ) {
+
+        if ( [lineNumber intValue] < line ) {
+            [responder performSelector: @selector(moveForwardAndModifySelection:) withObject: window];
+        }
+
+        [responder writeSelectionToPasteboard:pasteboard types:[NSArray arrayWithObject:@"NSStringPboardType"] ];
+        [responder performSelector: @selector(deleteBackward:) withObject: window];
+
+        [router setActiveKeyMap:@"commandDefault"];
+        [router setState:ViCommandState];
+    }
 }
 
 - (void)cutToEndOfWord:(NSNumber *)theIndex
@@ -350,16 +429,33 @@
     [router setState:ViCommandState];
 }
 
+/**
+ * Fully functional as far as I can tell
+ */
 - (void)copyLine:(NSNumber *)theIndex
 {
     NSArray * types = [NSArray arrayWithObject:@"NSStringPboardType"];
 
-    ViLog( @"Trying to cutLine" );
-    [responder performSelector: @selector(selectLine:) withObject: window];
-    [responder writeSelectionToPasteboard:pasteboard types:types];
-    [responder performSelector: @selector(moveBackward:) withObject: window];
-    [router setActiveKeyMap:@"commandDefault"];
-    [router setState:ViCommandState];
+    ViLog( @"Trying to testCommand" );
+    ViLog( @"theIndex: %d", [theIndex intValue] );
+
+    if ( [columnNumber intValue] != 0 ) {
+        [responder performSelector: @selector(moveToBeginningOfLine:) withObject: window];
+    }
+
+    [responder performSelector: @selector(moveDownAndModifySelection:) withObject: window];
+
+    if ([theIndex intValue] == 0) {
+        [responder writeSelectionToPasteboard:pasteboard types:types];
+        [responder performSelector: @selector(moveBackward:) withObject: window];
+
+        while ( [columnNumber intValue] < [beginningColumnNumber intValue] ) {
+            [self moveForward:nil];
+        }
+         
+        [router setActiveKeyMap:@"commandDefault"];
+        [router setState:ViCommandState];
+    }
 }
 
 - (void)copyForward:(NSNumber *)theIndex

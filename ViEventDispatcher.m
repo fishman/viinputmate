@@ -67,6 +67,7 @@ bool debugOn = true;
         [keyMaps setObject: [NSDictionary dictionaryWithObjectsAndKeys:
 		                   @"controlDefault", @"NSControlKeyMask",
 		                      @"resetStack:", [NSString stringWithCharacters:&escape length:1],
+		                     @"testCommand:", @"t",
 		                          @"repeat:", @"1",
 		                          @"repeat:", @"2",
 		                          @"repeat:", @"3",
@@ -114,6 +115,7 @@ bool debugOn = true;
         [keyMaps setObject: [NSDictionary dictionaryWithObjectsAndKeys:
 		                   @"controlDefault", @"NSControlKeyMask",
 		                      @"resetStack:", [NSString stringWithCharacters:&escape length:1],
+		                     @"testCommand:", @"t",
 		                          @"repeat:", @"0",
 		                          @"repeat:", @"1",
 		                          @"repeat:", @"2",
@@ -140,6 +142,7 @@ bool debugOn = true;
 		                      @"cutForward:", @"x",
 		                     @"cutBackward:", @"X",
 		                        @"cutState:", @"d", 
+		                       @"copyState:", @"y", 
                       NULL] forKey: @"commandRepeat"];
 
         /**

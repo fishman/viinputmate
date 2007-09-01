@@ -11,7 +11,6 @@
 
 
 @interface ViController : NSObject {
-    bool repeatOn;
     NSMutableArray *dataStack;
     NSMutableArray *methodStack;
     id router;
@@ -21,7 +20,6 @@
 - (void)setWindow:(NSWindow *)theWindow;
 - (void)releaseWindow:(NSWindow *)theWindow;
 - (void)pushMethod:(NSString *)theMethod withData:(NSString *)theData;
-- (void)setActiveKeyMap:(NSString *)theMapName;
 
 
 /**
@@ -30,6 +28,8 @@
 - (void)visual:(id)theEvent;
 - (void)repeat:(id)theEvent;
 - (void)resetStack:(id)theEvent;
+
+- (void)testCommand:(id)theEvent;
 
 /**
  * Insert Methods

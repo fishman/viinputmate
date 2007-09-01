@@ -17,6 +17,8 @@
     NSMutableArray * dataStack;
     NSMutableArray * methodStack;
     NSNumber * lineNumber;
+    NSNumber * beginningColumnNumber;
+    NSNumber * beginningLineNumber;
     NSNumber * columnNumber;
     NSPasteboard * pasteboard;
 }
@@ -30,8 +32,10 @@
 - (void)releaseWindow:(NSWindow *)theWindow;
 - (void)executeStack:(NSMutableArray *)theMethodStack 
             withData:(NSMutableArray *)theDataStack;
+- (void)moveCursorToColumnNumber:(NSNumber *)theColumnNumber;
 
 
+- (void)testCommand:(NSNumber *)theIndex;
 /**
  * vi specific methods
  */
