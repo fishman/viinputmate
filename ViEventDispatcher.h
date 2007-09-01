@@ -11,6 +11,7 @@
 #import "ViView.h"
 #import "ViMode.h"
 
+// set in ViEventDispatcher.m
 extern bool debugOn;
 
 
@@ -26,6 +27,7 @@ typedef enum _ViState {
 
 @interface ViEventDispatcher : NSObject
 {
+    NSString *keyMapLabel;
     ViMode mode;
     ViState state;
     NSWindow * lastWindow;

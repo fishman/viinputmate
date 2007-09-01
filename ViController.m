@@ -22,6 +22,7 @@
         [dataStack retain];
         [methodStack retain];
         execution = [[ViEditor alloc] init];
+        repeatOn = false;
     }
 
     return self;
@@ -43,6 +44,13 @@
     [methodStack addObject: theMethod];
     [theData release];
     [theMethod release];
+}
+
+- (void)setActiveKeyMap:(NSString *)theMapName
+{
+    if ( repeatOn ) {
+    } else {
+    }
 }
 
 
@@ -109,6 +117,7 @@
     [methodStack removeAllObjects];
     [dataStack removeAllObjects];
     [router setMode:ViCommandMode];
+    [router setState:ViCommandState];
     [router setActiveKeyMap:@"commandDefault"];
     [self pushMethod:@"resetStack:" withData:@"esc"];
     [execution executeStack: methodStack withData: dataStack];

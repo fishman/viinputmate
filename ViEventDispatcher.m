@@ -11,7 +11,8 @@
 #import "ViWindow.h"
 
 static ViEventDispatcher *sharedViEventDispatcher = nil;
-bool debugOn = false;
+//bool debugOn = false;
+bool debugOn = true;
 
 /**
  * singleton instance of the event router.
@@ -138,6 +139,7 @@ bool debugOn = false;
 		                      @"pasteAfter:", @"p", 
 		                      @"cutForward:", @"x",
 		                     @"cutBackward:", @"X",
+		                        @"cutState:", @"d", 
                       NULL] forKey: @"commandRepeat"];
 
         /**
@@ -478,6 +480,7 @@ bool debugOn = false;
  */
 - (void)setActiveKeyMap:(NSString *)theKeyMapLabel
 {
+    keyMapLabel = theKeyMapLabel;
     activeKeyMap = [keyMaps objectForKey: theKeyMapLabel];
 }
 
@@ -513,7 +516,7 @@ bool debugOn = false;
             return theEvent;
         default:
             ViLog( @"could not find method for '%c' :: 0x%04X", [keyPress characterAtIndex:0], [keyPress characterAtIndex:0] );
-            ViLog( @"%@", activeKeyMap );
+            ViLog( @"%@", keyMapLabel );
             return nil;
     }
 }

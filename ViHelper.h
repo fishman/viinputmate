@@ -9,6 +9,7 @@
 
 #include <Carbon/Carbon.h>
 
+// set in ViEventDispatcher.m
 extern bool debugOn;
 
 void ViLog( void *str, ... );
