@@ -11,8 +11,8 @@
 #import "ViWindow.h"
 
 static ViEventDispatcher *sharedViEventDispatcher = nil;
-//bool debugOn = false;
-bool debugOn = true;
+bool debugOn = false;
+//bool debugOn = true;
 
 /**
  * singleton instance of the event router.
