@@ -1,5 +1,5 @@
 //
-//  ViCommand.h
+//  ViController.h
 //  ViMate
 //
 //  Created by Kirt Fitzpatrick on 3/31/07.
@@ -7,14 +7,14 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "ViExecution.h"
+#import "ViEditor.h"
 
 
-@interface ViCommand : NSObject {
+@interface ViController : NSObject {
     NSMutableArray *dataStack;
     NSMutableArray *methodStack;
     id router;
-    ViExecution *execution;
+    ViEditor *execution;
 }
 
 - (void)setWindow:(NSWindow *)theWindow;

@@ -1,17 +1,17 @@
 //
-//  ViCommand.m
+//  ViController.m
 //  ViMate
 //
 //  Created by Kirt Fitzpatrick on 3/31/07.
 //  Copyright 2007 __MyCompanyName__. All rights reserved.
 //
 
-#import "ViCommand.h"
+#import "ViController.h"
 #import "ViEventDispatcher.h"
 #import "ViHelper.h"
 
 
-@implementation ViCommand
+@implementation ViController
 
 - (id)init
 {
@@ -21,7 +21,7 @@
         methodStack = [NSMutableArray arrayWithCapacity: 4];
         [dataStack retain];
         [methodStack retain];
-        execution = [[ViExecution alloc] init];
+        execution = [[ViEditor alloc] init];
     }
 
     return self;

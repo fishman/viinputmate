@@ -7,7 +7,6 @@
 //
 
 #import <Cocoa/Cocoa.h>
-//#import "ViControllerStack.h"
 #import "ViController.h"
 #import "ViView.h"
 #import "ViMode.h"
@@ -17,7 +16,7 @@ extern bool debugOn;
 
 
 typedef enum _ViState {
-    ViControllerState       = 1,
+    ViCommandState       = 1,
     ViVisualState        = 2,
     ViCutState           = 3,
     ViCopyState          = 4,

@@ -1,5 +1,5 @@
 //
-//  ViExecution.h
+//  ViEditor.h
 //  ViMate
 //
 //  Created by Kirt Fitzpatrick on 4/5/07.
@@ -8,7 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface ViExecution : NSObject {
+@interface ViEditor : NSObject {
 
     NSWindow * window;
     id responder;
