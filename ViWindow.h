@@ -9,11 +9,11 @@
 #import <Cocoa/Cocoa.h>
 #import "ViPlugin.h"
 
-
 @interface ViWindow : NSWindow {
 
 }
 
 - (void)sendEvent:(NSEvent *)theEvent;
+- (void)close;
 
 @end

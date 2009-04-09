@@ -10,14 +10,12 @@
 		8D5B49B0048680CD000E48DA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C167DFE841241C02AAC07 /* InfoPlist.strings */; };
 		8D5B49B4048680CD000E48DA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
 		C6103FBF0BF7B45500E0E228 /* ViHelper.c in Sources */ = {isa = PBXBuildFile; fileRef = C6103FBE0BF7B45500E0E228 /* ViHelper.c */; };
-		C65111CF0BBF183600F3C94C /* ViSelectorTest.m in Sources */ = {isa = PBXBuildFile; fileRef = C65111CE0BBF183600F3C94C /* ViSelectorTest.m */; };
-		C65112380BBF2D9B00F3C94C /* ViCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = C65112370BBF2D9B00F3C94C /* ViCommand.m */; };
-		C65112410BBF367700F3C94C /* ViEventRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = C65112400BBF367700F3C94C /* ViEventRouter.m */; };
-		C6D7B35C0BC5E35600A491A5 /* ViExecution.m in Sources */ = {isa = PBXBuildFile; fileRef = C6D7B35B0BC5E35600A491A5 /* ViExecution.m */; };
-		C6FA9FA20BBEF4CA00E54E59 /* ViPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = C6FA9FA10BBEF4CA00E54E59 /* ViPlugin.m */; };
 		C6FA9FC90BBEFAED00E54E59 /* ViWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = C6FA9FC80BBEFAED00E54E59 /* ViWindow.m */; };
 		DC2094210C332986003D9E8C /* NSColor_categories.m in Sources */ = {isa = PBXBuildFile; fileRef = DC20941D0C332986003D9E8C /* NSColor_categories.m */; };
-		DC2094220C332986003D9E8C /* ViView.m in Sources */ = {isa = PBXBuildFile; fileRef = DC2094200C332986003D9E8C /* ViView.m */; };
+		F51E4C1D0C70F8C8000E7B16 /* ViView.m in Sources */ = {isa = PBXBuildFile; fileRef = F51E4C1C0C70F8C8000E7B16 /* ViView.m */; };
+		F5F443B20C70E34300E8B5B5 /* ViCommandPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5F443B00C70E34300E8B5B5 /* ViCommandPanelController.m */; };
+		F5F443FC0C70E4C100E8B5B5 /* ViPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = F5F443FA0C70E4C100E8B5B5 /* ViPlugin.m */; };
+		F5F444060C70E52C00E8B5B5 /* ViCommandPanel.nib in Resources */ = {isa = PBXBuildFile; fileRef = F5F444040C70E52C00E8B5B5 /* ViCommandPanel.nib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,27 +25,21 @@
 		1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		32DBCF630370AF2F00C91783 /* ViMate_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViMate_Prefix.pch; sourceTree = "<group>"; };
 		8D5B49B6048680CD000E48DA /* ViMate.tmplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ViMate.tmplugin; sourceTree = BUILT_PRODUCTS_DIR; };
-		8D5B49B7048680CD000E48DA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Info.plist; sourceTree = "<group>"; };
+		8D5B49B7048680CD000E48DA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C6103FBD0BF7B45500E0E228 /* ViHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViHelper.h; sourceTree = "<group>"; };
 		C6103FBE0BF7B45500E0E228 /* ViHelper.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ViHelper.c; sourceTree = "<group>"; };
-		C65111CD0BBF183600F3C94C /* ViSelectorTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViSelectorTest.h; sourceTree = "<group>"; };
-		C65111CE0BBF183600F3C94C /* ViSelectorTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViSelectorTest.m; sourceTree = "<group>"; };
-		C65112360BBF2D9B00F3C94C /* ViCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViCommand.h; sourceTree = "<group>"; };
-		C65112370BBF2D9B00F3C94C /* ViCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViCommand.m; sourceTree = "<group>"; };
-		C651123F0BBF367700F3C94C /* ViEventRouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViEventRouter.h; sourceTree = "<group>"; };
-		C65112400BBF367700F3C94C /* ViEventRouter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViEventRouter.m; sourceTree = "<group>"; };
-		C6D7B35A0BC5E35600A491A5 /* ViExecution.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViExecution.h; sourceTree = "<group>"; };
-		C6D7B35B0BC5E35600A491A5 /* ViExecution.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViExecution.m; sourceTree = "<group>"; };
-		C6FA9FA00BBEF4CA00E54E59 /* ViPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViPlugin.h; sourceTree = "<group>"; };
-		C6FA9FA10BBEF4CA00E54E59 /* ViPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViPlugin.m; sourceTree = "<group>"; };
 		C6FA9FC70BBEFAED00E54E59 /* ViWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViWindow.h; sourceTree = "<group>"; };
 		C6FA9FC80BBEFAED00E54E59 /* ViWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViWindow.m; sourceTree = "<group>"; };
 		D2F7E65807B2D6F200F64583 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 		DC20941C0C332986003D9E8C /* NSColor_categories.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NSColor_categories.h; sourceTree = "<group>"; };
 		DC20941D0C332986003D9E8C /* NSColor_categories.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NSColor_categories.m; sourceTree = "<group>"; };
-		DC20941E0C332986003D9E8C /* ViMode.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ViMode.h; sourceTree = "<group>"; };
-		DC20941F0C332986003D9E8C /* ViView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ViView.h; sourceTree = "<group>"; };
-		DC2094200C332986003D9E8C /* ViView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = ViView.m; sourceTree = "<group>"; };
+		F51E4C1B0C70F8C8000E7B16 /* ViView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ViView.h; sourceTree = "<group>"; };
+		F51E4C1C0C70F8C8000E7B16 /* ViView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = ViView.m; sourceTree = "<group>"; };
+		F5F443B00C70E34300E8B5B5 /* ViCommandPanelController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = ViCommandPanelController.m; sourceTree = "<group>"; };
+		F5F443B10C70E34300E8B5B5 /* ViCommandPanelController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ViCommandPanelController.h; sourceTree = "<group>"; };
+		F5F443FA0C70E4C100E8B5B5 /* ViPlugin.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = ViPlugin.m; sourceTree = "<group>"; };
+		F5F443FB0C70E4C100E8B5B5 /* ViPlugin.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ViPlugin.h; sourceTree = "<group>"; };
+		F5F444050C70E52C00E8B5B5 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/ViCommandPanel.nib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +80,7 @@
 		089C167CFE841241C02AAC07 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F5F444040C70E52C00E8B5B5 /* ViCommandPanel.nib */,
 				8D5B49B7048680CD000E48DA /* Info.plist */,
 				089C167DFE841241C02AAC07 /* InfoPlist.strings */,
 			);
@@ -97,21 +90,14 @@
 		08FB77AFFE84173DC02AAC07 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				F5F443FA0C70E4C100E8B5B5 /* ViPlugin.m */,
+				F5F443FB0C70E4C100E8B5B5 /* ViPlugin.h */,
 				DC20941C0C332986003D9E8C /* NSColor_categories.h */,
 				DC20941D0C332986003D9E8C /* NSColor_categories.m */,
-				DC20941E0C332986003D9E8C /* ViMode.h */,
-				DC20941F0C332986003D9E8C /* ViView.h */,
-				DC2094200C332986003D9E8C /* ViView.m */,
-				C65112360BBF2D9B00F3C94C /* ViCommand.h */,
-				C65112370BBF2D9B00F3C94C /* ViCommand.m */,
-				C6D7B35A0BC5E35600A491A5 /* ViExecution.h */,
-				C6D7B35B0BC5E35600A491A5 /* ViExecution.m */,
-				C651123F0BBF367700F3C94C /* ViEventRouter.h */,
-				C65112400BBF367700F3C94C /* ViEventRouter.m */,
-				C6FA9FA00BBEF4CA00E54E59 /* ViPlugin.h */,
-				C6FA9FA10BBEF4CA00E54E59 /* ViPlugin.m */,
-				C65111CD0BBF183600F3C94C /* ViSelectorTest.h */,
-				C65111CE0BBF183600F3C94C /* ViSelectorTest.m */,
+				F5F443B00C70E34300E8B5B5 /* ViCommandPanelController.m */,
+				F5F443B10C70E34300E8B5B5 /* ViCommandPanelController.h */,
+				F51E4C1B0C70F8C8000E7B16 /* ViView.h */,
+				F51E4C1C0C70F8C8000E7B16 /* ViView.m */,
 				C6FA9FC70BBEFAED00E54E59 /* ViWindow.h */,
 				C6FA9FC80BBEFAED00E54E59 /* ViWindow.m */,
 			);
@@ -180,9 +166,11 @@
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			buildConfigurationList = 1DEB913E08733D840010E9CD /* Build configuration list for PBXProject "ViMate" */;
+			compatibilityVersion = "Xcode 2.4";
 			hasScannedForEncodings = 1;
 			mainGroup = 089C166AFE841209C02AAC07 /* ViMate */;
 			projectDirPath = "";
+			projectRoot = "";
 			targets = (
 				8D5B49AC048680CD000E48DA /* ViMate */,
 			);
@@ -195,6 +183,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D5B49B0048680CD000E48DA /* InfoPlist.strings in Resources */,
+				F5F444060C70E52C00E8B5B5 /* ViCommandPanel.nib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -213,7 +202,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = "/usr/bin/perl -w";
-			shellScript = "# Xcode auto-versioning script for Subversion\n# by Axel Andersson, modified by Daniel Jalkut to add\n# \"--revision HEAD\" to the svn info line, which allows\n# the latest revision to always be used.\n\nuse strict;\n\ndie \"$0: Must be run from Xcode\" unless $ENV{\"BUILT_PRODUCTS_DIR\"};\n\n# Get the current subversion revision number and use it to set the CFBundleVersion value\nmy $REV = `svnversion -n ./`;\nmy $INFO = \"$ENV{BUILT_PRODUCTS_DIR}/$ENV{WRAPPER_NAME}/Contents/Info.plist\";\n\nmy $version = $REV;\n\n# (Match the last group of digits and optional letter M/S):\n\n# ugly yet functional (barely) regex by Daniel Jalkut:\n#$version =~ s/([\\d]*:)(\\d+[M|S]*).*/$2/;\n\n# better yet still functional regex via Kevin \"Regex Nerd\" Ballard\n($version =~ m/\\d+[MS]*$/) && ($version = $&);\n\ndie \"$0: No Subversion revision found\" unless $version;\n\nopen(FH, \"$INFO\") or die \"$0: $INFO: $!\";\nmy $info = join(\"\", <FH>);\nclose(FH);\n\n$info =~ s/([\\t ]+<key>CFBundleVersion<\\/key>\\n[\\t ]+<string>).*?(<\\/string>)/$1$version$2/;\n\nopen(FH, \">$INFO\") or die \"$0: $INFO: $!\";\nprint FH $info;\nclose(FH);";
+			shellScript = "# Xcode auto-versioning script for Subversion\n# by Axel Andersson, modified by Daniel Jalkut to add\n# \"--revision HEAD\" to the svn info line, which allows\n# the latest revision to always be used.\n\nuse strict;\n\ndie \"$0: Must be run from Xcode\" unless $ENV{\"BUILT_PRODUCTS_DIR\"};\n\n# Get the current subversion revision number and use it to set the CFBundleVersion value\nmy $REV = `/usr/bin/svnversion -n ./`;\nmy $INFO = \"$ENV{BUILT_PRODUCTS_DIR}/$ENV{WRAPPER_NAME}/Contents/Info.plist\";\n\nmy $version = $REV;\n\n# (Match the last group of digits and optional letter M/S):\n\n# ugly yet functional (barely) regex by Daniel Jalkut:\n#$version =~ s/([\\d]*:)(\\d+[M|S]*).*/$2/;\n\n# better yet still functional regex via Kevin \"Regex Nerd\" Ballard\n($version =~ m/\\d+[MS]*$/) && ($version = $&);\n\ndie \"$0: No Subversion revision found\" unless $version;\n\nopen(FH, \"$INFO\") or die \"$0: $INFO: $!\";\nmy $info = join(\"\", <FH>);\nclose(FH);\n\n$info =~ s/([\\t ]+<key>CFBundleVersion<\\/key>\\n[\\t ]+<string>).*?(<\\/string>)/$1$version$2/;\n\nopen(FH, \">$INFO\") or die \"$0: $INFO: $!\";\nprint FH $info;\nclose(FH);";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -222,15 +211,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C6FA9FA20BBEF4CA00E54E59 /* ViPlugin.m in Sources */,
 				C6FA9FC90BBEFAED00E54E59 /* ViWindow.m in Sources */,
-				C65111CF0BBF183600F3C94C /* ViSelectorTest.m in Sources */,
-				C65112380BBF2D9B00F3C94C /* ViCommand.m in Sources */,
-				C65112410BBF367700F3C94C /* ViEventRouter.m in Sources */,
-				C6D7B35C0BC5E35600A491A5 /* ViExecution.m in Sources */,
 				C6103FBF0BF7B45500E0E228 /* ViHelper.c in Sources */,
 				DC2094210C332986003D9E8C /* NSColor_categories.m in Sources */,
-				DC2094220C332986003D9E8C /* ViView.m in Sources */,
+				F5F443B20C70E34300E8B5B5 /* ViCommandPanelController.m in Sources */,
+				F5F443FC0C70E4C100E8B5B5 /* ViPlugin.m in Sources */,
+				F51E4C1D0C70F8C8000E7B16 /* ViView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -243,6 +229,14 @@
 				089C167EFE841241C02AAC07 /* English */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		F5F444040C70E52C00E8B5B5 /* ViCommandPanel.nib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F5F444050C70E52C00E8B5B5 /* English */,
+			);
+			name = ViCommandPanel.nib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -287,6 +281,7 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/Bundles";
 				PRODUCT_NAME = ViMate;
+				SDKROOT = /Developer/SDKs/MacOSX10.5.sdk;
 				VERSIONING_SYSTEM = "";
 				WRAPPER_EXTENSION = tmplugin;
 			};
@@ -302,7 +297,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				SDKROOT = /Developer/SDKs/MacOSX10.5.sdk;
 			};
 			name = Debug;
 		};
@@ -312,7 +307,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				SDKROOT = /Developer/SDKs/MacOSX10.5.sdk;
 			};
 			name = Release;
 		};

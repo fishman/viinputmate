@@ -1,0 +1,25 @@
+{
+    IBClasses = (
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            ACTIONS = {
+                autoupdateAction = id; 
+                changeRangeTypeAction = id; 
+                gotoAction = id; 
+                textFieldAction = id; 
+            }; 
+            CLASS = TEGotoPanelController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {autoupdateCheckbox = id; gotoButton = id; radioButtons = id; textField = id; }; 
+            SUPERCLASS = NSWindowController; 
+        }, 
+        {
+            ACTIONS = {searchAction = id; textFieldAction = id; }; 
+            CLASS = TEIncrementalSearchPanelController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {textField = NSTextField; }; 
+            SUPERCLASS = NSWindowController; 
+        }
+    ); 
+    IBVersion = 1; 
+}

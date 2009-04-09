@@ -8,8 +8,9 @@
 
 #import "ViWindow.h"
 //#import "ViSelectorTest.h"
-#import "ViEventRouter.h"
+#import "ViCommandPanelController.h"
 
+bool debugOn = FALSE;
 
 @implementation ViWindow
 
@@ -22,19 +23,28 @@
 
 - (void)sendEvent:(NSEvent *)theEvent
 {
-    id event;
+	id event;
 	
 	if( [self isValidWindowType:self] && [theEvent type] == NSKeyDown ) {
-		ViEventRouter *router = [ViEventRouter sharedViEventRouter];
-        [router setWindow:self];
-        event = [router routeEvent:theEvent];
-            
-        if ( event != nil ) {
-            [super sendEvent:theEvent];
-        } 
-    } else {
-        [super sendEvent:theEvent];
-    }
+		NSString * keyPress = [theEvent charactersIgnoringModifiers];
+		if ( [keyPress characterAtIndex:0] == 0x1B ){
+		// if ( [keyPress characterAtIndex:0] == '`' ) {
+			[[ViCommandPanelController sharedViCommandPanelController] handleInputAction:self];
+		}
+		// if ( [keyPress characterAtIndex:0] == ' ')
+		// {
+		// 	if ([theEvent modifierFlags]&NSShiftKeyMask)
+		// 		[[ViCommandPanelController sharedViCommandPanelController] handleInputAction:self];
+		// 	else 
+		// 		[super sendEvent:theEvent];
+		// }
+		else {
+				[super sendEvent:theEvent];
+		} 
+	}
+	else {
+			[super sendEvent:theEvent];
+	}
 }
 
 @end

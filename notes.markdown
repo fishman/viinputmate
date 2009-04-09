@@ -10,6 +10,7 @@
 * insertAbove & insertBelow do not autoindent
 * insertAtBeginningOfLine moves all the way to the start of the line instead of the first non-whitespace character.
 * command mode should pass through events when a message box has focus.
+* the block cursor doesn't work past line 138 after certain operations
 
 
 ### To Implement

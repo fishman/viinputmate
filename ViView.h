@@ -10,7 +10,7 @@
 #import "ViMode.h"
 
 @interface ViView : NSView {
-    ViMode mode;
+	ViMode mode;
 	NSColor * caretColor;
 }
 
